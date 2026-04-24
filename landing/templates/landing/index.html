@@ -1697,17 +1697,17 @@
     .player-card:nth-child(1) .player-card-bg {
       background:
         linear-gradient(160deg, rgba(26, 42, 26, .45) 0%, rgba(42, 92, 53, .35) 40%, rgba(26, 107, 53, .55) 100%),
-        url("{% static 'landing/img/Player1.jpeg' %}") center/cover no-repeat;
+        url("{% static 'imagenes/player1.jpeg' %}") center/cover no-repeat;
     }
     .player-card:nth-child(2) .player-card-bg {
       background:
         linear-gradient(160deg, rgba(26, 16, 16, .45) 0%, rgba(92, 26, 32, .35) 40%, rgba(138, 32, 48, .55) 100%),
-        url("{% static 'landing/img/Player2.jpeg' %}") center/cover no-repeat;
+        url("{% static 'imagenes/player2.jpeg' %}") center/cover no-repeat;
     }
     .player-card:nth-child(3) .player-card-bg {
       background:
         linear-gradient(160deg, rgba(9, 20, 9, .45) 0%, rgba(15, 53, 25, .35) 40%, rgba(0, 92, 48, .55) 100%),
-        url("{% static 'landing/img/Player3.jpeg' %}") center/cover no-repeat;
+        url("{% static 'imagenes/player3.jpeg' %}") center/cover no-repeat;
     }
 
     /* Jersey number watermark */
@@ -2671,7 +2671,7 @@
 <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
 <nav id="navbar">
   <a href="{% url 'landing:index' %}" class="nav-brand">
-    <img src="{% static 'landing/img/escudo-estado33.png' %}" alt="Estado 33" class="logo-estado">
+    <img src="{% static 'imagenes/Escudo logo estado 33 mx.png' %}" alt="Estado 33" class="logo-estado">
   </a>
 
   <ul class="nav-links">
@@ -2737,9 +2737,9 @@
 
 <!-- ─── HERO ───────────────────────────────────────────────── -->
 <section id="hero">
-    <div class="hero-bg" style="--hero-desktop-image: url('{% if LANGUAGE_CODE == 'en' %}{% static 'landing/img/BannerEnglish.jpeg' %}{% else %}{% static 'landing/img/BannerEspañol.jpeg' %}{% endif %}');"></div>
+    <div class="hero-bg" style="--hero-desktop-image: url('{% if LANGUAGE_CODE == 'en' %}{% static 'imagenes/BannerEnglish.jpeg' %}{% else %}{% static 'imagenes/BannerEspañol.jpeg' %}{% endif %}');"></div>
   <div class="hero-gold-line"></div>
-  <img src="{% static 'landing/img/baseball-fire.png' %}" class="baseball-fly" alt="">
+  <img src="{% static 'imagenes/—Pngtree—baseball on fire flame_5066305.png' %}" class="baseball-fly" alt="">
 
   <div class="hero-content">
     <div class="hero-actions">
@@ -2751,7 +2751,7 @@
   </div>
 
   <div class="hero-badge">
-    <img src="{% static 'landing/img/logo-mxpremier.png' %}" alt="MX Premier">
+    <img src="{% static 'imagenes/logo-international.png' %}" alt="MX Premier">
     <span>MX Premier</span>
   </div>
 
