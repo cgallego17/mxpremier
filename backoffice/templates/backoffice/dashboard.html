@@ -5,70 +5,380 @@
 {% block page_title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="row g-3 mb-4">
-  <div class="col-sm-6 col-lg-3">
+
+<!-- ── Stat cards ──────────────────────────────────────────── -->
+<div class="row g-3 mb-3">
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-eye-fill" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ total_visitas|default:"0" }}</div>
+        <div class="stat-label">{% trans "Total visits" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-person-check-fill" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ visitantes_unicos|default:"0" }}</div>
+        <div class="stat-label">{% trans "Unique visitors" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-calendar-day" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ visitas_hoy|default:"0" }}</div>
+        <div class="stat-label">{% trans "Visits today" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-calendar-week" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ visitas_semana|default:"0" }}</div>
+        <div class="stat-label">{% trans "Visits this week" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-lg-3">
     <div class="stat-card">
       <div class="stat-icon" style="background:#D6EDD9;">
         <i class="bi bi-people-fill" style="color:#0D3B1E;"></i>
       </div>
       <div>
-        <div class="stat-value">{{ total }}</div>
+        <div class="stat-value">{{ total_jugadores|default:"0" }}</div>
         <div class="stat-label">{% trans "Registered players" %}</div>
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-lg-3">
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-person-plus-fill" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ jugadores_hoy|default:"0" }}</div>
+        <div class="stat-label">{% trans "Registrations today" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-lg-3">
     <div class="stat-card red">
       <div class="stat-icon" style="background:#F4D9DE;">
         <i class="bi bi-flag-fill" style="color:#C41230;"></i>
       </div>
       <div>
-        <div class="stat-value">{{ doble_nac }}</div>
+        <div class="stat-value">{{ doble_nac|default:"0" }}</div>
         <div class="stat-label">{% trans "Dual nationality" %}</div>
       </div>
     </div>
   </div>
+
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-building" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ total_sponsors|default:"0" }}</div>
+        <div class="stat-label">{% trans "Sponsor Inquiries" %}</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="bo-card">
-  <div class="bo-card-header">
-    <h5><i class="bi bi-clock-history me-2"></i>{% trans "Recent entries" %}</h5>
-    <a href="{% url 'backoffice:jugadores_lista' %}"
-       class="btn btn-sm" style="color:#C41230;border-color:#C41230;border:1px solid;">
-      {% trans "View all" %}
-    </a>
+<!-- ── Charts row 1: visits line + device doughnut ─────────── -->
+<div class="row g-3 mb-3">
+
+  <div class="col-12 col-lg-8">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-graph-up me-2"></i>{% trans "Website visits — last 30 days" %}</h6>
+      </div>
+      <div style="padding:1rem;height:240px;">
+        <canvas id="chartVisits"></canvas>
+      </div>
+    </div>
   </div>
-  {% if recientes %}
-    <table class="table bo-table mb-0">
-      <thead>
-        <tr>
-          <th>{% trans "Player" %}</th>
-          <th>{% trans "Email" %}</th>
-          <th>{% trans "Nationality" %}</th>
-          <th>{% trans "Registration date" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for j in recientes %}
+
+  <div class="col-12 col-lg-4">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-phone me-2"></i>{% trans "Device type" %}</h6>
+      </div>
+      <div style="padding:1rem;display:flex;align-items:center;justify-content:center;height:240px;">
+        <canvas id="chartDevice" style="max-width:200px;"></canvas>
+      </div>
+      <div style="text-align:center;padding-bottom:.75rem;font-size:.8rem;color:#5a7a62;">
+        {{ mobile_pct }}% {% trans "Mobile" %} · {{ desktop_pct }}% {% trans "Desktop" %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Charts row 2: registrations line + top countries bar ── -->
+<div class="row g-3 mb-3">
+
+  <div class="col-12 col-lg-7">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-person-lines-fill me-2"></i>{% trans "Player registrations — last 30 days" %}</h6>
+      </div>
+      <div style="padding:1rem;height:240px;">
+        <canvas id="chartRegs"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-globe-americas me-2"></i>{% trans "Top visitor countries" %}</h6>
+      </div>
+      <div style="padding:1rem;height:240px;">
+        <canvas id="chartCountries"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Tables row: countries detail + pages + player countries -->
+<div class="row g-3 mb-3">
+
+  <div class="col-12 col-lg-4">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-pin-map me-2"></i>{% trans "Visitors by country" %}</h6>
+      </div>
+      {% if top_paises %}
+      <table class="table bo-table mb-0">
+        <thead><tr><th>{% trans "Country" %}</th><th style="text-align:right;">{% trans "Visits" %}</th></tr></thead>
+        <tbody>
+          {% for p in top_paises %}
+          <tr>
+            <td>{{ p.name }}</td>
+            <td style="text-align:right;font-weight:600;">{{ p.n }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center py-4 text-muted"><i class="bi bi-globe2 fs-2 d-block mb-2"></i>{% trans "No data yet." %}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>{% trans "Top pages" %}</h6>
+      </div>
+      {% if top_paginas %}
+      <table class="table bo-table mb-0">
+        <thead><tr><th>{% trans "Page" %}</th><th style="text-align:right;">{% trans "Visits" %}</th></tr></thead>
+        <tbody>
+          {% for p in top_paginas %}
+          <tr>
+            <td style="font-family:monospace;font-size:.8rem;">{{ p.path }}</td>
+            <td style="text-align:right;font-weight:600;">{{ p.n }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center py-4 text-muted"><i class="bi bi-inbox fs-2 d-block mb-2"></i>{% trans "No data yet." %}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-flag me-2"></i>{% trans "Players by country" %}</h6>
+      </div>
+      {% if jugadores_por_pais %}
+      <table class="table bo-table mb-0">
+        <thead><tr><th>{% trans "Country" %}</th><th style="text-align:right;">{% trans "Players" %}</th></tr></thead>
+        <tbody>
+          {% for p in jugadores_por_pais %}
+          <tr>
+            <td>{{ p.pais }}</td>
+            <td style="text-align:right;font-weight:600;">{{ p.n }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center py-4 text-muted"><i class="bi bi-inbox fs-2 d-block mb-2"></i>{% trans "No data yet." %}</div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Recent rows ────────────────────────────────────────── -->
+<div class="row g-3">
+
+  <div class="col-12 col-lg-6">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-clock-history me-2"></i>{% trans "Recent registrations" %}</h6>
+        <a href="{% url 'backoffice:jugadores_lista' %}" class="btn btn-sm" style="color:#C41230;border:1px solid #C41230;">{% trans "View all" %}</a>
+      </div>
+      {% if recientes %}
+      <table class="table bo-table mb-0">
+        <thead><tr><th>{% trans "Player" %}</th><th>{% trans "Nationality" %}</th><th>{% trans "Date" %}</th></tr></thead>
+        <tbody>
+          {% for j in recientes %}
           <tr>
             <td><strong>{{ j.apellidos }}, {{ j.nombre }}</strong></td>
-            <td>{{ j.email }}</td>
-            <td>
-              <span class="badge-nac">{{ j.get_nacionalidad_display }}</span>
-              {% if j.doble_nacionalidad and j.segunda_nacionalidad %}
-                <span class="badge-nac ms-1">{{ j.get_segunda_nacionalidad_display }}</span>
-              {% endif %}
-            </td>
-            <td>{{ j.fecha_registro|date:"d/m/Y H:i" }}</td>
+            <td><span class="badge-nac">{{ j.get_nacionalidad_display }}</span></td>
+            <td>{{ j.fecha_registro|date:"d/m/Y" }}</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <div class="text-center py-5 text-muted">
-      <i class="bi bi-inbox fs-2 d-block mb-2"></i>
-      {% trans "No players registered yet." %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center py-4 text-muted">{% trans "No players registered yet." %}</div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-building me-2"></i>{% trans "Recent Sponsor Inquiries" %}</h6>
+        <a href="{% url 'backoffice:sponsors_lista' %}" class="btn btn-sm" style="color:#C41230;border:1px solid #C41230;">{% trans "View all" %}</a>
+      </div>
+      {% if sponsors_recientes %}
+      <table class="table bo-table mb-0">
+        <thead><tr><th>{% trans "Company" %}</th><th>{% trans "Budget" %}</th><th>{% trans "Date" %}</th></tr></thead>
+        <tbody>
+          {% for s in sponsors_recientes %}
+          <tr style="cursor:pointer;" onclick="location.href='{% url 'backoffice:sponsor_detalle' s.pk %}'">
+            <td><strong>{{ s.company_name }}</strong></td>
+            <td>{% if s.budget %}{{ s.get_budget_display }}{% else %}—{% endif %}</td>
+            <td>{{ s.fecha_registro|date:"d/m/Y" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center py-4 text-muted">{% trans "No sponsor inquiries yet." %}</div>
+      {% endif %}
+    </div>
+  </div>
+
 </div>
+
+<!-- ── Chart.js ───────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function () {
+  const GREEN  = '#0D3B1E';
+  const LGREEN = '#1A6B35';
+  const RED    = '#C41230';
+  const GOLD   = '#C9A82C';
+  const GRID   = 'rgba(13,59,30,.08)';
+
+  const baseOpts = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: GRID }, ticks: { color: '#5a7a62', font: { size: 10 } } },
+      y: { grid: { color: GRID }, ticks: { color: '#5a7a62', font: { size: 10 }, precision: 0 }, beginAtZero: true },
+    },
+  };
+
+  /* Visits line */
+  new Chart(document.getElementById('chartVisits'), {
+    type: 'line',
+    data: {
+      labels: {{ v_labels|safe }},
+      datasets: [{
+        data: {{ v_data|safe }},
+        borderColor: LGREEN, backgroundColor: 'rgba(26,107,53,.08)',
+        fill: true, tension: .35, pointRadius: 2, borderWidth: 2,
+      }],
+    },
+    options: baseOpts,
+  });
+
+  /* Registrations line */
+  new Chart(document.getElementById('chartRegs'), {
+    type: 'line',
+    data: {
+      labels: {{ j_labels|safe }},
+      datasets: [{
+        data: {{ j_data|safe }},
+        borderColor: RED, backgroundColor: 'rgba(196,18,48,.07)',
+        fill: true, tension: .35, pointRadius: 2, borderWidth: 2,
+      }],
+    },
+    options: baseOpts,
+  });
+
+  /* Device doughnut */
+  new Chart(document.getElementById('chartDevice'), {
+    type: 'doughnut',
+    data: {
+      labels: ['{% trans "Mobile" %}', '{% trans "Desktop" %}'],
+      datasets: [{
+        data: [{{ mobile_count }}, {{ desktop_count }}],
+        backgroundColor: [LGREEN, '#e0ece3'],
+        borderWidth: 0,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '72%',
+      plugins: { legend: { position: 'bottom', labels: { color: '#2d4a32', font: { size: 11 } } } },
+    },
+  });
+
+  /* Countries bar */
+  new Chart(document.getElementById('chartCountries'), {
+    type: 'bar',
+    data: {
+      labels: {{ paises_labels|safe }},
+      datasets: [{
+        data: {{ paises_data|safe }},
+        backgroundColor: LGREEN, borderRadius: 4,
+      }],
+    },
+    options: {
+      ...baseOpts,
+      indexAxis: 'y',
+      scales: {
+        x: { grid: { color: GRID }, ticks: { color: '#5a7a62', font: { size: 10 }, precision: 0 }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { color: '#5a7a62', font: { size: 10 } } },
+      },
+    },
+  });
+})();
+</script>
+
 {% endblock %}

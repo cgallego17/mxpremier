@@ -1,0 +1,90 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Sponsor Inquiries" %}{% endblock %}
+{% block page_title %}{% trans "Sponsor Inquiries" %}{% endblock %}
+
+{% block content %}
+<div class="bo-card">
+  <div class="bo-card-header">
+    <h5><i class="bi bi-building me-2"></i>{% trans "Sponsor Inquiries" %}</h5>
+    <form method="get" class="d-flex gap-2">
+      <input type="search" name="q" value="{{ q }}"
+             class="form-control form-control-sm"
+             placeholder="{% trans 'Search by company, contact or email…' %}"
+             style="min-width:220px;">
+      <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
+      {% if q %}
+        <a href="{% url 'backoffice:sponsors_lista' %}" class="btn btn-sm btn-outline-danger">
+          <i class="bi bi-x"></i>
+        </a>
+      {% endif %}
+    </form>
+  </div>
+
+  {% if sponsors %}
+    <div class="table-responsive">
+      <table class="table bo-table mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{% trans "Company" %}</th>
+            <th>{% trans "Contact" %}</th>
+            <th>{% trans "Email" %}</th>
+            <th>{% trans "Phone" %}</th>
+            <th>{% trans "Budget" %}</th>
+            <th>{% trans "Proposal" %}</th>
+            <th>{% trans "Submitted" %}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in sponsors %}
+          <tr>
+            <td class="text-muted">{{ forloop.counter }}</td>
+            <td><strong>{{ s.company_name }}</strong></td>
+            <td>{{ s.contact_name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.phone }}</td>
+            <td>
+              {% if s.budget %}
+                <span class="badge-nac">{{ s.get_budget_display }}</span>
+              {% else %}—{% endif %}
+            </td>
+            <td>
+              {% if s.wants_proposal %}
+                <span class="badge bg-success bg-opacity-10 text-success" style="font-size:.72rem;">{% trans "Yes" %}</span>
+              {% else %}
+                <span class="text-muted">{% trans "No" %}</span>
+              {% endif %}
+            </td>
+            <td>{{ s.fecha_registro|date:"d/m/Y" }}</td>
+            <td>
+              <div class="d-flex gap-1">
+                <a href="{% url 'backoffice:sponsor_detalle' s.pk %}"
+                   class="btn btn-sm btn-outline-primary" title="{% trans 'View' %}">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a href="{% url 'backoffice:sponsor_eliminar' s.pk %}"
+                   class="btn btn-sm btn-outline-danger" title="{% trans 'Delete' %}">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+      {% if q %}
+        {% blocktrans %}No inquiries found for "{{ q }}".{% endblocktrans %}
+      {% else %}
+        {% trans "No sponsor inquiries yet." %}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ sponsor.company_name }}{% endblock %}
+{% block page_title %}{{ sponsor.company_name }}{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-2 mb-3">
+  <a href="{% url 'backoffice:sponsors_lista' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i>{% trans "Back" %}
+  </a>
+  <a href="{% url 'backoffice:sponsor_eliminar' sponsor.pk %}" class="btn btn-sm btn-outline-danger ms-auto">
+    <i class="bi bi-trash me-1"></i>{% trans "Delete" %}
+  </a>
+</div>
+
+<div class="row g-3">
+
+  <!-- Company info -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card h-100">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-building me-2"></i>{% trans "Company Information" %}</h6></div>
+      <dl class="sp-dl">
+        <dt>{% trans "Company" %}</dt><dd>{{ sponsor.company_name }}</dd>
+        <dt>{% trans "Contact" %}</dt><dd>{{ sponsor.contact_name }}</dd>
+        <dt>{% trans "Email" %}</dt><dd><a href="mailto:{{ sponsor.email }}">{{ sponsor.email }}</a></dd>
+        <dt>{% trans "Phone" %}</dt><dd>{{ sponsor.phone }}</dd>
+        {% if sponsor.website %}
+        <dt>{% trans "Website / Social" %}</dt>
+        <dd><a href="{{ sponsor.website }}" target="_blank" rel="noopener">{{ sponsor.website }}</a></dd>
+        {% endif %}
+        <dt>{% trans "Submitted" %}</dt><dd>{{ sponsor.fecha_registro|date:"d/m/Y H:i" }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Proposal + Budget -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card h-100">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-cash-coin me-2"></i>{% trans "Budget & Proposal" %}</h6></div>
+      <dl class="sp-dl">
+        <dt>{% trans "Estimated Budget" %}</dt>
+        <dd>{% if sponsor.budget %}{{ sponsor.get_budget_display }}{% else %}—{% endif %}</dd>
+        <dt>{% trans "Wants Proposal" %}</dt>
+        <dd>{% if sponsor.wants_proposal %}<span class="badge bg-success bg-opacity-10 text-success">{% trans "Yes" %}</span>
+            {% else %}<span class="text-muted">{% trans "No" %}</span>{% endif %}</dd>
+        {% if sponsor.logo %}
+        <dt>{% trans "Logo" %}</dt>
+        <dd><a href="{{ sponsor.logo.url }}" target="_blank" rel="noopener">
+          <img src="{{ sponsor.logo.url }}" alt="Logo" style="max-height:60px;border-radius:6px;">
+        </a></dd>
+        {% endif %}
+      </dl>
+    </div>
+  </div>
+
+  <!-- Interests + Goals + Activation -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-check2-square me-2"></i>{% trans "Sponsorship Interest" %}</h6></div>
+      <ul class="sp-checks-list">
+        {% if sponsor.interest_teams %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Estado 33 Teams" %}</li>{% endif %}
+        {% if sponsor.interest_players %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Player Sponsorships" %}</li>{% endif %}
+        {% if sponsor.interest_showcases %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Showcases / Tryouts" %}</li>{% endif %}
+        {% if sponsor.interest_tournaments %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Mexico Tournaments" %}</li>{% endif %}
+        {% if sponsor.interest_full_program %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Full Program Partnership" %}</li>{% endif %}
+        {% if not sponsor.interest_teams and not sponsor.interest_players and not sponsor.interest_showcases and not sponsor.interest_tournaments and not sponsor.interest_full_program %}
+          <li class="text-muted">—</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-bullseye me-2"></i>{% trans "Goals" %}</h6></div>
+      <ul class="sp-checks-list">
+        {% if sponsor.goal_brand_awareness %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Brand Awareness" %}</li>{% endif %}
+        {% if sponsor.goal_youth_athletes %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Support Youth Athletes" %}</li>{% endif %}
+        {% if sponsor.goal_community %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Community Impact" %}</li>{% endif %}
+        {% if sponsor.goal_marketing %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Marketing / Exposure" %}</li>{% endif %}
+        {% if sponsor.goal_international %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "International (U.S.–Mexico) Reach" %}</li>{% endif %}
+        {% if not sponsor.goal_brand_awareness and not sponsor.goal_youth_athletes and not sponsor.goal_community and not sponsor.goal_marketing and not sponsor.goal_international %}
+          <li class="text-muted">—</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-lightning-charge me-2"></i>{% trans "Activation" %}</h6></div>
+      <ul class="sp-checks-list">
+        {% if sponsor.activation_logo %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Logo on uniforms" %}</li>{% endif %}
+        {% if sponsor.activation_event %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Event branding" %}</li>{% endif %}
+        {% if sponsor.activation_social %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "Social media promotion" %}</li>{% endif %}
+        {% if sponsor.activation_onsite %}<li><i class="bi bi-check-circle-fill text-success me-1"></i>{% trans "On-site presence" %}</li>{% endif %}
+        {% if not sponsor.activation_logo and not sponsor.activation_event and not sponsor.activation_social and not sponsor.activation_onsite %}
+          <li class="text-muted">—</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  {% if sponsor.notes %}
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header"><h6 class="mb-0"><i class="bi bi-chat-left-text me-2"></i>{% trans "Notes / Ideas" %}</h6></div>
+      <p style="white-space:pre-wrap;font-size:.9rem;color:#2d4a32;padding:.25rem 0;">{{ sponsor.notes }}</p>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<style>
+  .sp-dl { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; padding: .75rem 0; font-size: .88rem; }
+  .sp-dl dt { font-weight: 700; color: rgba(13,59,30,.55); text-transform: uppercase; font-size: .7rem; letter-spacing: .08em; align-self: center; }
+  .sp-dl dd { margin: 0; color: #1a3a20; }
+  .sp-checks-list { list-style: none; margin: 0; padding: .5rem 0; font-size: .88rem; color: #1a3a20; display: flex; flex-direction: column; gap: .3rem; }
+</style>
+{% endblock %}

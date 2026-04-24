@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'landing.middleware.VisitTrackingMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -145,6 +146,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 LOGIN_URL = '/backoffice/login/'
 LOGIN_REDIRECT_URL = '/backoffice/'
 LOGOUT_REDIRECT_URL = '/backoffice/login/'
@@ -162,7 +166,9 @@ FB_GRAPH_API_VERSION = os.getenv('FB_GRAPH_API_VERSION', 'v24.0')
 FB_PAGE_ID = os.getenv('FB_PAGE_ID', '')
 FB_PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN', '')
 FB_REELS_LIMIT = _env_int('FB_REELS_LIMIT', 3)
-FB_PAGE_URL = os.getenv('FB_PAGE_URL', 'https://www.facebook.com/MXpremierbaseball')
+FB_PAGE_URL = os.getenv(
+    'FB_PAGE_URL', 'https://www.facebook.com/MXpremierbaseball'
+)
 FB_REELS_URL = os.getenv(
     'FB_REELS_URL',
     'https://www.facebook.com/MXpremierbaseball/reels/',

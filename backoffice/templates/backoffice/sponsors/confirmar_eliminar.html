@@ -1,0 +1,30 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete inquiry" %}{% endblock %}
+{% block page_title %}{% trans "Delete inquiry" %}{% endblock %}
+
+{% block content %}
+<div class="bo-card" style="max-width:480px;margin:0 auto;">
+  <div class="bo-card-header">
+    <h5 class="text-danger mb-0"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Delete inquiry?" %}</h5>
+  </div>
+  <div style="padding:1.5rem 1.75rem;">
+    <p>
+      {% blocktrans with name=sponsor.company_name %}
+        You are about to delete the inquiry from <strong>{{ name }}</strong>.
+      {% endblocktrans %}
+    </p>
+    <p class="text-muted" style="font-size:.88rem;">{% trans "This action cannot be undone." %}</p>
+    <form method="post" class="d-flex gap-2 mt-4">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash me-1"></i>{% trans "Yes, delete" %}
+      </button>
+      <a href="{% url 'backoffice:sponsor_detalle' sponsor.pk %}" class="btn btn-outline-secondary">
+        {% trans "Cancel" %}
+      </a>
+    </form>
+  </div>
+</div>
+{% endblock %}

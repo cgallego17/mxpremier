@@ -5,13 +5,34 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from django.conf import settings
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from backoffice.forms import JugadorForm
+from jugadores.choices import AMERICAS_CHOICES
+from landing.forms import SponsorForm
 
 
 logger = logging.getLogger(__name__)
+
+
+def _get_client_ip(request):
+    forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
+    if forwarded:
+        return forwarded.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR', '')
+
+
+def _is_rate_limited(ip):
+    limit = getattr(settings, 'REGISTRO_RATE_LIMIT', 5)
+    window = getattr(settings, 'REGISTRO_RATE_WINDOW', 3600)
+    key = f'reg_rate_{ip}'
+    count = cache.get(key, 0)
+    if count >= limit:
+        return True
+    cache.set(key, count + 1, timeout=window)
+    return False
 
 
 def _get_facebook_reels():
@@ -27,7 +48,8 @@ def _get_facebook_reels():
     )
     endpoint = (
         'https://graph.facebook.com/'
-        f'{settings.FB_GRAPH_API_VERSION}/{settings.FB_PAGE_ID}/video_reels?{params}'
+        f'{settings.FB_GRAPH_API_VERSION}'
+        f'/{settings.FB_PAGE_ID}/video_reels?{params}'
     )
     request = Request(endpoint, headers={'Accept': 'application/json'})
 
@@ -39,7 +61,9 @@ def _get_facebook_reels():
         return []
 
     if payload.get('error'):
-        logger.warning('Facebook reels API returned an error: %s', payload['error'])
+        logger.warning(
+            'Facebook reels API returned an error: %s', payload['error']
+        )
         return []
 
     reels = []
@@ -65,17 +89,37 @@ def index(request):
         'facebook_reels': _get_facebook_reels(),
         'facebook_page_url': settings.FB_PAGE_URL,
         'facebook_reels_url': settings.FB_REELS_URL,
+        'americas_choices': AMERICAS_CHOICES,
     }
     return render(request, 'landing/index.html', context)
 
 
 @require_POST
 def registro(request):
+    ip = _get_client_ip(request)
+    if _is_rate_limited(ip):
+        return JsonResponse(
+            {'ok': False, 'error': 'too_many_requests'}, status=429
+        )
     form = JugadorForm(request.POST)
     if form.is_valid():
         jugador = form.save(commit=False)
         if not jugador.email and jugador.tutor_email:
             jugador.email = jugador.tutor_email
         jugador.save()
+        return JsonResponse({'ok': True})
+    return JsonResponse({'ok': False, 'errors': form.errors}, status=400)
+
+
+@require_POST
+def sponsor(request):
+    ip = _get_client_ip(request)
+    if _is_rate_limited(ip):
+        return JsonResponse(
+            {'ok': False, 'error': 'too_many_requests'}, status=429
+        )
+    form = SponsorForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
         return JsonResponse({'ok': True})
     return JsonResponse({'ok': False, 'errors': form.errors}, status=400)
