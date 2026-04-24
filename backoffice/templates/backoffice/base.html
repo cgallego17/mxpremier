@@ -1,0 +1,381 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Backoffice{% endblock %} — Estado 33</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --green-dk: #0D3B1E;
+      --green-md: #155828;
+      --green:    #1A6B35;
+      --green-lt: #D6EDD9;
+      --red:      #C41230;
+      --red-dk:   #9E0E26;
+      --gold:     #C8A830;
+      --cream:    #F2EDDA;
+      --sidebar-width: 240px;
+      --topbar-height: 60px;
+    }
+
+    body { background: #EAF0E6; font-family: 'Segoe UI', sans-serif; }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--green-dk);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: transform .25s ease;
+      border-right: 3px solid var(--gold);
+    }
+
+    .sidebar-brand {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--green-md);
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .sidebar-brand .brand-logo {
+      width: 42px; height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .sidebar-brand .brand-name {
+      color: var(--cream);
+      font-weight: 700;
+      font-size: .95rem;
+      line-height: 1.2;
+      letter-spacing: .02em;
+    }
+    .sidebar-brand .brand-firm {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      margin-top: .15rem;
+    }
+    .sidebar-brand .firm-logo {
+      width: 16px; height: 16px;
+      object-fit: contain;
+      opacity: .9;
+    }
+    .sidebar-brand .brand-firm span {
+      color: var(--gold);
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .sidebar-nav { padding: 1rem 0; flex: 1; }
+    .nav-section-label {
+      padding: .5rem 1.5rem .25rem;
+      font-size: .62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #5C9A6E;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem 1.5rem;
+      color: #9ECFAE;
+      text-decoration: none;
+      font-size: .875rem;
+      border-left: 3px solid transparent;
+      transition: all .15s;
+    }
+    .sidebar-link:hover { color: var(--cream); background: var(--green-md); }
+    .sidebar-link.active {
+      color: var(--cream);
+      background: var(--green-md);
+      border-left-color: var(--gold);
+    }
+    .sidebar-link i { font-size: 1rem; width: 18px; text-align: center; }
+
+    .sidebar-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--green-md);
+      font-size: .78rem;
+      color: #5C9A6E;
+    }
+
+    /* Main */
+    #main-content {
+      margin-left: var(--sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    #topbar {
+      height: var(--topbar-height);
+      background: var(--green-dk);
+      border-bottom: 2px solid var(--gold);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    .topbar-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--cream);
+      letter-spacing: .02em;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .875rem;
+      color: #9ECFAE;
+    }
+    .user-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    .btn-logout {
+      color: #9ECFAE !important;
+      border-color: #5C9A6E !important;
+    }
+    .btn-logout:hover { color: var(--cream) !important; border-color: var(--cream) !important; }
+
+    /* Language switcher */
+    .lang-switcher { display: flex; gap: .25rem; }
+    .lang-btn {
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .45rem;
+      border-radius: 4px;
+      border: 1px solid #5C9A6E;
+      background: transparent;
+      color: #9ECFAE;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em;
+    }
+    .lang-btn:hover { border-color: var(--cream); color: var(--cream); }
+    .lang-btn.active { background: var(--gold); border-color: var(--gold); color: var(--green-dk); }
+
+    /* Page content */
+    .page-body { padding: 1.75rem; flex: 1; }
+
+    /* Stat cards */
+    .stat-card {
+      background: #fff;
+      border: 1px solid #C8DCC8;
+      border-top: 3px solid var(--green);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .stat-card.red { border-top-color: var(--red); }
+    .stat-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--green-dk); line-height: 1; }
+    .stat-label { font-size: .8rem; color: #4A7A5A; margin-top: .2rem; }
+
+    /* Cards */
+    .bo-card {
+      background: #fff;
+      border: 1px solid #C8DCC8;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .bo-card-header {
+      padding: .875rem 1.5rem;
+      border-bottom: 1px solid #D6EDD9;
+      background: var(--green-lt);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .bo-card-header h5 {
+      margin: 0;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--green-dk);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .bo-table th {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--green-dk);
+      background: var(--green-lt);
+      border-bottom: 2px solid var(--gold);
+      padding: .75rem 1rem;
+    }
+    .bo-table td {
+      padding: .75rem 1rem;
+      font-size: .875rem;
+      color: #1E3A28;
+      vertical-align: middle;
+      border-bottom: 1px solid #E8F2E8;
+    }
+    .bo-table tbody tr:last-child td { border-bottom: none; }
+    .bo-table tbody tr:hover td { background: #F0F8F0; }
+
+    /* Badges */
+    .badge-nac {
+      font-size: .7rem;
+      padding: .25rem .55rem;
+      border-radius: 20px;
+      background: var(--green-lt);
+      color: var(--green-dk);
+      font-weight: 600;
+      border: 1px solid #A8CCA8;
+    }
+
+    /* Buttons */
+    .btn-primary { background: var(--green); border-color: var(--green); }
+    .btn-primary:hover, .btn-primary:focus {
+      background: var(--green-md); border-color: var(--green-md);
+    }
+    .btn-outline-primary { color: var(--green); border-color: var(--green); }
+    .btn-outline-primary:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(26,107,53,.15);
+    }
+
+    /* Form card */
+    .form-card {
+      background: #fff;
+      border: 1px solid #C8DCC8;
+      border-radius: 10px;
+      padding: 2rem;
+      max-width: 680px;
+    }
+    .form-section-title {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--green-dk);
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .bo-alert { border-radius: 8px; font-size: .875rem; }
+
+    @media (max-width: 768px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #main-content { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+  <div class="sidebar-brand">
+    <img src="{% static 'backoffice/img/logo.png' %}" alt="Estado 33" class="brand-logo">
+    <div>
+      <div class="brand-name">Estado 33</div>
+      <div class="brand-firm">
+        <img src="{% static 'backoffice/img/mx-premier.png' %}" alt="MX Premier" class="firm-logo">
+        <span>MX PREMIER</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-section-label">{% trans "General" %}</div>
+    <a href="{% url 'backoffice:dashboard' %}"
+       class="sidebar-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+      <i class="bi bi-grid-1x2"></i> Dashboard
+    </a>
+
+    <div class="nav-section-label mt-2">{% trans "Management" %}</div>
+    <a href="{% url 'backoffice:jugadores_lista' %}"
+       class="sidebar-link {% if 'jugador' in request.resolver_match.url_name %}active{% endif %}">
+      <i class="bi bi-person-lines-fill"></i> {% trans "Player Registrations" %}
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>
+    {% trans "System active" %}
+  </div>
+</nav>
+
+<!-- Main -->
+<div id="main-content">
+  <!-- Topbar -->
+  <header id="topbar">
+    <span class="topbar-title">{% block page_title %}{% endblock %}</span>
+    <div class="topbar-right">
+
+      <!-- Language switcher -->
+      <div class="lang-switcher">
+        <form action="{% url 'set_language' %}" method="post" style="display:contents;">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.get_full_path }}">
+          <button type="submit" name="language" value="en"
+                  class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">EN</button>
+          <button type="submit" name="language" value="es"
+                  class="lang-btn {% if LANGUAGE_CODE == 'es' %}active{% endif %}">ES</button>
+        </form>
+      </div>
+
+      <div class="user-avatar">{{ request.user.username|first|upper }}</div>
+      <span>{{ request.user.username }}</span>
+      <a href="{% url 'backoffice:logout' %}" class="btn btn-sm btn-logout">
+        <i class="bi bi-box-arrow-right"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Alerts -->
+  <div class="px-4 pt-3">
+    {% for msg in messages %}
+      <div class="alert bo-alert alert-{{ msg.tags }} alert-dismissible fade show" role="alert">
+        {{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Content -->
+  <main class="page-body">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

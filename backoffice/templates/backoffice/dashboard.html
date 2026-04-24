@@ -1,0 +1,74 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-people-fill" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ total }}</div>
+        <div class="stat-label">{% trans "Registered players" %}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="stat-card red">
+      <div class="stat-icon" style="background:#F4D9DE;">
+        <i class="bi bi-flag-fill" style="color:#C41230;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ doble_nac }}</div>
+        <div class="stat-label">{% trans "Dual nationality" %}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bo-card">
+  <div class="bo-card-header">
+    <h5><i class="bi bi-clock-history me-2"></i>{% trans "Recent entries" %}</h5>
+    <a href="{% url 'backoffice:jugadores_lista' %}"
+       class="btn btn-sm" style="color:#C41230;border-color:#C41230;border:1px solid;">
+      {% trans "View all" %}
+    </a>
+  </div>
+  {% if recientes %}
+    <table class="table bo-table mb-0">
+      <thead>
+        <tr>
+          <th>{% trans "Player" %}</th>
+          <th>{% trans "Email" %}</th>
+          <th>{% trans "Nationality" %}</th>
+          <th>{% trans "Registration date" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for j in recientes %}
+          <tr>
+            <td><strong>{{ j.apellidos }}, {{ j.nombre }}</strong></td>
+            <td>{{ j.email }}</td>
+            <td>
+              <span class="badge-nac">{{ j.get_nacionalidad_display }}</span>
+              {% if j.doble_nacionalidad and j.segunda_nacionalidad %}
+                <span class="badge-nac ms-1">{{ j.get_segunda_nacionalidad_display }}</span>
+              {% endif %}
+            </td>
+            <td>{{ j.fecha_registro|date:"d/m/Y H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+      {% trans "No players registered yet." %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

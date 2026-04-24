@@ -1,0 +1,167 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% trans "Sign in" %} — Estado 33</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background: #0D3B1E;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(196,18,48,.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,168,48,.08) 0%, transparent 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .login-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 380px;
+      padding: 1rem;
+    }
+    .login-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .login-logo-main {
+      width: 100px;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.5));
+    }
+    .login-logo-firm {
+      width: 80px;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,.4));
+      opacity: .92;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem 2rem 2.25rem;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      border-top: 4px solid #1A6B35;
+    }
+    .login-title {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1B2D4F;
+      margin-bottom: .2rem;
+    }
+    .login-sub {
+      text-align: center;
+      font-size: .78rem;
+      color: #C8A830;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 1.75rem;
+    }
+    .form-label { font-size: .82rem; font-weight: 600; color: #1B2D4F; }
+    .form-control {
+      border-radius: 8px;
+      border-color: #d1d5db;
+      font-size: .875rem;
+      padding: .6rem .85rem;
+    }
+    .form-control:focus {
+      border-color: #C41230;
+      box-shadow: 0 0 0 3px rgba(196,18,48,.12);
+    }
+    .btn-login {
+      background: #1A6B35;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: .65rem;
+      font-weight: 700;
+      font-size: .9rem;
+      width: 100%;
+      transition: background .15s;
+      letter-spacing: .04em;
+    }
+    .btn-login:hover { background: #155828; color: #fff; }
+    .form-control:focus {
+      border-color: #1A6B35;
+      box-shadow: 0 0 0 3px rgba(26,107,53,.15);
+    }
+    .alert { border-radius: 8px; font-size: .82rem; }
+    .lang-row {
+      display: flex;
+      justify-content: center;
+      gap: .4rem;
+    }
+    .lang-btn {
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.3);
+      background: transparent;
+      color: rgba(255,255,255,.55);
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em;
+    }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+    .lang-btn.active { background: #C8A830; border-color: #C8A830; color: #1B2D4F; }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-logos">
+      <img src="{% static 'backoffice/img/logo.png' %}" alt="Estado 33" class="login-logo-main">
+      <img src="{% static 'backoffice/img/mx-premier.png' %}" alt="MX Premier" class="login-logo-firm">
+    </div>
+
+    <!-- Language switcher -->
+    <div class="lang-row">
+      <form action="{% url 'set_language' %}" method="post" style="display:contents;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <button type="submit" name="language" value="en"
+                class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">EN</button>
+        <button type="submit" name="language" value="es"
+                class="lang-btn {% if LANGUAGE_CODE == 'es' %}active{% endif %}">ES</button>
+      </form>
+    </div>
+
+    <div class="login-card">
+      <div class="login-title">Estado 33</div>
+      <div class="login-sub">Backoffice · MX PREMIER</div>
+
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="alert alert-danger">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">{% trans "Username" %}</label>
+          <input type="text" name="username" class="form-control"
+                 placeholder="{% trans 'Your username' %}" autofocus required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">{% trans "Password" %}</label>
+          <input type="password" name="password" class="form-control"
+                 placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-login">{% trans "Sign in" %}</button>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

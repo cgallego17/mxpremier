@@ -1,0 +1,134 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="form-card">
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    <!-- ── Player information ───────────────────────────── -->
+    <div class="form-section-title">{% trans "Player information" %}</div>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "First name" %}</label>
+        {{ form.nombre }}
+        {% if form.nombre.errors %}<div class="text-danger small mt-1">{{ form.nombre.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Last names" %}</label>
+        {{ form.apellidos }}
+        {% if form.apellidos.errors %}<div class="text-danger small mt-1">{{ form.apellidos.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">{% trans "Date of birth" %}</label>
+        {{ form.fecha_nacimiento }}
+        {% if form.fecha_nacimiento.errors %}<div class="text-danger small mt-1">{{ form.fecha_nacimiento.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-8">
+        <label class="form-label fw-semibold">{% trans "City and State" %}</label>
+        {{ form.ciudad_estado }}
+        {% if form.ciudad_estado.errors %}<div class="text-danger small mt-1">{{ form.ciudad_estado.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Citizenship" %}</label>
+        {{ form.nacionalidad }}
+        {% if form.nacionalidad.errors %}<div class="text-danger small mt-1">{{ form.nacionalidad.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Instagram handle" %}</label>
+        {{ form.instagram }}
+        {% if form.instagram.errors %}<div class="text-danger small mt-1">{{ form.instagram.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          {{ form.doble_nacionalidad }}
+          <label class="form-check-label" for="id_doble_nacionalidad">{% trans "Has dual nationality" %}</label>
+        </div>
+      </div>
+      <div class="col-md-6" id="segunda-nac-wrapper" style="display:none;">
+        <label class="form-label fw-semibold">{% trans "Second nationality" %}</label>
+        {{ form.segunda_nacionalidad }}
+        {% if form.segunda_nacionalidad.errors %}<div class="text-danger small mt-1">{{ form.segunda_nacionalidad.errors.0 }}</div>{% endif %}
+      </div>
+    </div>
+
+    <!-- ── Additional player info ────────────────────────── -->
+    <div class="form-section-title">{% trans "Additional player info" %}</div>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Travel team name" %}</label>
+        {{ form.equipo_viaje }}
+        {% if form.equipo_viaje.errors %}<div class="text-danger small mt-1">{{ form.equipo_viaje.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Team city and state" %}</label>
+        {{ form.equipo_ciudad_estado }}
+        {% if form.equipo_ciudad_estado.errors %}<div class="text-danger small mt-1">{{ form.equipo_ciudad_estado.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-5">
+        <label class="form-label fw-semibold">{% trans "Primary position" %}</label>
+        {{ form.posicion_principal }}
+        {% if form.posicion_principal.errors %}<div class="text-danger small mt-1">{{ form.posicion_principal.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-5">
+        <label class="form-label fw-semibold">{% trans "Secondary position" %}</label>
+        {{ form.posicion_secundaria }}
+        {% if form.posicion_secundaria.errors %}<div class="text-danger small mt-1">{{ form.posicion_secundaria.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-2 d-flex align-items-end pb-1">
+        <div class="form-check">
+          {{ form.es_pitcher }}
+          <label class="form-check-label" for="{{ form.es_pitcher.id_for_label }}">{% trans "Pitcher?" %}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Parents / guardian ────────────────────────────── -->
+    <div class="form-section-title">{% trans "Parents / Guardian" %}</div>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Guardian first name" %}</label>
+        {{ form.tutor_nombre }}
+        {% if form.tutor_nombre.errors %}<div class="text-danger small mt-1">{{ form.tutor_nombre.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Guardian last name" %}</label>
+        {{ form.tutor_apellidos }}
+        {% if form.tutor_apellidos.errors %}<div class="text-danger small mt-1">{{ form.tutor_apellidos.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Guardian phone" %}</label>
+        {{ form.tutor_telefono }}
+        {% if form.tutor_telefono.errors %}<div class="text-danger small mt-1">{{ form.tutor_telefono.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Guardian email" %}</label>
+        {{ form.tutor_email }}
+        {% if form.tutor_email.errors %}<div class="text-danger small mt-1">{{ form.tutor_email.errors.0 }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-check-lg me-1"></i>{% trans "Save" %}
+      </button>
+      <a href="{% url 'backoffice:jugadores_lista' %}" class="btn btn-outline-secondary">
+        {% trans "Cancel" %}
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const checkbox = document.getElementById('id_doble_nacionalidad');
+  const wrapper  = document.getElementById('segunda-nac-wrapper');
+  function toggleSegunda() { wrapper.style.display = checkbox.checked ? 'block' : 'none'; }
+  checkbox.addEventListener('change', toggleSegunda);
+  toggleSegunda();
+</script>
+{% endblock %}

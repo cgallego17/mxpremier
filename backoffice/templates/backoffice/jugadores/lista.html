@@ -1,0 +1,91 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Player Registrations" %}{% endblock %}
+{% block page_title %}{% trans "Player Registrations" %}{% endblock %}
+
+{% block content %}
+<div class="bo-card">
+  <div class="bo-card-header">
+    <h5><i class="bi bi-person-lines-fill me-2"></i>{% trans "Player Registrations" %}</h5>
+    <div class="d-flex gap-2 flex-wrap">
+      <form method="get" class="d-flex gap-2">
+        <input type="search" name="q" value="{{ q }}"
+               class="form-control form-control-sm"
+               placeholder="{% trans 'Search by name, last name or email...' %}"
+               style="min-width:220px;">
+        <button class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-search"></i>
+        </button>
+        {% if q %}
+          <a href="{% url 'backoffice:jugadores_lista' %}" class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-x"></i>
+          </a>
+        {% endif %}
+      </form>
+      <a href="{% url 'backoffice:jugador_crear' %}" class="btn btn-sm btn-primary">
+        <i class="bi bi-plus-lg me-1"></i>{% trans "New player" %}
+      </a>
+    </div>
+  </div>
+
+  {% if jugadores %}
+    <div class="table-responsive">
+      <table class="table bo-table mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Email" %}</th>
+            <th>{% trans "Phone" %}</th>
+            <th>{% trans "Age" %}</th>
+            <th>{% trans "Nationality" %}</th>
+            <th>{% trans "Registration" %}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for j in jugadores %}
+            <tr>
+              <td class="text-muted">{{ forloop.counter }}</td>
+              <td><strong>{{ j.apellidos }}, {{ j.nombre }}</strong></td>
+              <td>{{ j.email }}</td>
+              <td>{{ j.telefono }}</td>
+              <td>{{ j.edad }}</td>
+              <td>
+                <span class="badge-nac">{{ j.get_nacionalidad_display }}</span>
+                {% if j.doble_nacionalidad and j.segunda_nacionalidad %}
+                  <span class="badge-nac ms-1">{{ j.get_segunda_nacionalidad_display }}</span>
+                {% endif %}
+              </td>
+              <td>{{ j.fecha_registro|date:"d/m/Y" }}</td>
+              <td>
+                <div class="d-flex gap-1">
+                  <a href="{% url 'backoffice:jugador_editar' j.pk %}"
+                     class="btn btn-sm btn-outline-primary" title="{% trans 'Edit' %}">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <a href="{% url 'backoffice:jugador_eliminar' j.pk %}"
+                     class="btn btn-sm btn-outline-danger" title="{% trans 'Delete' %}">
+                    <i class="bi bi-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+      {% if q %}
+        {% blocktrans %}No players found for "{{ q }}".{% endblocktrans %}
+      {% else %}
+        {% trans "No players registered." %}
+        <a href="{% url 'backoffice:jugador_crear' %}">{% trans "Add one" %}</a>.
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

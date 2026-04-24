@@ -1,0 +1,706 @@
+# Spanish translations for Estado 33
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+# settings.py
+msgid "English"
+msgstr "Inglés"
+
+msgid "Spanish"
+msgstr "Español"
+
+# models.py — nationalities
+msgid "Mexican"
+msgstr "Mexicano"
+
+msgid "American"
+msgstr "Estadounidense"
+
+msgid "Dominican"
+msgstr "Dominicano"
+
+msgid "Cuban"
+msgstr "Cubano"
+
+msgid "Venezuelan"
+msgstr "Venezolano"
+
+msgid "Panamanian"
+msgstr "Panameño"
+
+msgid "Puerto Rican"
+msgstr "Puertorriqueño"
+
+msgid "Colombian"
+msgstr "Colombiano"
+
+msgid "Nicaraguan"
+msgstr "Nicaragüense"
+
+msgid "Costa Rican"
+msgstr "Costarricense"
+
+msgid "Guatemalan"
+msgstr "Guatemalteco"
+
+msgid "Honduran"
+msgstr "Hondureño"
+
+msgid "Argentine"
+msgstr "Argentino"
+
+msgid "Brazilian"
+msgstr "Brasileño"
+
+msgid "Other"
+msgstr "Otra"
+
+# models.py — field labels
+msgid "First name"
+msgstr "Nombre"
+
+msgid "Last names"
+msgstr "Apellidos"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Phone"
+msgstr "Teléfono"
+
+msgid "Age"
+msgstr "Edad"
+
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+msgid "Dual nationality"
+msgstr "Doble nacionalidad"
+
+msgid "Second nationality"
+msgstr "Segunda nacionalidad"
+
+msgid "Registration date"
+msgstr "Fecha de registro"
+
+msgid "Player"
+msgstr "Jugador"
+
+msgid "Players"
+msgstr "Jugadores"
+
+msgid "Player Registrations"
+msgstr "Registro de Jugadores"
+
+# forms.py
+msgid "Select the second nationality."
+msgstr "Selecciona la segunda nacionalidad."
+
+# views.py
+msgid "Invalid username or password."
+msgstr "Usuario o contraseña incorrectos."
+
+msgid "Player registered successfully."
+msgstr "Jugador registrado correctamente."
+
+msgid "Player updated successfully."
+msgstr "Jugador actualizado correctamente."
+
+msgid "Player deleted."
+msgstr "Jugador eliminado."
+
+msgid "New Player"
+msgstr "Nuevo Jugador"
+
+msgid "Edit"
+msgstr "Editar"
+
+# base.html
+msgid "General"
+msgstr "General"
+
+msgid "Management"
+msgstr "Gestión"
+
+msgid "System active"
+msgstr "Sistema activo"
+
+# login.html
+msgid "Sign in"
+msgstr "Iniciar sesión"
+
+msgid "Username"
+msgstr "Usuario"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Your username"
+msgstr "Tu usuario"
+
+# dashboard.html
+msgid "Registered players"
+msgstr "Jugadores registrados"
+
+msgid "Recent entries"
+msgstr "Últimos registros"
+
+msgid "View all"
+msgstr "Ver todos"
+
+msgid "Registration"
+msgstr "Registro"
+
+msgid "No players registered yet."
+msgstr "No hay jugadores registrados aún."
+
+# lista.html
+msgid "Players list"
+msgstr "Registro de jugadores"
+
+msgid "Search by name, last name or email..."
+msgstr "Buscar por nombre, apellido o email..."
+
+msgid "New player"
+msgstr "Nuevo jugador"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "No players found for \"%(q)s\"."
+msgstr "No se encontraron jugadores para \"%(q)s\"."
+
+msgid "No players registered."
+msgstr "No hay jugadores registrados."
+
+msgid "Add one"
+msgstr "Agregar uno"
+
+# confirmar_eliminar.html
+msgid "Delete player"
+msgstr "Eliminar jugador"
+
+msgid "Delete player?"
+msgstr "¿Eliminar jugador?"
+
+msgid "You are about to delete <strong>%(name)s</strong>."
+msgstr "Estás por eliminar a <strong>%(name)s</strong>."
+
+msgid "This action cannot be undone."
+msgstr "Esta acción no se puede deshacer."
+
+msgid "Yes, delete"
+msgstr "Sí, eliminar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Has dual nationality"
+msgstr "Tiene doble nacionalidad"
+
+msgid "Personal data"
+msgstr "Datos personales"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+# landing
+msgid "REGISTRATIONS NOW OPEN"
+msgstr "REGISTROS AHORA ABIERTOS"
+
+msgid "TALENTO MEXICANO"
+msgstr "TALENTO MEXICANO"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Requirements"
+msgstr "Requisitos"
+
+msgid "Why"
+msgstr "¿Por qué?"
+
+msgid "Events"
+msgstr "Eventos"
+
+msgid "Reels"
+msgstr "Reels"
+
+msgid "Division"
+msgstr "División"
+
+msgid "Schedule"
+msgstr "Calendario"
+
+msgid "Contact"
+msgstr "Contacto"
+
+msgid "Register Now"
+msgstr "Regístrate Ahora"
+
+msgid "Coming Soon · 2025"
+msgstr "Próximamente · 2025"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "TBD"
+msgstr "Por confirmar"
+
+msgid "Venue"
+msgstr "Sede"
+
+msgid "Mexico · USA"
+msgstr "México · EUA"
+
+msgid "Register as Player"
+msgstr "Registrarme como Jugador"
+
+msgid "Learn More"
+msgstr "Más información"
+
+msgid "Registrations"
+msgstr "Registros"
+
+msgid "Spots are <strong>limited</strong>. Secure your place in the most important Mexican-American Baseball National Championship."
+msgstr "Los lugares son <strong>limitados</strong>. Asegura tu lugar en el Campeonato Nacional de Béisbol Mexicano-Americano más importante."
+
+msgid "Why join the most important"
+msgstr "¿Por qué unirte al evento de béisbol"
+
+msgid "Mexican-American"
+msgstr "mexicano-americano"
+
+msgid "baseball event?"
+msgstr "más importante?"
+
+msgid "Talent Showcase"
+msgstr "Escaparate de Talento"
+
+msgid "Showcase your talent"
+msgstr "Muestra tu talento"
+
+msgid "Showcase your skills in front of professional scouts and coaches from Mexico and the United States. This is your opportunity to be seen at the highest level."
+msgstr "Muestra tus habilidades ante scouts y entrenadores profesionales de México y Estados Unidos. Esta es tu oportunidad de ser visto al más alto nivel."
+
+msgid "Elite Competition"
+msgstr "Competencia de Élite"
+
+msgid "Compete against the best Mexican baseball talent. Measure yourself against players who have been identified as the best of the best in Mexico."
+msgstr "Compite contra el mejor talento del béisbol mexicano. Mídete contra jugadores que han sido identificados como los mejores de los mejores en México."
+
+msgid "Connections"
+msgstr "Conexiones"
+
+msgid "Connect with your roots"
+msgstr "Conecta con tus raíces"
+
+msgid "Connect with the land of your parents and grandparents; experience the feeling of reuniting with your culture through baseball."
+msgstr "Conecta con la tierra de tus padres y abuelos; vive la emoción de reencontrarte con tu cultura a través del béisbol."
+
+msgid "UPCOMING EVENTS"
+msgstr "PRÓXIMOS EVENTOS"
+
+msgid "Opening"
+msgstr "Apertura"
+
+msgid "Opening Ceremony & Player Registration"
+msgstr "Ceremonia de Apertura y Registro de Jugadores"
+
+msgid "Showcase"
+msgstr "Escaparate"
+
+msgid "Talent Showcase & Scouting Day"
+msgstr "Escaparate de Talento y Día de Scouting"
+
+msgid "Competition"
+msgstr "Competencia"
+
+msgid "Elite Games — MX vs USA"
+msgstr "Juegos de Élite — MX vs EUA"
+
+msgid "Closing"
+msgstr "Clausura"
+
+msgid "Awards & Closing Ceremony"
+msgstr "Premios y Ceremonia de Clausura"
+
+msgid "Platinum"
+msgstr "Platino"
+
+msgid "Partners"
+msgstr "Patrocinadores"
+
+msgid "Become a Partner"
+msgstr "Conviértete en Patrocinador"
+
+msgid "View All"
+msgstr "Ver Todos"
+
+msgid "Meet the Mexican-American talent that will take the field. Players from both sides of the border competing at the highest level of amateur baseball."
+msgstr "Conoce el talento mexicano-americano que tomará el campo. Jugadores de ambos lados de la frontera compitiendo al más alto nivel del béisbol amateur."
+
+msgid "View All Players"
+msgstr "Ver Todos los Jugadores"
+
+msgid "The Roster"
+msgstr "La Alineación"
+
+msgid "Why participate"
+msgstr "Por qué participar"
+
+msgid "The most important"
+msgstr "El evento de béisbol"
+
+msgid "baseball event."
+msgstr "mexicano-americano más importante."
+
+msgid "Mexico"
+msgstr "México"
+
+msgid "United States"
+msgstr "Estados Unidos"
+
+msgid "Dual Nationality"
+msgstr "Doble Nacionalidad"
+
+msgid "Your Name"
+msgstr "Tu Nombre"
+
+msgid "Register to appear here"
+msgstr "Regístrate para aparecer aquí"
+
+msgid "Now Open"
+msgstr "Ahora Abierto"
+
+msgid "Early Bird"
+msgstr "Acceso Anticipado"
+
+msgid "spots"
+msgstr "lugares"
+
+msgid "remaining"
+msgstr "disponibles"
+
+msgid "TBD · 2025"
+msgstr "Por confirmar · 2025"
+
+msgid "Venue TBD"
+msgstr "Sede por confirmar"
+
+msgid "Event Details"
+msgstr "Detalles del Evento"
+
+msgid "Date: TBD · 2025"
+msgstr "Fecha: Por confirmar · 2025"
+
+msgid "Venue: TBD"
+msgstr "Sede: Por confirmar"
+
+msgid "Links"
+msgstr "Enlaces"
+
+msgid "Register"
+msgstr "Registrarse"
+
+msgid "Sponsors & Partners"
+msgstr "Patrocinadores y Socios"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "All rights reserved."
+msgstr "Todos los derechos reservados."
+
+msgid "Terms & Conditions"
+msgstr "Términos y Condiciones"
+
+msgid "Privacy Policy"
+msgstr "Política de Privacidad"
+
+msgid "Official · FEMEBE"
+msgstr "Oficial · FEMEBE"
+
+msgid "For the first time"
+msgstr "¡Por primera vez"
+
+msgid "in history!"
+msgstr "en la historia!"
+
+msgid "Estado 33 is here."
+msgstr "Estado 33 está aquí."
+
+msgid ""
+"\n"
+"          Mexican-American players will have the opportunity to join the new\n"
+"          <strong>#Estado33 team</strong> — officially recognized by the\n"
+"          <strong>FEMEBE (Mexican Baseball Federation)</strong> — to compete\n"
+"          alongside the other states in the upcoming <strong>11–12 Age Division\n"
+"          National Baseball Championship</strong> in La Paz, Baja California Sur.\n"
+"          "
+msgstr ""
+"\n"
+"          Los jugadores mexicoamericanos tendrán la oportunidad de formar parte del nuevo\n"
+"          equipo <strong>#Estado33</strong> — reconocido oficialmente por la\n"
+"          <strong>FEMEBE (Federación Mexicana de Béisbol)</strong> — para participar\n"
+"          junto a los demás estados en el próximo <strong>Campeonato Nacional de\n"
+"          Béisbol División 11-12</strong> en La Paz, Baja California Sur.\n"
+"          "
+
+msgid ""
+"\n"
+"          The top dual-national players will face off against the best players\n"
+"          from across Mexico, competing for a spot on the\n"
+"          <strong>Mexican National Team</strong> that will participate in the\n"
+"          <strong>12U Pan American Games</strong>.\n"
+"          "
+msgstr ""
+"\n"
+"          Los mejores jugadores con doble nacionalidad se enfrentarán a los mejores\n"
+"          jugadores de todo México, para competir por un espacio en la\n"
+"          <strong>Selección Nacional de México</strong> que participará en la\n"
+"          <strong>Campeonato Panamericano Sub-12U</strong>.\n"
+"          "
+
+msgid "World Cup"
+msgstr "Copa Mundial"
+
+msgid "Tournament"
+msgstr "Torneo"
+
+msgid "National Championship"
+msgstr "Campeonato Nacional"
+
+msgid "Age Division"
+msgstr "Categoría"
+
+msgid "La Paz, Baja California Sur, México"
+msgstr "La Paz, Baja California Sur, México"
+
+msgid "Sanctioned by"
+msgstr "Avalado por"
+
+msgid "Location"
+msgstr "Sede"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Goal"
+msgstr "Meta"
+
+msgid "11–12 Age Division — La Paz, Baja California Sur, México."
+msgstr "Categoría 11–12 años — La Paz, Baja California Sur, México."
+
+msgid "Organization"
+msgstr "Organización"
+
+msgid "Federación Mexicana de Béisbol — officially recognizing Estado 33 as a competing state."
+msgstr "Federación Mexicana de Béisbol — reconociendo oficialmente al Estado 33 como estado participante."
+
+msgid "Ultimate Goal"
+msgstr "Objetivo Final"
+
+msgid "Baseball World Cup"
+msgstr "Copa Mundial de Béisbol"
+
+msgid "Front Office"
+msgstr "Directorio"
+
+msgid "Directory"
+msgstr "Ejecutivo"
+
+msgid "Coming soon"
+msgstr "Próximamente"
+
+msgid "Commissioner of Baseball"
+msgstr "Comisionado de Béisbol"
+
+msgid "Deputy Commissioner, Baseball Administration & Chief Legal Officer"
+msgstr "Comisionado Adjunto, Administración de Béisbol y Consejero Jurídico en Jefe"
+
+msgid "Deputy Commissioner, Business & Media"
+msgstr "Comisionado Adjunto, Negocios y Medios"
+
+msgid "12U Pan American Games"
+msgstr "Campeonato Panamericano Sub-12U"
+
+msgid "Register as"
+msgstr "Registrarme como"
+
+msgid "Select"
+msgstr "Seleccionar"
+
+msgid "Additional player info"
+msgstr "Información adicional del jugador"
+
+msgid "Travel team name"
+msgstr "Nombre del equipo"
+
+msgid "Team city and state"
+msgstr "Ciudad y estado del equipo"
+
+msgid "Primary position"
+msgstr "Posición principal"
+
+msgid "Secondary position"
+msgstr "Posición secundaria"
+
+msgid "Pitcher?"
+msgstr "¿Es pitcher?"
+
+msgid "Parents / Guardian"
+msgstr "Padres / Tutor"
+
+msgid "Guardian first name"
+msgstr "Nombre del tutor"
+
+msgid "Guardian last name"
+msgstr "Apellido del tutor"
+
+msgid "Guardian phone"
+msgstr "Teléfono del tutor"
+
+msgid "Guardian email"
+msgstr "Email del tutor"
+
+msgid "Registration complete!"
+msgstr "¡Registro completado!"
+
+msgid "We'll be in touch with next steps. Welcome to Estado 33."
+msgstr "Nos pondremos en contacto con los próximos pasos. Bienvenido a Estado 33."
+
+msgid "Player information"
+msgstr "Información del jugador"
+
+msgid "Date of birth"
+msgstr "Fecha de nacimiento"
+
+msgid "City and State"
+msgstr "Ciudad y Estado"
+
+msgid "Citizenship"
+msgstr "Ciudadanía"
+
+msgid "Instagram handle"
+msgstr "Usuario de Instagram"
+
+msgid "Our"
+msgstr "Nuestros"
+
+msgid "Follow us on Facebook and don't miss a single moment of the event"
+msgstr "Síguenos en Facebook y no te pierdas ningún momento del evento"
+
+msgid "Watch Reels"
+msgstr "Ver Reels"
+
+msgid "Follow on Facebook"
+msgstr "Seguir en Facebook"
+
+msgid "Watch all Reels"
+msgstr "Ver todos los Reels"
+
+msgid "Top players earn a spot on the Mexican National Team competing on the world stage."
+msgstr "Los mejores jugadores ganan un lugar en la Selección Nacional Mexicana para competir a nivel mundial."
+
+msgid "MAY 16–23, 2026"
+msgstr "16–23 DE MAYO, 2026"
+
+msgid "May 16–23, 2026"
+msgstr "16–23 de Mayo, 2026"
+
+msgid "DEADLINE: MAY 15, 2026"
+msgstr "LÍMITE: 15 DE MAYO, 2026"
+
+msgid "How to participate"
+msgstr "Cómo participar"
+
+msgid "Requirements & Information"
+msgstr "Requisitos e Información"
+
+msgid "Everything you need to know to join the 2026 Estado 33 National Championship. Review the requirements and secure your spot before the deadline."
+msgstr "Todo lo que necesitas saber para unirte al Campeonato Nacional Estado 33 2026. Revisa los requisitos y asegura tu lugar antes de la fecha límite."
+
+msgid "Who can join?"
+msgstr "¿Quién puede participar?"
+
+msgid "Dual-National Players"
+msgstr "Jugadores de Doble Nacionalidad"
+
+msgid "Dual-National / Mexican Heritage players <strong>residing in the United States</strong>. Ages 11-12 years old Born 2014–2015."
+msgstr "Jugadores de doble nacionalidad / herencia mexicana <strong>residiendo en Estados Unidos</strong>. Edades 11-12 años, nacidos 2014–2015."
+
+msgid "Registration Deadline"
+msgstr "Fecha Límite de Registro"
+
+msgid "May 10, 2026"
+msgstr "15 de Mayo, 2026"
+
+msgid "Pre-register by <strong>May 10, 2026 at 8:00 PM</strong>. Don't miss your chance to be part of history."
+msgstr "Prerregístrate antes del <strong>15 de mayo de 2026 a las 8:00 PM</strong>. No pierdas tu oportunidad de ser parte de la historia."
+
+msgid "Official Requirement"
+msgstr "Requisito Oficial"
+
+msgid "SIREBE Credential"
+msgstr "Credencial SIREBE"
+
+msgid "Official <strong>2026 SIREBE Credential</strong> required to compete. Must be processed before the deadline."
+msgstr "Se requiere la <strong>Credencial SIREBE 2026</strong> oficial para competir. Debe tramitarse antes de la fecha límite."
+
+msgid "Insurance"
+msgstr "Seguro"
+
+msgid "Medical Insurance"
+msgstr "Seguro Médico"
+
+msgid "<strong>Valid Medical Insurance</strong> is required for all registered players during the championship."
+msgstr "Se requiere <strong>Seguro Médico Vigente</strong> para todos los jugadores registrados durante el campeonato."
+
+msgid "Official Tournament Division"
+msgstr "División Oficial del Torneo"
+
+msgid "The <strong>12U National Championship</strong> brings together the top Under-12 talent from Mexico and the United States. Organized under the MX Premier Baseball banner, this is the premier stage for the next generation of Mexican-American baseball."
+msgstr "El <strong>Campeonato Nacional 12U</strong> reúne al mejor talento Sub-12 de México y Estados Unidos. Organizado bajo la bandera de MX Premier Baseball, este es el escenario principal para la próxima generación del béisbol mexicano-americano."
+msgid "Pitcher"
+msgstr "Pitcher"
+
+msgid "Catcher"
+msgstr "Receptor"
+
+msgid "First Base"
+msgstr "Primera Base"
+
+msgid "Second Base"
+msgstr "Segunda Base"
+
+msgid "Third Base"
+msgstr "Tercera Base"
+
+msgid "Shortstop"
+msgstr "Parador en Corto"
+
+msgid "Left Field"
+msgstr "Jardín Izquierdo"
+
+msgid "Center Field"
+msgstr "Jardín Central"
+
+msgid "Right Field"
+msgstr "Jardín Derecho"
+
+msgid "Outfield"
+msgstr "Jardines"
+
+msgid "Designated Hitter"
+msgstr "Bateador Designado"
+
+msgid "Utility"
+msgstr "Utilitario"
