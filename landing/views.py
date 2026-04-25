@@ -1,7 +1,7 @@
 import json
 import logging
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
 from django.conf import settings
@@ -41,8 +41,11 @@ def _get_facebook_reels():
 
     params = urlencode(
         {
-            'fields': 'id,permalink_url,description,created_time',
-            'limit': settings.FB_REELS_LIMIT,
+            'fields': (
+                'id,permalink_url,title,picture,'
+                'format,description,created_time'
+            ),
+            'limit': settings.FB_REELS_LIMIT * 4,
             'access_token': settings.FB_PAGE_ACCESS_TOKEN,
         }
     )
@@ -71,10 +74,18 @@ def _get_facebook_reels():
         permalink_url = item.get('permalink_url')
         if not permalink_url:
             continue
+        fmt = (item.get('format') or [{}])[0]
+        if fmt.get('width', 0) > fmt.get('height', 1):
+            continue
+        if permalink_url.startswith('/'):
+            permalink_url = f'https://www.facebook.com{permalink_url}'
         reels.append(
             {
                 'id': item.get('id', ''),
                 'permalink_url': permalink_url,
+                'permalink_url_encoded': quote(permalink_url, safe=''),
+                'title': item.get('title', ''),
+                'picture': item.get('picture', ''),
                 'description': item.get('description', ''),
                 'created_time': item.get('created_time', ''),
             }

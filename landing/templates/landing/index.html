@@ -974,18 +974,31 @@
     }
     .banner-visual {
       position: relative;
-      height: 420px;
+      height: 520px;
+      min-height: 320px;
+      max-height: 70vh;
       overflow: hidden;
       display: flex;
       align-items: stretch;
     }
     .banner-field {
       flex: 1;
+      min-height: 320px;
       background:
         radial-gradient(ellipse 70% 90% at 30% 50%, var(--navy) 0%, var(--navy-dk) 60%, #010E07 100%);
       position: relative;
       overflow: hidden;
     }
+    .banner-field-video {
+      width: 100%;
+      height: 100%;
+      object-fit: none;
+      position: absolute;
+      top: 0;
+      left: -180px;
+      z-index: 1;
+    }
+    .video-mobile { display: none; }
     /* Diamond pattern — baseball field outline */
     .banner-field::before {
       content: '';
@@ -1791,6 +1804,19 @@
       inset: 0;
       background: linear-gradient(to top, rgb(0 0 0 / 18%) 30%, rgba(0, 0, 0, .1) 65%, transparent 100%);
     }
+    .player-card-logo {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 56px;
+      opacity: .22;
+      filter: brightness(0) invert(1);
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .player-card:hover .player-card-logo {
+      opacity: .45;
+    }
     .player-card-body {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -1883,21 +1909,20 @@
       flex-wrap: wrap;
     }
     .fb-reel-card {
+      position: relative;
       width: 295px;
-      height: 476px;
+      aspect-ratio: 9 / 16;
       background: #1a1a1a;
       border-radius: 14px;
       border: 1px solid rgba(24,119,242,.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: .75rem;
-      color: rgba(255,255,255,.25);
-      font-size: .75rem;
+      overflow: hidden;
       transition: border-color .2s, transform .2s;
-      cursor: pointer;
-      text-decoration: none;
+    }
+    .fb-reel-card iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
     .fb-reel-card:hover {
       border-color: #1877F2;
@@ -1906,6 +1931,27 @@
     }
     .fb-reel-card i { font-size: 2.5rem; color: #1877F2; opacity: .7; }
     .fb-reel-card:hover i { opacity: 1; }
+    .fb-reel-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+    .fb-reel-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.3);
+      border-radius: 14px;
+      transition: background .2s;
+    }
+    .fb-reel-play i { font-size: 3rem; color: #fff; opacity: .85; }
+    .fb-reel-card:hover .fb-reel-play { background: rgba(0,0,0,.5); }
+    .fb-reel-card:hover .fb-reel-play i { opacity: 1; }
     .fb-btns {
       display: flex;
       justify-content: center;
@@ -1949,7 +1995,8 @@
     .fb-watch-btn:hover { background: #1877F2; color: #fff; }
     @media (max-width: 650px) {
       #early-reg { padding: 2.5rem 4%; }
-      .fb-reel-card { width: 130px; height: 230px; }
+      .fb-reels-cards { gap: .5rem; }
+      .fb-reel-card { width: 30vw; }
       .fb-btns { flex-direction: column; align-items: center; }
       .fb-follow-btn, .fb-watch-btn { width: 100%; justify-content: center; }
     }
@@ -1990,7 +2037,7 @@
     .executives-title span { color: var(--red); }
     .executives-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem 1.5rem;
       max-width: 1200px;
       margin: 0 auto;
@@ -2428,9 +2475,12 @@
       .btn-register { display: none; }
       .nav-lang { gap: 0; }
       .lang-btn { padding: .25rem .5rem; font-size: .7rem; }
-      .banner-visual { height: auto; flex-direction: column; }
-      .banner-field { height: 200px; }
+      .banner-visual { height: auto; min-height: unset; max-height: none; flex-direction: column; }
+      .banner-field { height: 340px; min-height: 280px; flex-shrink: 0; }
+      .video-desktop { display: none; }
+      .video-mobile { display: block; object-fit: inherit; left: 0; width: 100%; height: 100%; }
       .register-card { position: static; width: 100%; border-left: none; border-top: 3px solid var(--gold); }
+      .register-card-top { display: none; }
       .why-header { flex-direction: column; }
 
       /* Hero mobile — full screen vertical */
@@ -3163,9 +3213,11 @@
 <!-- ─── REGISTER BANNER ────────────────────────────────────── -->
 <section id="register-banner">
   <div class="banner-visual">
-    <div class="banner-field">
-      <div class="banner-lines"></div>
-      <div class="banner-glow"></div>
+    <div class="banner-field" style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <video class="banner-field-video video-desktop" src="{% static 'imagenes/PromoV2.mp4' %}" autoplay loop muted playsinline></video>
+      <video class="banner-field-video video-mobile" src="{% static 'imagenes/promoMovil.mp4' %}" autoplay loop muted playsinline></video>
+      <div class="banner-lines" style="position:relative;z-index:2;"></div>
+      <div class="banner-glow" style="position:relative;z-index:2;"></div>
     </div>
 
     <div class="register-card">
@@ -3359,7 +3411,9 @@
     <div class="player-card">
       <div class="player-card-bg" data-num="33"></div>
       <div class="player-card-pattern"></div>
-      <div class="player-card-overlay"></div>
+      <div class="player-card-overlay">
+        <img src="{% static 'imagenes/Escudo logo estado 33 mx.png' %}" alt="" class="player-card-logo">
+      </div>
       <div class="player-card-body">
         <div class="player-card-flag">#ESTADO33</div>
         <div class="player-card-name">NICK GONZALEZ</div>
@@ -3370,7 +3424,9 @@
     <div class="player-card">
       <div class="player-card-bg" data-num="1"></div>
       <div class="player-card-pattern"></div>
-      <div class="player-card-overlay"></div>
+      <div class="player-card-overlay">
+        <img src="{% static 'imagenes/Escudo logo estado 33 mx.png' %}" alt="" class="player-card-logo">
+      </div>
       <div class="player-card-body">
         <div class="player-card-flag">#ESTADO33</div>
         <div class="player-card-name">VICTOR RIVERA</div>
@@ -3381,7 +3437,9 @@
     <div class="player-card">
       <div class="player-card-bg" data-num="7"></div>
       <div class="player-card-pattern"></div>
-      <div class="player-card-overlay"></div>
+      <div class="player-card-overlay">
+        <img src="{% static 'imagenes/Escudo logo estado 33 mx.png' %}" alt="" class="player-card-logo">
+      </div>
       <div class="player-card-body">
         <div class="player-card-flag">#ESTADO33</div>
         <div class="player-card-name">SAMMY LOPEZ</div>
@@ -3403,10 +3461,15 @@
   <div class="fb-reels-cards">
     {% if facebook_reels %}
       {% for reel in facebook_reels %}
-        <a href="{{ reel.permalink_url }}" target="_blank" rel="noopener" class="fb-reel-card">
-          <i class="bi bi-play-circle-fill"></i>
-          <span>{% trans "Watch Reels" %}</span>
-        </a>
+        <div class="fb-reel-card">
+          <iframe
+            src="https://www.facebook.com/plugins/video.php?href={{ reel.permalink_url_encoded }}&show_text=false&autoplay=1&mute=1"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
+        </div>
       {% endfor %}
     {% else %}
       <a href="{{ facebook_reels_url }}" target="_blank" rel="noopener" class="fb-reel-card">
