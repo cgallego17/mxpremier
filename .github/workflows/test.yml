@@ -19,6 +19,7 @@ jobs:
       FB_PAGE_ACCESS_TOKEN: "fake-token-for-ci"
       FB_PAGE_URL: "https://www.facebook.com/test"
       FB_REELS_URL: "https://www.facebook.com/test/reels/"
+      SECURE_SSL_REDIRECT: "false"
 
     steps:
       - uses: actions/checkout@v4

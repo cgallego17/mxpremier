@@ -164,8 +164,10 @@ CSRF_TRUSTED_ORIGINS = [
     o for o in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if o
 ]
 
+_prod = not DEBUG and os.getenv('SECURE_SSL_REDIRECT', 'true').lower() != 'false'
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = not DEBUG
+SECURE_SSL_REDIRECT = _prod
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 SECURE_HSTS_SECONDS = 0 if DEBUG else 31536000
