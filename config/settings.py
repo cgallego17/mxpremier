@@ -13,23 +13,20 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+load_dotenv(BASE_DIR / '.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    'django-insecure-ac0y9m8zyb3x&po5efn!f1!%t_wzm-(^hyrz437%4=5wg1=nt2'
-)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -163,16 +160,14 @@ def _env_int(name: str, default: int) -> int:
 
 
 FB_GRAPH_API_VERSION = os.getenv('FB_GRAPH_API_VERSION', 'v25.0')
-FB_PAGE_ID = os.getenv('FB_PAGE_ID', '985338847996794')
-FB_PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN', 'EAASf4E5LdncBRXAgAmn7uch54ZCXutwQKsHWZBOCnaAOYtjgLddDfKeOZCPIHdHhJLZCz4A9vcOjZC2cWs6vhRzRJGU3g6lDUx40w8UaPqqRfvHfIZCVjtyqQkOzeO3fMNVF1PEYFqUc1P3soZA1QspCrVMU2ZCpn227B7CkkVUuCiefeJqUATAvZAkWmJha2xqdGdO94SQsu5Y2wHGZBDkjJg8K8VOdlToo4NlWvzancXXadZCMe0z6uvWreq6SbMZD')
+FB_PAGE_ID = os.getenv('FB_PAGE_ID')
+FB_PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN')
 FB_REELS_LIMIT = _env_int('FB_REELS_LIMIT', 3)
-FB_PAGE_URL = os.getenv(
-    'FB_PAGE_URL', 'https://www.facebook.com/MXpremierbaseball'
-)
-FB_REELS_URL = os.getenv(
-    'FB_REELS_URL',
-    'https://www.facebook.com/MXpremierbaseball/reels/',
-)
+FB_PAGE_URL = os.getenv('FB_PAGE_URL', '')
+FB_REELS_URL = os.getenv('FB_REELS_URL', '')
+
+REGISTRO_RATE_LIMIT = _env_int('REGISTRO_RATE_LIMIT', 5)
+REGISTRO_RATE_WINDOW = _env_int('REGISTRO_RATE_WINDOW', 3600)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
