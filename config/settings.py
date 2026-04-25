@@ -162,9 +162,9 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
-FB_GRAPH_API_VERSION = os.getenv('FB_GRAPH_API_VERSION', 'v24.0')
-FB_PAGE_ID = os.getenv('FB_PAGE_ID', '')
-FB_PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN', '')
+FB_GRAPH_API_VERSION = os.getenv('FB_GRAPH_API_VERSION', 'v25.0')
+FB_PAGE_ID = os.getenv('FB_PAGE_ID', '985338847996794')
+FB_PAGE_ACCESS_TOKEN = os.getenv('FB_PAGE_ACCESS_TOKEN', 'EAASf4E5LdncBRROechnoQKCaiNOcgWOrALabdCzUA668ATeT0gjn9Fz9y3trp5YHCB5uPvBC7GqkZBTlrMh1pjxZBZArklNuecGUi1osi0do3wps6bYW5VTbI6jbTZBZBU77ZCS5cAy8BnqkZCrvoUCFXUOJBpxK4BpvEeFpZB9hvtcVNsoEiI4dO0S6aFxQNErpp6pxm0JU4L0TKErKZBYCse24zok8hSfwO5hxRHPnT2I632A93VmUL9eQsMsaFZA2bZC791Naf2qIFjx69IjU27G1UA6y4kNaaFnnbAZD')
 FB_REELS_LIMIT = _env_int('FB_REELS_LIMIT', 3)
 FB_PAGE_URL = os.getenv(
     'FB_PAGE_URL', 'https://www.facebook.com/MXpremierbaseball'
