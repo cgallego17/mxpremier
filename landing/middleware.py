@@ -25,7 +25,8 @@ def _get_country(request, ip):
         if val:
             return val.upper()[:2]
 
-    if not ip or ip.startswith(('127.', '192.168.', '10.', '172.')) or ip == '::1':
+    _private = ('127.', '192.168.', '10.', '172.', '169.254.', '100.64.', 'fc', 'fd')
+    if not ip or ip.startswith(_private) or ip in ('::1', '0.0.0.0'):
         return 'LO'
 
     key = f'geoip_{ip}'

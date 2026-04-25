@@ -364,9 +364,12 @@
 
       <div class="user-avatar">{{ request.user.username|first|upper }}</div>
       <span>{{ request.user.username }}</span>
-      <a href="{% url 'backoffice:logout' %}" class="btn btn-sm btn-logout">
-        <i class="bi bi-box-arrow-right"></i>
-      </a>
+      <form method="post" action="{% url 'backoffice:logout' %}" style="display:inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-logout" style="background:none;border:1px solid;cursor:pointer">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </form>
     </div>
   </header>
 
