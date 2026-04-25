@@ -20,6 +20,7 @@ jobs:
       FB_PAGE_URL: "https://www.facebook.com/test"
       FB_REELS_URL: "https://www.facebook.com/test/reels/"
       SECURE_SSL_REDIRECT: "false"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - uses: actions/checkout@v4
