@@ -1430,6 +1430,33 @@ msgstr "¡Gracias por tu interés!"
 msgid "Our team will contact you soon with partnership opportunities."
 msgstr "Nuestro equipo te contactará pronto con oportunidades de patrocinio."
 
+msgid "FEMEBE President"
+msgstr "PRESIDENTE DE FEMEBE"
+
+msgid "FEMEBE National Teams Coordinator"
+msgstr "Coordinador de Selecciones Nacionales de FEMEBE"
+
+msgid "Mexico National Team Roster Manager"
+msgstr "Gerente de Roster de la Selección Nacional de México"
+
+msgid "Mexico National Team General Manager"
+msgstr "Gerente General de la Selección Nacional de México"
+
+msgid "Mexico National Team Operations Manager"
+msgstr "Gerente de Operaciones de la Selección Nacional de México"
+
+msgid "#Estado33 General Manager"
+msgstr "Gerente General del #Estado33"
+
+msgid "#Estado33 Baseball Operations Manager"
+msgstr "Gerente de Operaciones de Béisbol del #Estado33"
+
+msgid "#Estado33 VP of Baseball Operations"
+msgstr "Vice Presidente de Operaciones de Béisbol del #Estado33"
+
+msgid "#Estado33 Media Director"
+msgstr "Director de Medios del #Estado33"
+
 # models.py — nationalities
 #~ msgid "Mexican"
 #~ msgstr "Mexicano"

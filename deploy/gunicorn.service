@@ -1,0 +1,22 @@
+[Unit]
+Description=Gunicorn daemon for mxbaseball.com
+After=network.target
+
+[Service]
+User=mxbaseball
+Group=www-data
+WorkingDirectory=/var/www/mxbaseball
+EnvironmentFile=/var/www/mxbaseball/.env
+ExecStart=/var/www/mxbaseball/venv/bin/gunicorn \
+    --workers 3 \
+    --bind 127.0.0.1:8000 \
+    --timeout 60 \
+    --access-logfile /var/log/mxbaseball/access.log \
+    --error-logfile /var/log/mxbaseball/error.log \
+    config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

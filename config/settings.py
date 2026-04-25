@@ -142,6 +142,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -158,6 +159,25 @@ def _env_int(name: str, default: int) -> int:
     except (TypeError, ValueError):
         return default
 
+
+CSRF_TRUSTED_ORIGINS = [
+    o for o in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if o
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_HSTS_SECONDS = 0 if DEBUG else 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': BASE_DIR / '.django_cache',
+    }
+}
 
 FB_GRAPH_API_VERSION = os.getenv('FB_GRAPH_API_VERSION', 'v25.0')
 FB_PAGE_ID = os.getenv('FB_PAGE_ID')

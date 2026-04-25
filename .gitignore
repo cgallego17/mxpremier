@@ -10,4 +10,5 @@ env/
 *.log
 staticfiles/
 media/
+.django_cache/
 .DS_Store
