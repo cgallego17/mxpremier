@@ -427,7 +427,7 @@ def gastos_lista(request):
             .annotate(total=Sum('monto'))
             .order_by('-total')
         )
-        cat_labels = [dict(CATEGORIAS_GASTO).get(r['categoria'], r['categoria']) for r in por_categoria]
+        cat_labels = [str(dict(CATEGORIAS_GASTO).get(r['categoria'], r['categoria'])) for r in por_categoria]
         cat_data = [float(r['total']) for r in por_categoria]
         cat_colors = [CATEGORIA_COLORS.get(r['categoria'], '#374151') for r in por_categoria]
 
