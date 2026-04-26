@@ -378,69 +378,77 @@ def partner_eliminar(request, pk):
 
 # ── Gastos ────────────────────────────────────────────────────────
 
+
+import traceback
+from django.http import HttpResponse
+
 @login_required
 def gastos_lista(request):
-    qs = Gasto.objects.all()
+    try:
+        qs = Gasto.objects.all()
 
-    # Filters
-    categoria = request.GET.get('categoria', '')
-    estado = request.GET.get('estado', '')
-    moneda = request.GET.get('moneda', '')
-    q = request.GET.get('q', '')
+        # Filters
+        categoria = request.GET.get('categoria', '')
+        estado = request.GET.get('estado', '')
+        moneda = request.GET.get('moneda', '')
+        q = request.GET.get('q', '')
 
-    if categoria:
-        qs = qs.filter(categoria=categoria)
-    if estado:
-        qs = qs.filter(estado=estado)
-    if moneda:
-        qs = qs.filter(moneda=moneda)
-    if q:
-        qs = qs.filter(Q(titulo__icontains=q) | Q(notas__icontains=q))
+        if categoria:
+            qs = qs.filter(categoria=categoria)
+        if estado:
+            qs = qs.filter(estado=estado)
+        if moneda:
+            qs = qs.filter(moneda=moneda)
+        if q:
+            qs = qs.filter(Q(titulo__icontains=q) | Q(notas__icontains=q))
 
-    # Summary totals (unfiltered by currency for full picture)
-    total_usd = (
-        Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
-        .aggregate(t=Sum('monto'))['t'] or 0
-    )
-    total_mxn = (
-        Gasto.objects.filter(moneda='MXN', estado__in=['pendiente', 'pagado'])
-        .aggregate(t=Sum('monto'))['t'] or 0
-    )
-    pagado_usd = (
-        Gasto.objects.filter(moneda='USD', estado='pagado')
-        .aggregate(t=Sum('monto'))['t'] or 0
-    )
-    pendiente_usd = (
-        Gasto.objects.filter(moneda='USD', estado='pendiente')
-        .aggregate(t=Sum('monto'))['t'] or 0
-    )
+        # Summary totals (unfiltered by currency for full picture)
+        total_usd = (
+            Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
+            .aggregate(t=Sum('monto'))['t'] or 0
+        )
+        total_mxn = (
+            Gasto.objects.filter(moneda='MXN', estado__in=['pendiente', 'pagado'])
+            .aggregate(t=Sum('monto'))['t'] or 0
+        )
+        pagado_usd = (
+            Gasto.objects.filter(moneda='USD', estado='pagado')
+            .aggregate(t=Sum('monto'))['t'] or 0
+        )
+        pendiente_usd = (
+            Gasto.objects.filter(moneda='USD', estado='pendiente')
+            .aggregate(t=Sum('monto'))['t'] or 0
+        )
 
-    # By category chart data (USD only for simplicity)
-    por_categoria = list(
-        Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
-        .values('categoria')
-        .annotate(total=Sum('monto'))
-        .order_by('-total')
-    )
-    cat_labels = [dict(CATEGORIAS_GASTO).get(r['categoria'], r['categoria']) for r in por_categoria]
-    cat_data = [float(r['total']) for r in por_categoria]
-    cat_colors = [CATEGORIA_COLORS.get(r['categoria'], '#374151') for r in por_categoria]
+        # By category chart data (USD only for simplicity)
+        por_categoria = list(
+            Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
+            .values('categoria')
+            .annotate(total=Sum('monto'))
+            .order_by('-total')
+        )
+        cat_labels = [dict(CATEGORIAS_GASTO).get(r['categoria'], r['categoria']) for r in por_categoria]
+        cat_data = [float(r['total']) for r in por_categoria]
+        cat_colors = [CATEGORIA_COLORS.get(r['categoria'], '#374151') for r in por_categoria]
 
-    return render(request, 'backoffice/gastos/lista.html', {
-        'gastos': qs,
-        'total_usd': total_usd,
-        'total_mxn': total_mxn,
-        'pagado_usd': pagado_usd,
-        'pendiente_usd': pendiente_usd,
-        'categorias': CATEGORIAS_GASTO,
-        'filtro_categoria': categoria,
-        'filtro_estado': estado,
-        'filtro_moneda': moneda,
-        'q': q,
-        'cat_labels': json.dumps(cat_labels),
-        'cat_data': json.dumps(cat_data),
-        'cat_colors': json.dumps(cat_colors),
-    })
+        return render(request, 'backoffice/gastos/lista.html', {
+            'gastos': qs,
+            'total_usd': total_usd,
+            'total_mxn': total_mxn,
+            'pagado_usd': pagado_usd,
+            'pendiente_usd': pendiente_usd,
+            'categorias': CATEGORIAS_GASTO,
+            'filtro_categoria': categoria,
+            'filtro_estado': estado,
+            'filtro_moneda': moneda,
+            'q': q,
+            'cat_labels': json.dumps(cat_labels),
+            'cat_data': json.dumps(cat_data),
+            'cat_colors': json.dumps(cat_colors),
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        return HttpResponse(f'<h2>Error en gastos_lista</h2><pre>{tb}</pre>', status=500)
 
 
 @login_required
