@@ -607,17 +607,18 @@ def gastos_exportar(request):
     try:
         for g in qs:
             try:
-                rows.append([
-                    g.fecha.strftime('%Y-%m-%d') if g.fecha else 'N/A',
-                    g.titulo,
-                    cat_display.get(g.categoria, g.categoria),
+                row = [
+                    str(g.fecha.strftime('%Y-%m-%d')) if g.fecha else 'N/A',
+                    str(g.titulo),
+                    str(cat_display.get(g.categoria, g.categoria)),
                     float(g.monto) if g.monto is not None else 0.0,
-                    g.moneda,
-                    g.get_metodo_pago_display(),
-                    g.get_estado_display(),
-                    g.notas,
-                    g.fecha_registro.strftime('%Y-%m-%d %H:%M') if g.fecha_registro else 'N/A',
-                ])
+                    str(g.moneda),
+                    str(g.get_metodo_pago_display()),
+                    str(g.get_estado_display()),
+                    str(g.notas) if g.notas is not None else '',
+                    str(g.fecha_registro.strftime('%Y-%m-%d %H:%M')) if g.fecha_registro else 'N/A',
+                ]
+                rows.append(row)
             except Exception as row_exc:
                 return HttpResponse(f'<h2>Error en gasto ID {g.id}</h2><pre>{traceback.format_exc()}</pre>', status=500)
         col_widths = [12, 30, 16, 12, 8, 14, 12, 36, 18]
