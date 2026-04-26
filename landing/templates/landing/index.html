@@ -2745,17 +2745,40 @@
       display: none;
       text-align: center;
       padding: 3rem 2rem;
+      animation: successIn .5s ease forwards;
     }
-    .reg-success i { font-size: 3.5rem; color: var(--green); margin-bottom: 1rem; display: block; }
+    @keyframes successIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reg-success-icon {
+      font-size: 4rem;
+      color: var(--green);
+      margin-bottom: 1.25rem;
+      display: block;
+      animation: successBounce .6s .1s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes successBounce {
+      0%   { transform: scale(.5); opacity: 0; }
+      70%  { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
     .reg-success h3 {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2rem;
+      font-size: 2.4rem;
       font-weight: 900;
       text-transform: uppercase;
       color: var(--green-dk);
       margin-bottom: .5rem;
+      line-height: 1;
     }
-    .reg-success p { color: rgba(13,59,30,.6); font-size: .95rem; }
+    .reg-success-sub {
+      font-size: 1rem;
+      color: var(--green-dk);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .reg-success p { color: rgba(13,59,30,.6); font-size: .9rem; line-height: 1.6; max-width: 320px; margin: 0 auto; }
     .reg-lang {
       background: rgba(13,59,30,.08);
       border-color: rgba(13,59,30,.2);
@@ -3955,9 +3978,10 @@
 
     <!-- Success -->
     <div class="reg-success" id="reg-success">
-      <i class="bi bi-patch-check-fill"></i>
-      <h3>{% trans "Registration complete!" %}</h3>
-      <p>{% trans "We'll be in touch with next steps. Welcome to Estado 33." %}</p>
+      <i class="bi bi-patch-check-fill reg-success-icon"></i>
+      <h3>{% trans "Thank you for registering!" %}</h3>
+      <p class="reg-success-sub">{% trans "Welcome to Estado 33 🙌" %}</p>
+      <p>{% trans "Your registration has been received. We will contact you soon with the next steps. See you on the field!" %}</p>
     </div>
 
   </div>

@@ -1273,6 +1273,15 @@ msgid "We'll be in touch with next steps. Welcome to Estado 33."
 msgstr ""
 "Nos pondremos en contacto con los próximos pasos. Bienvenido a Estado 33."
 
+msgid "Thank you for registering!"
+msgstr "¡Gracias por registrarte!"
+
+msgid "Welcome to Estado 33 🙌"
+msgstr "Bienvenido a Estado 33 🙌"
+
+msgid "Your registration has been received. We will contact you soon with the next steps. See you on the field!"
+msgstr "Tu registro ha sido recibido. Pronto nos pondremos en contacto contigo con los próximos pasos. ¡Nos vemos en el campo!"
+
 #: .\landing\templates\landing\index.html:3901
 #: .\landing\templates\landing\index.html:3902
 #: .\landing\templates\landing\index.html:3903
