@@ -17,7 +17,7 @@ echo "==> Instalando dependencias..."
 apt-get install -y -q \
     python3 python3-pip python3-venv \
     nginx certbot python3-certbot-nginx \
-    git curl
+    git curl gettext
 
 echo "==> Creando usuario de la app..."
 id "$APP_USER" &>/dev/null || useradd --system --create-home --shell /bin/bash "$APP_USER"
