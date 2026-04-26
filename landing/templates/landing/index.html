@@ -314,6 +314,9 @@
       overflow: hidden;
       padding: 0 4% 80px;
     }
+    @media (min-width: 651px) {
+      #hero { min-height: unset; padding: 0; }
+    }
 
     /* Background */
     .hero-bg {
@@ -325,18 +328,6 @@
       background-repeat: no-repeat;
     }
     @media (min-width: 1025px) and (max-width: 1366px) {
-      .hero-bg {
-        background-size: contain;
-        background-position: center center;
-        background-repeat: no-repeat;
-      }
-      #hero { min-height: 56.25vw; }
-      .hero-content {
-        position: absolute;
-        bottom: 4rem;
-        left: 4%;
-        z-index: 2;
-      }
       .nav-links { gap: 1.5rem; }
       .nav-links a {
         font-size: .82rem;
@@ -2466,52 +2457,62 @@
       .baseball-fly { width: 260px; top: 28%; animation: baseball-fly-mobile 1.8s cubic-bezier(.4,0,.2,1) forwards; }
     }
 
-    /* ─── HERO IPAD (651px – 1024px) ─────────────────────────── */
-    @media (min-width: 651px) and (max-width: 1024px) {
+    /* ─── HERO 651px+ — aspect-ratio correcto para el banner 1905×911 ─── */
+    @media (min-width: 651px) {
+      #hero {
+        min-height: unset;
+        aspect-ratio: 1905 / 911;
+        padding: 0;
+        justify-content: flex-end;
+        overflow: hidden;
+      }
       .hero-bg {
         background-image: var(--hero-desktop-image);
-        background-size: contain;
+        background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
       }
-      #hero {
-        min-height: 56.25vw;
-        padding: 0 5% 60px;
-        justify-content: flex-end;
+      /* Gradiente sutil abajo para legibilidad de botones */
+      .hero-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 22%, transparent 45%);
+        pointer-events: none;
       }
       .hero-content {
         position: absolute;
-        bottom: 4rem;
+        bottom: 2.5rem;
         left: 4%;
         z-index: 2;
       }
-      .hero-title {
-        font-size: clamp(4rem, 10vw, 7rem);
-      }
-      .hero-subtitle {
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-        letter-spacing: .2em;
-      }
-      .hero-meta { gap: 1.5rem; margin-bottom: 1.75rem; }
-      .hero-actions {
-        gap: .75rem;
-      }
+      .hero-actions { gap: .75rem; }
       .btn-hero-primary, .btn-hero-secondary {
-        font-size: .9rem;
-        padding: .75rem 1.75rem;
+        font-size: .95rem;
+        padding: .8rem 2rem;
       }
       .hero-badge {
         display: flex;
         position: absolute;
-        top: 7rem;
+        bottom: 2.5rem;
         right: 4%;
-        bottom: auto;
+        top: auto;
         z-index: 5;
       }
-      .hero-badge img { width: 80px; }
-      .hero-badge span { font-size: .6rem; }
-      .hero-bg-logo { width: 360px; opacity: .06; right: -20px; }
+      .hero-badge img { width: 90px; }
+      .hero-badge span { font-size: .65rem; }
+      .hero-bg-logo { display: none; }
       .baseball-fly { width: 220px; top: 20%; }
+    }
+    /* ─── HERO tablet (651px – 900px) ─────────────────────────────────── */
+    @media (min-width: 651px) and (max-width: 900px) {
+      .hero-content { bottom: 1.5rem; left: 3%; }
+      .hero-badge { bottom: 1.5rem; right: 3%; }
+      .hero-badge img { width: 70px; }
+      .btn-hero-primary, .btn-hero-secondary {
+        font-size: .82rem;
+        padding: .65rem 1.5rem;
+      }
     }
     @media (max-width: 650px) {
       .baseball-fly { width: 180px; top: 32%; animation: baseball-fly-mobile 1.6s cubic-bezier(.4,0,.2,1) forwards; animation-play-state: paused; }
@@ -2562,9 +2563,10 @@
       .register-card-top { display: none; }
       .why-header { flex-direction: column; }
 
-      /* Hero mobile — full screen vertical */
+      /* Hero mobile — imagen completa + botones en el fondo */
       #hero {
-        min-height: 65svh;
+        min-height: unset;
+        aspect-ratio: 600 / 865;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -2582,34 +2584,38 @@
         height: 100%;
         aspect-ratio: unset;
       }
-      .hero-bg::after {
-        content: none;
-      }
+      .hero-bg::after { content: none; }
       .hero-gold-line { display: none; }
       .hero-bg-logo { display: none; }
+      .hero-strip { display: none; }
       .hero-badge {
         display: flex;
         position: absolute;
+        top: 4rem;
+        right: 5%;
         bottom: auto;
-        top: 7rem;
-        right: 3%;
         z-index: 5;
       }
       .hero-badge img { width: 60px; }
       .hero-badge span { display: none; }
       .hero-content {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        padding: 0.25rem 5% 1rem;
-        background: transparent;
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
         z-index: 5;
+        padding: 0 5%;
+        background: transparent;
+      }
+      .hero-date {
+        font-size: .85rem;
+        margin-bottom: .4rem;
       }
       .hero-actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: .5rem;
-        margin-top: 3.5rem;
+        margin-top: 0;
       }
       .btn-hero-primary, .btn-hero-secondary {
         width: 100%;
@@ -2619,25 +2625,6 @@
         padding: .6rem .5rem;
         letter-spacing: .08em;
       }
-    }
-    @media (max-width: 390px) {
-      .hero-actions { margin-top: 5rem; }
-    }
-    @media (max-width: 390px) and (max-height: 700px) {
-      #hero {
-        min-height: 85svh;
-        justify-content: flex-end;
-      }
-      .hero-content {
-        padding: 0.25rem 5% 0.75rem;
-      }
-      .hero-actions {
-        margin-top: 1.5rem;
-      }
-      .hero-badge {
-        bottom: 2.5rem;
-      }
-      .hero-badge img { width: 55px; }
     }
     /* ─── REGISTRATION MODAL ──────────────────────────────── */
     .reg-overlay {
@@ -3743,7 +3730,7 @@
       <img src="{% static 'landing/img/luis-tovar.jpeg' %}" alt="Luis Tovar" class="exec-photo" loading="lazy">
       <div class="exec-info">
         <div class="exec-name">LUIS TOVAR</div>
-        <div class="exec-title">{% trans "#Estado33 Baseball Operations President" %}</div>
+        <div class="exec-title">{% trans "#Estado33 President of Baseball Operations" %}</div>
       </div>
     </div>
 

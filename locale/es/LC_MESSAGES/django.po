@@ -953,7 +953,7 @@ msgstr "Fecha Límite de Registro"
 
 #: .\landing\templates\landing\index.html:3123
 msgid "May 10, 2026"
-msgstr "15 de Mayo, 2026"
+msgstr "10 de mayo de 2026"
 
 #: .\landing\templates\landing\index.html:3125
 msgid ""
@@ -1457,7 +1457,7 @@ msgstr "Gerente de Operaciones de la Selección Nacional de México"
 msgid "#Estado33 General Manager"
 msgstr "Gerente General del #Estado33"
 
-msgid "#Estado33 Baseball Operations President"
+msgid "#Estado33 President of Baseball Operations"
 msgstr "Presidente de Operaciones de Béisbol del #Estado33"
 
 msgid "#Estado33 VP of Baseball Operations"
