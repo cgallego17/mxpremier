@@ -2447,8 +2447,14 @@
 
     /* ─── HERO IPAD (651px – 1024px) ─────────────────────────── */
     @media (min-width: 651px) and (max-width: 1024px) {
+      .hero-bg {
+        background-image: var(--hero-desktop-image);
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
       #hero {
-        min-height: 90vh;
+        min-height: 56.25vw;
         padding: 0 5% 60px;
         justify-content: flex-end;
       }
@@ -2499,8 +2505,8 @@
     }
     @media (max-width: 650px) {
       #navbar {
-        height: 86px;
-        padding: 0 4%;
+        height: 48px;
+        padding: 0 1%;
         justify-content: space-between;
         background: rgba(5,14,6,0);
         backdrop-filter: blur(12px);
@@ -2519,7 +2525,7 @@
         padding-top: 0;
       }
       #navbar.scrolled .nav-right { margin-top: 0; }
-      .nav-brand .logo-estado { height: 158px; padding-top: 43px; }
+      .nav-brand .logo-estado { height: 158px; padding-top: 53px; }
       .nav-brand::after { display: none; }
       .nav-brand {
         --logo-line-width: 0px;
