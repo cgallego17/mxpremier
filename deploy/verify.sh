@@ -76,11 +76,16 @@ for img in enrique-mayorga ricardo-bravo jorge-campillo rodrigo-lopez jorge-marq
         fail "Imagen $img.jpeg FALTANTE en staticfiles/landing/img/"
     fi
 done
+if [ -f "$STATIC_DIR/landing/img/mariana-patraca.jpg" ]; then
+    ok "Imagen mariana-patraca.jpg presente"
+else
+    fail "Imagen mariana-patraca.jpg FALTANTE en staticfiles/landing/img/"
+fi
 
-# 7. Peticion HTTP interna
+# 7. Peticion HTTP interna (con Host header correcto para pasar ALLOWED_HOSTS)
 echo ""
 echo "-- HTTP --"
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/ 2>/dev/null || echo "000")
+HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Host: $DOMAIN" http://127.0.0.1:8000/ 2>/dev/null || echo "000")
 if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "301" ] || [ "$HTTP_CODE" = "302" ]; then
     ok "App responde localmente (HTTP $HTTP_CODE)"
 else
@@ -118,8 +123,9 @@ echo ""
 echo "-- Logs --"
 LOG_DIR="/var/log/mxbaseball"
 if [ -d "$LOG_DIR" ]; then
-    ERRORS=$(grep -c "ERROR\|Exception\|Traceback" "$LOG_DIR/error.log" 2>/dev/null || echo "0")
-    if [ "$ERRORS" = "0" ]; then
+    ERRORS=$(grep -cE "ERROR|Exception|Traceback" "$LOG_DIR/error.log" 2>/dev/null; true)
+    ERRORS=${ERRORS:-0}
+    if [ "$ERRORS" -eq 0 ] 2>/dev/null; then
         ok "Sin errores en error.log"
     else
         fail "$ERRORS errores encontrados en error.log (revisa $LOG_DIR/error.log)"
