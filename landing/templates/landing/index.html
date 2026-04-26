@@ -2444,6 +2444,49 @@
       .register-card-title { font-size: 1.8rem; }
       .baseball-fly { width: 260px; top: 28%; animation: baseball-fly-mobile 1.8s cubic-bezier(.4,0,.2,1) forwards; }
     }
+
+    /* ─── HERO IPAD (651px – 1024px) ─────────────────────────── */
+    @media (min-width: 651px) and (max-width: 1024px) {
+      #hero {
+        min-height: 90vh;
+        padding: 0 5% 60px;
+        justify-content: flex-end;
+      }
+      .hero-content {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        padding-bottom: 1.5rem;
+        z-index: 2;
+      }
+      .hero-title {
+        font-size: clamp(4rem, 10vw, 7rem);
+      }
+      .hero-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        letter-spacing: .2em;
+      }
+      .hero-meta { gap: 1.5rem; margin-bottom: 1.75rem; }
+      .hero-actions {
+        gap: .75rem;
+      }
+      .btn-hero-primary, .btn-hero-secondary {
+        font-size: .9rem;
+        padding: .75rem 1.75rem;
+      }
+      .hero-badge {
+        display: flex;
+        position: absolute;
+        top: 7rem;
+        right: 4%;
+        bottom: auto;
+        z-index: 5;
+      }
+      .hero-badge img { width: 80px; }
+      .hero-badge span { font-size: .6rem; }
+      .hero-bg-logo { width: 360px; opacity: .06; right: -20px; }
+      .baseball-fly { width: 220px; top: 20%; }
+    }
     @media (max-width: 650px) {
       .baseball-fly { width: 180px; top: 32%; animation: baseball-fly-mobile 1.6s cubic-bezier(.4,0,.2,1) forwards; }
       .events-carousel-wrap { padding: 2rem 4% 2.5rem; overflow-x: visible; }
@@ -2568,7 +2611,7 @@
       .hero-badge {
         bottom: 2.5rem;
       }
-      .hero-badge img { width: 48px; }
+      .hero-badge img { width: 55px; }
     }
     /* ─── REGISTRATION MODAL ──────────────────────────────── */
     .reg-overlay {
