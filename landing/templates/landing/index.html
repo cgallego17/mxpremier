@@ -4698,7 +4698,7 @@
 </script>
 <script>
   (function () {
-    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var isIOS = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
 
     document.querySelectorAll('.fb-reel-facade').forEach(function (card) {
       card.addEventListener('click', function () {
