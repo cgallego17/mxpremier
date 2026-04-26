@@ -1,17 +1,19 @@
+import csv
 import json
 from datetime import timedelta
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from jugadores.models import Jugador
 from landing.models import SponsorInquiry, PageVisit
-from .forms import JugadorForm, PartnerForm
-from .models import Partner
+from .forms import JugadorForm, GastoForm, PartnerForm
+from .models import Partner, Gasto, CATEGORIA_COLORS, CATEGORIAS_GASTO
 
 COUNTRY_NAMES = {
     'US': 'United States', 'MX': 'Mexico', 'DO': 'Dominican Republic',
@@ -82,6 +84,14 @@ def dashboard(request):
     )
     edades_labels = [str(r['edad']) for r in edades_raw]
     edades_data = [r['n'] for r in edades_raw]
+
+    # ── Expenses ──────────────────────────────────────────────────
+    from django.db.models import Sum as _Sum
+    total_gastos_usd = (
+        Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
+        .aggregate(t=_Sum('monto'))['t'] or 0
+    )
+    gastos_pendientes = Gasto.objects.filter(estado='pendiente').count()
 
     # ── Sponsors ──────────────────────────────────────────────────
     total_sponsors = SponsorInquiry.objects.count()
@@ -181,6 +191,8 @@ def dashboard(request):
 
     return render(request, 'backoffice/dashboard.html', {
         # stats
+        'total_gastos_usd': total_gastos_usd,
+        'gastos_pendientes': gastos_pendientes,
         'total_jugadores': total_jugadores,
         'doble_nac': doble_nac,
         'jugadores_hoy': jugadores_hoy,
@@ -361,3 +373,137 @@ def partner_eliminar(request, pk):
         'backoffice/partners/confirmar_eliminar.html',
         {'partner': partner},
     )
+
+
+# ── Gastos ────────────────────────────────────────────────────────
+
+@login_required
+def gastos_lista(request):
+    qs = Gasto.objects.all()
+
+    # Filters
+    categoria = request.GET.get('categoria', '')
+    estado = request.GET.get('estado', '')
+    moneda = request.GET.get('moneda', '')
+    q = request.GET.get('q', '')
+
+    if categoria:
+        qs = qs.filter(categoria=categoria)
+    if estado:
+        qs = qs.filter(estado=estado)
+    if moneda:
+        qs = qs.filter(moneda=moneda)
+    if q:
+        qs = qs.filter(Q(titulo__icontains=q) | Q(notas__icontains=q))
+
+    # Summary totals (unfiltered by currency for full picture)
+    total_usd = (
+        Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
+        .aggregate(t=Sum('monto'))['t'] or 0
+    )
+    total_mxn = (
+        Gasto.objects.filter(moneda='MXN', estado__in=['pendiente', 'pagado'])
+        .aggregate(t=Sum('monto'))['t'] or 0
+    )
+    pagado_usd = (
+        Gasto.objects.filter(moneda='USD', estado='pagado')
+        .aggregate(t=Sum('monto'))['t'] or 0
+    )
+    pendiente_usd = (
+        Gasto.objects.filter(moneda='USD', estado='pendiente')
+        .aggregate(t=Sum('monto'))['t'] or 0
+    )
+
+    # By category chart data (USD only for simplicity)
+    por_categoria = list(
+        Gasto.objects.filter(moneda='USD', estado__in=['pendiente', 'pagado'])
+        .values('categoria')
+        .annotate(total=Sum('monto'))
+        .order_by('-total')
+    )
+    cat_labels = [dict(CATEGORIAS_GASTO).get(r['categoria'], r['categoria']) for r in por_categoria]
+    cat_data = [float(r['total']) for r in por_categoria]
+    cat_colors = [CATEGORIA_COLORS.get(r['categoria'], '#374151') for r in por_categoria]
+
+    return render(request, 'backoffice/gastos/lista.html', {
+        'gastos': qs,
+        'total_usd': total_usd,
+        'total_mxn': total_mxn,
+        'pagado_usd': pagado_usd,
+        'pendiente_usd': pendiente_usd,
+        'categorias': CATEGORIAS_GASTO,
+        'filtro_categoria': categoria,
+        'filtro_estado': estado,
+        'filtro_moneda': moneda,
+        'q': q,
+        'cat_labels': json.dumps(cat_labels),
+        'cat_data': json.dumps(cat_data),
+        'cat_colors': json.dumps(cat_colors),
+    })
+
+
+@login_required
+def gasto_crear(request):
+    form = GastoForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, _('Expense saved.'))
+        return redirect('backoffice:gastos_lista')
+    return render(request, 'backoffice/gastos/form.html', {
+        'form': form,
+        'titulo': _('New Expense'),
+    })
+
+
+@login_required
+def gasto_editar(request, pk):
+    gasto = get_object_or_404(Gasto, pk=pk)
+    form = GastoForm(
+        request.POST or None, request.FILES or None, instance=gasto
+    )
+    if form.is_valid():
+        form.save()
+        messages.success(request, _('Expense updated.'))
+        return redirect('backoffice:gastos_lista')
+    return render(request, 'backoffice/gastos/form.html', {
+        'form': form,
+        'gasto': gasto,
+        'titulo': _('Edit Expense'),
+    })
+
+
+@login_required
+def gasto_eliminar(request, pk):
+    gasto = get_object_or_404(Gasto, pk=pk)
+    if request.method == 'POST':
+        if gasto.comprobante:
+            gasto.comprobante.delete(save=False)
+        gasto.delete()
+        messages.success(request, _('Expense deleted.'))
+        return redirect('backoffice:gastos_lista')
+    return render(request, 'backoffice/gastos/confirmar_eliminar.html', {
+        'gasto': gasto,
+    })
+
+
+@login_required
+def gastos_exportar(request):
+    qs = Gasto.objects.all().order_by('-fecha')
+    resp = HttpResponse(content_type='text/csv')
+    resp['Content-Disposition'] = 'attachment; filename="gastos_estado33.csv"'
+    cat_display = dict(CATEGORIAS_GASTO)
+    writer = csv.writer(resp)
+    writer.writerow([
+        'Date', 'Title', 'Category', 'Amount', 'Currency',
+        'Payment Method', 'Status', 'Notes',
+    ])
+    for g in qs:
+        writer.writerow([
+            g.fecha, g.titulo,
+            cat_display.get(g.categoria, g.categoria),
+            g.monto, g.moneda,
+            g.get_metodo_pago_display(),
+            g.get_estado_display(),
+            g.notas,
+        ])
+    return resp

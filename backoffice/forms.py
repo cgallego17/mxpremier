@@ -2,7 +2,7 @@ import datetime
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from jugadores.models import Jugador
-from .models import Partner
+from .models import Partner, Gasto
 
 
 class JugadorForm(forms.ModelForm):
@@ -94,6 +94,33 @@ class JugadorForm(forms.ModelForm):
         if not doble:
             cleaned['segunda_nacionalidad'] = None
         return cleaned
+
+
+class GastoForm(forms.ModelForm):
+    class Meta:
+        model = Gasto
+        fields = [
+            'titulo', 'categoria', 'monto', 'moneda',
+            'fecha', 'metodo_pago', 'estado', 'comprobante', 'notas',
+        ]
+        widgets = {
+            'titulo':      forms.TextInput(attrs={'class': 'form-control'}),
+            'categoria':   forms.Select(attrs={'class': 'form-select'}),
+            'monto':       forms.NumberInput(attrs={
+                'class': 'form-control', 'step': '0.01', 'min': '0',
+            }),
+            'moneda':      forms.Select(attrs={'class': 'form-select'}),
+            'fecha':       forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'metodo_pago': forms.Select(attrs={'class': 'form-select'}),
+            'estado':      forms.Select(attrs={'class': 'form-select'}),
+            'notas':       forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+    def clean_monto(self):
+        monto = self.cleaned_data.get('monto')
+        if monto is not None and monto <= 0:
+            raise forms.ValidationError(_('Amount must be greater than zero.'))
+        return monto
 
 
 class PartnerForm(forms.ModelForm):

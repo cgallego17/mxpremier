@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-26 12:39-0500\n"
+"POT-Creation-Date: 2026-04-26 12:54-0500\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -186,7 +186,9 @@ msgid "View all"
 msgstr "Ver todos"
 
 #: .\backoffice\templates\backoffice\dashboard.html:321
-#: .\jugadores\models.py:96 .\landing\templates\landing\index.html:3847
+#: .\jugadores\models.py:96
+#: .\landing\templates\emails\registro_confirmacion.html:65
+#: .\landing\templates\landing\index.html:3847
 msgid "Player"
 msgstr "Jugador"
 
@@ -212,6 +214,7 @@ msgstr "Consultas de patrocinio recientes"
 #: .\backoffice\templates\backoffice\dashboard.html:346
 #: .\backoffice\templates\backoffice\sponsors\detalle.html:24
 #: .\backoffice\templates\backoffice\sponsors\lista.html:31
+#: .\landing\templates\emails\sponsor_confirmacion.html:58
 msgid "Company"
 msgstr "Empresa"
 
@@ -288,11 +291,14 @@ msgid "Last names"
 msgstr "Apellidos"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:26
-#: .\jugadores\models.py:27 .\landing\templates\landing\index.html:3902
+#: .\jugadores\models.py:27
+#: .\landing\templates\emails\registro_confirmacion.html:69
+#: .\landing\templates\landing\index.html:3902
 msgid "Date of birth"
 msgstr "Fecha de nacimiento"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:31
+#: .\landing\templates\emails\registro_confirmacion.html:76
 #: .\landing\templates\landing\index.html:3907
 msgid "City and State"
 msgstr "Ciudad y Estado"
@@ -323,7 +329,9 @@ msgid "Additional player info"
 msgstr "Información adicional del jugador"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:62
-#: .\jugadores\models.py:54 .\landing\templates\landing\index.html:3974
+#: .\jugadores\models.py:54
+#: .\landing\templates\emails\registro_confirmacion.html:84
+#: .\landing\templates\landing\index.html:3974
 msgid "Travel team name"
 msgstr "Nombre del equipo"
 
@@ -333,7 +341,9 @@ msgid "Team city and state"
 msgstr "Ciudad y estado del equipo"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:72
-#: .\jugadores\models.py:61 .\landing\templates\landing\index.html:3984
+#: .\jugadores\models.py:61
+#: .\landing\templates\emails\registro_confirmacion.html:92
+#: .\landing\templates\landing\index.html:3984
 msgid "Primary position"
 msgstr "Posición principal"
 
@@ -413,6 +423,7 @@ msgid "Age"
 msgstr "Edad"
 
 #: .\backoffice\templates\backoffice\jugadores\lista.html:43
+#: .\landing\templates\emails\registro_confirmacion.html:35
 msgid "Registration"
 msgstr "Registro"
 
@@ -561,6 +572,7 @@ msgstr "Información de la empresa"
 
 #: .\backoffice\templates\backoffice\sponsors\detalle.html:25
 #: .\backoffice\templates\backoffice\sponsors\lista.html:32
+#: .\landing\templates\emails\sponsor_confirmacion.html:62
 #: .\landing\templates\landing\index.html:3813
 msgid "Contact"
 msgstr "Contacto"
@@ -582,6 +594,7 @@ msgid "Budget & Proposal"
 msgstr "Presupuesto y propuesta"
 
 #: .\backoffice\templates\backoffice\sponsors\detalle.html:42
+#: .\landing\templates\emails\sponsor_confirmacion.html:67
 #: .\landing\templates\landing\index.html:4478
 msgid "Estimated Budget"
 msgstr "Presupuesto estimado"
@@ -987,6 +1000,15 @@ msgstr "Estado / Provincia"
 msgid "Registration date"
 msgstr "Fecha de registro"
 
+#: .\landing\emails.py:41
+msgid "Your Estado 33 registration is confirmed ✓"
+msgstr "Tu registro en Estado 33 está confirmado ✓"
+
+#: .\landing\emails.py:62
+#: .\landing\templates\emails\sponsor_confirmacion.html:6
+msgid "Sponsorship Inquiry Received — Estado 33"
+msgstr "Consulta de Patrocinio Recibida — Estado 33"
+
 #: .\landing\forms.py:41
 msgid "Logo must be under 5 MB."
 msgstr "El logo debe pesar menos de 5 MB."
@@ -1038,6 +1060,147 @@ msgstr "Desea propuesta personalizada"
 #: .\landing\models.py:55
 msgid "Sponsor Inquiry"
 msgstr "Consulta de patrocinio"
+
+#: .\landing\templates\emails\registro_confirmacion.html:6
+msgid "Registration Confirmed — Estado 33"
+msgstr "Registro Confirmado — Estado 33"
+
+#: .\landing\templates\emails\registro_confirmacion.html:36
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#: .\landing\templates\emails\registro_confirmacion.html:46
+#, python-format
+msgid ""
+"\n"
+"          Hello <strong>%(tutor)s</strong>, we have received "
+"<strong>%(nombre)s</strong>'s pre-registration for the <strong>Estado 33 "
+"National Championship 2026</strong>.\n"
+"          "
+msgstr ""
+"\n"
+"          Hola <strong>%(tutor)s</strong>, hemos recibido el pre-registro de "
+"<strong>%(nombre)s</strong> para el <strong>Campeonato Nacional "
+"Estado 33 2026</strong>.\n"
+"          "
+
+#: .\landing\templates\emails\registro_confirmacion.html:56
+msgid "Player Information"
+msgstr "Información del Jugador"
+
+#: .\landing\templates\emails\registro_confirmacion.html:107
+msgid "Next Steps"
+msgstr "Próximos Pasos"
+
+#: .\landing\templates\emails\registro_confirmacion.html:110
+msgid ""
+"\n"
+"                Our team will review your information and contact you with "
+"the details about the <strong>SIREBE credential</strong> and medical "
+"insurance requirements. Keep an eye on your inbox.\n"
+"                "
+msgstr ""
+"\n"
+"                Nuestro equipo revisará tu información y te contactará con "
+"los detalles sobre la <strong>credencial SIREBE</strong> y los requisitos "
+"de seguro médico. Estate atento a tu bandeja de entrada.\n"
+"                "
+
+#: .\landing\templates\emails\registro_confirmacion.html:125
+#: .\landing\templates\landing\index.html:3336
+msgid "Registration Deadline"
+msgstr "Fecha Límite de Registro"
+
+#: .\landing\templates\emails\registro_confirmacion.html:126
+#: .\landing\templates\landing\index.html:3337
+msgid "May 10, 2026"
+msgstr "10 de mayo de 2026"
+
+#: .\landing\templates\emails\registro_confirmacion.html:135
+msgid "Championship"
+msgstr "Campeonato"
+
+#: .\landing\templates\emails\registro_confirmacion.html:136
+#: .\landing\templates\emails\sponsor_confirmacion.html:108
+#: .\landing\templates\landing\index.html:3772
+#: .\landing\templates\landing\index.html:3784
+msgid "May 16–23, 2026"
+msgstr "16–23 de Mayo, 2026"
+
+#: .\landing\templates\emails\registro_confirmacion.html:150
+#: .\landing\templates\emails\sponsor_confirmacion.html:119
+#: .\landing\templates\landing\index.html:3204
+msgid "Learn More"
+msgstr "Más información"
+
+#: .\landing\templates\emails\registro_confirmacion.html:168
+#: .\landing\templates\emails\sponsor_confirmacion.html:135
+msgid "La Paz, Baja California Sur"
+msgstr "La Paz, Baja California Sur"
+
+#: .\landing\templates\emails\registro_confirmacion.html:171
+#: .\landing\templates\emails\sponsor_confirmacion.html:138
+#: .\landing\templates\landing\index.html:3828
+msgid "All rights reserved."
+msgstr "Todos los derechos reservados."
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:32
+msgid "Thank you for your"
+msgstr "¡Gracias por tu"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:33
+msgid "interest!"
+msgstr "interés!"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:43
+#, python-format
+msgid ""
+"\n"
+"          Hello <strong>%(name)s</strong>, we have received your sponsorship "
+"inquiry from <strong>%(company)s</strong>. Our team will review your "
+"proposal and get back to you shortly.\n"
+"          "
+msgstr ""
+"\n"
+"          Hola <strong>%(name)s</strong>, hemos recibido tu consulta de "
+"patrocinio de <strong>%(company)s</strong>. Nuestro equipo revisará tu "
+"propuesta y te responderá en breve.\n"
+"          "
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:52
+msgid "Inquiry Summary"
+msgstr "Resumen de la Consulta"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:75
+msgid "Custom proposal requested"
+msgstr "Propuesta personalizada solicitada"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:88
+msgid "What happens next?"
+msgstr "¿Qué sigue?"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:91
+msgid ""
+"\n"
+"              A member of our team will contact you within <strong>2–3 "
+"business days</strong> to discuss partnership opportunities that align with "
+"your goals.\n"
+"              "
+msgstr ""
+"\n"
+"              Un miembro de nuestro equipo te contactará en <strong>2–3 "
+"días hábiles</strong> para hablar sobre las oportunidades de patrocinio "
+"que se alineen con tus objetivos.\n"
+"              "
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:102
+msgid "The Event"
+msgstr "El Evento"
+
+#: .\landing\templates\emails\sponsor_confirmacion.html:105
+#: .\landing\templates\landing\index.html:3275
+msgid "National Championship"
+msgstr "Campeonato Nacional"
 
 # landing
 #: .\landing\templates\landing\index.html:3116
@@ -1107,10 +1270,6 @@ msgstr "Regístrate Ahora"
 #: .\landing\templates\landing\index.html:4184
 msgid "Player registration"
 msgstr "Registro de jugador"
-
-#: .\landing\templates\landing\index.html:3204
-msgid "Learn More"
-msgstr "Más información"
 
 #: .\landing\templates\landing\index.html:3222
 msgid "Official · FEMEBE"
@@ -1194,10 +1353,6 @@ msgstr "Meta"
 msgid "Tournament"
 msgstr "Torneo"
 
-#: .\landing\templates\landing\index.html:3275
-msgid "National Championship"
-msgstr "Campeonato Nacional"
-
 #: .\landing\templates\landing\index.html:3278
 msgid "11–12 Age Division — La Paz, Baja California Sur, México."
 msgstr "Categoría 11–12 años — La Paz, Baja California Sur, México."
@@ -1262,14 +1417,6 @@ msgid ""
 msgstr ""
 "Jugadores de doble nacionalidad / herencia mexicana <strong>residiendo en "
 "Estados Unidos</strong>. Edades 11-12 años, nacidos 2014–2015."
-
-#: .\landing\templates\landing\index.html:3336
-msgid "Registration Deadline"
-msgstr "Fecha Límite de Registro"
-
-#: .\landing\templates\landing\index.html:3337
-msgid "May 10, 2026"
-msgstr "10 de mayo de 2026"
 
 #: .\landing\templates\landing\index.html:3339
 msgid ""
@@ -1496,11 +1643,6 @@ msgstr "Vice Presidente de Operaciones de Béisbol del #Estado33"
 msgid "#Estado33 Media Director"
 msgstr "Director de Medios del #Estado33"
 
-#: .\landing\templates\landing\index.html:3772
-#: .\landing\templates\landing\index.html:3784
-msgid "May 16–23, 2026"
-msgstr "16–23 de Mayo, 2026"
-
 #: .\landing\templates\landing\index.html:3780
 msgid "Event Details"
 msgstr "Detalles del Evento"
@@ -1516,10 +1658,6 @@ msgstr "Registrarse"
 #: .\landing\templates\landing\index.html:3802
 msgid "Sponsors & Partners"
 msgstr "Colaboradores y Socios"
-
-#: .\landing\templates\landing\index.html:3828
-msgid "All rights reserved."
-msgstr "Todos los derechos reservados."
 
 #: .\landing\templates\landing\index.html:3830
 msgid "Terms & Conditions"
@@ -1855,9 +1993,6 @@ msgstr "Nuestro equipo te contactará pronto con oportunidades de patrocinio."
 
 #~ msgid "Age Division"
 #~ msgstr "Categoría"
-
-#~ msgid "La Paz, Baja California Sur, México"
-#~ msgstr "La Paz, Baja California Sur, México"
 
 #~ msgid "Baseball World Cup"
 #~ msgstr "Copa Mundial de Béisbol"

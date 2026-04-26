@@ -335,6 +335,12 @@
        class="sidebar-link {% if 'partner' in request.resolver_match.url_name %}active{% endif %}">
       <i class="bi bi-image"></i> {% trans "Partner Logos" %}
     </a>
+
+    <div class="nav-section-label mt-2">{% trans "Finance" %}</div>
+    <a href="{% url 'backoffice:gastos_lista' %}"
+       class="sidebar-link {% if 'gasto' in request.resolver_match.url_name %}active{% endif %}">
+      <i class="bi bi-cash-stack"></i> {% trans "Expenses" %}
+    </a>
   </div>
 
   <div class="sidebar-footer">

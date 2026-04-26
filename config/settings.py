@@ -191,6 +191,21 @@ FB_REELS_URL = os.getenv('FB_REELS_URL', '')
 REGISTRO_RATE_LIMIT = _env_int('REGISTRO_RATE_LIMIT', 5)
 REGISTRO_RATE_WINDOW = _env_int('REGISTRO_RATE_WINDOW', 3600)
 
+# ── Email ──────────────────────────────────────────────────────────
+EMAIL_BACKEND = os.getenv(
+    'EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend'
+)
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = _env_int('EMAIL_PORT', 587)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.getenv(
+    'DEFAULT_FROM_EMAIL', 'Estado 33 <noreply@mxbaseball.com>'
+)
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', '')
+SITE_URL = os.getenv('SITE_URL', 'https://www.mxbaseball.com')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

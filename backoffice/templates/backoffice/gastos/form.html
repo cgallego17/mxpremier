@@ -1,0 +1,108 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-7">
+
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-receipt me-2"></i>{{ titulo }}</h6>
+        <a href="{% url 'backoffice:gastos_lista' %}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-arrow-left me-1"></i>{% trans "Back" %}
+        </a>
+      </div>
+      <div style="padding:1.5rem;">
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <!-- Title -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{% trans "Title" %} *</label>
+            {{ form.titulo }}
+            {% if form.titulo.errors %}<div class="text-danger small mt-1">{{ form.titulo.errors.0 }}</div>{% endif %}
+          </div>
+
+          <!-- Category + Currency row -->
+          <div class="row g-3 mb-3">
+            <div class="col-8">
+              <label class="form-label fw-semibold">{% trans "Category" %} *</label>
+              {{ form.categoria }}
+            </div>
+            <div class="col-4">
+              <label class="form-label fw-semibold">{% trans "Currency" %}</label>
+              {{ form.moneda }}
+            </div>
+          </div>
+
+          <!-- Amount + Date row -->
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label fw-semibold">{% trans "Amount" %} *</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                {{ form.monto }}
+              </div>
+              {% if form.monto.errors %}<div class="text-danger small mt-1">{{ form.monto.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="col-6">
+              <label class="form-label fw-semibold">{% trans "Date" %} *</label>
+              {{ form.fecha }}
+            </div>
+          </div>
+
+          <!-- Method + Status row -->
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label fw-semibold">{% trans "Payment method" %}</label>
+              {{ form.metodo_pago }}
+            </div>
+            <div class="col-6">
+              <label class="form-label fw-semibold">{% trans "Status" %}</label>
+              {{ form.estado }}
+            </div>
+          </div>
+
+          <!-- Receipt -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              {% trans "Receipt" %}
+              <span class="text-muted fw-normal">({% trans "optional" %})</span>
+            </label>
+            {% if gasto.comprobante %}
+            <div class="mb-2">
+              <a href="{{ gasto.comprobante.url }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-paperclip me-1"></i>{% trans "View current receipt" %}
+              </a>
+            </div>
+            {% endif %}
+            {{ form.comprobante }}
+            <div class="form-text">{% trans "PDF, image, or any document." %}</div>
+          </div>
+
+          <!-- Notes -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">{% trans "Notes" %}</label>
+            {{ form.notas }}
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn" style="background:#0D3B1E;color:#C8A830;border:none;padding:.6rem 2rem;font-weight:700;">
+              <i class="bi bi-check-lg me-1"></i>{% trans "Save" %}
+            </button>
+            <a href="{% url 'backoffice:gastos_lista' %}" class="btn btn-outline-secondary">
+              {% trans "Cancel" %}
+            </a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

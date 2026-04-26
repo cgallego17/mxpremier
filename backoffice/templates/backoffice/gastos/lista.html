@@ -1,0 +1,254 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Expenses" %}{% endblock %}
+{% block page_title %}{% trans "Expenses" %}{% endblock %}
+
+{% block content %}
+
+<!-- ── Summary cards ─────────────────────────────────────────── -->
+<div class="row g-3 mb-3">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D6EDD9;">
+        <i class="bi bi-cash-stack" style="color:#0D3B1E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">${{ total_usd|floatformat:2 }}</div>
+        <div class="stat-label">{% trans "Total USD" %}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#FEF3C7;">
+        <i class="bi bi-currency-exchange" style="color:#92400E;"></i>
+      </div>
+      <div>
+        <div class="stat-value">${{ total_mxn|floatformat:2 }}</div>
+        <div class="stat-label">{% trans "Total MXN" %}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:#D1FAE5;">
+        <i class="bi bi-check-circle" style="color:#065F46;"></i>
+      </div>
+      <div>
+        <div class="stat-value">${{ pagado_usd|floatformat:2 }}</div>
+        <div class="stat-label">{% trans "Paid (USD)" %}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card red">
+      <div class="stat-icon" style="background:#F4D9DE;">
+        <i class="bi bi-hourglass-split" style="color:#C41230;"></i>
+      </div>
+      <div>
+        <div class="stat-value">${{ pendiente_usd|floatformat:2 }}</div>
+        <div class="stat-label">{% trans "Pending (USD)" %}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Chart + filters row ───────────────────────────────────── -->
+<div class="row g-3 mb-3">
+
+  <div class="col-12 col-lg-5">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-pie-chart-fill me-2"></i>{% trans "Expenses by category (USD)" %}</h6>
+      </div>
+      <div style="padding:1rem;height:230px;display:flex;align-items:center;justify-content:center;">
+        {% if cat_data != '[]' %}
+        <canvas id="chartCategorias"></canvas>
+        {% else %}
+        <p class="text-muted mb-0">{% trans "No data yet." %}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-7">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-funnel me-2"></i>{% trans "Filters" %}</h6>
+        <a href="{% url 'backoffice:gastos_lista' %}" class="btn btn-sm btn-outline-secondary">{% trans "Clear" %}</a>
+      </div>
+      <div style="padding:1rem;">
+        <form method="get" class="row g-2">
+          <div class="col-12">
+            <input type="text" name="q" value="{{ q }}" placeholder="{% trans 'Search title or notes…' %}"
+                   class="form-control form-control-sm">
+          </div>
+          <div class="col-6 col-md-4">
+            <select name="categoria" class="form-select form-select-sm">
+              <option value="">{% trans "All categories" %}</option>
+              {% for val, label in categorias %}
+              <option value="{{ val }}" {% if filtro_categoria == val %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <select name="estado" class="form-select form-select-sm">
+              <option value="">{% trans "All statuses" %}</option>
+              <option value="pendiente" {% if filtro_estado == 'pendiente' %}selected{% endif %}>{% trans "Pending" %}</option>
+              <option value="pagado"    {% if filtro_estado == 'pagado'    %}selected{% endif %}>{% trans "Paid" %}</option>
+              <option value="cancelado" {% if filtro_estado == 'cancelado' %}selected{% endif %}>{% trans "Cancelled" %}</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <select name="moneda" class="form-select form-select-sm">
+              <option value="">{% trans "All" %}</option>
+              <option value="USD" {% if filtro_moneda == 'USD' %}selected{% endif %}>USD</option>
+              <option value="MXN" {% if filtro_moneda == 'MXN' %}selected{% endif %}>MXN</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-sm btn-primary w-100">
+              <i class="bi bi-search me-1"></i>{% trans "Filter" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Table ─────────────────────────────────────────────────── -->
+<div class="bo-card">
+  <div class="bo-card-header">
+    <h6 class="mb-0"><i class="bi bi-receipt me-2"></i>
+      {% trans "Expense records" %}
+      {% if gastos %}<span class="badge bg-secondary ms-1">{{ gastos|length }}</span>{% endif %}
+    </h6>
+    <div class="d-flex gap-2">
+      <a href="{% url 'backoffice:gastos_exportar' %}" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-download me-1"></i>CSV
+      </a>
+      <a href="{% url 'backoffice:gasto_crear' %}" class="btn btn-sm" style="background:#C41230;color:#fff;">
+        <i class="bi bi-plus-lg me-1"></i>{% trans "New expense" %}
+      </a>
+    </div>
+  </div>
+
+  {% if gastos %}
+  <div style="overflow-x:auto;">
+  <table class="table bo-table mb-0">
+    <thead>
+      <tr>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "Title" %}</th>
+        <th>{% trans "Category" %}</th>
+        <th>{% trans "Amount" %}</th>
+        <th>{% trans "Method" %}</th>
+        <th>{% trans "Status" %}</th>
+        <th>{% trans "Receipt" %}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in gastos %}
+      <tr>
+        <td style="white-space:nowrap;font-size:.85rem;">{{ g.fecha|date:"d/m/Y" }}</td>
+        <td>
+          <strong>{{ g.titulo }}</strong>
+          {% if g.notas %}<br><small class="text-muted">{{ g.notas|truncatechars:50 }}</small>{% endif %}
+        </td>
+        <td>
+          <span style="display:inline-flex;align-items:center;gap:.35rem;font-size:.82rem;">
+            <i class="bi {{ g.icono }}" style="color:{{ g.color }};"></i>
+            {{ g.get_categoria_display }}
+          </span>
+        </td>
+        <td style="font-weight:700;white-space:nowrap;">
+          <span style="color:{{ g.color }};">{{ g.moneda }}</span> {{ g.monto|floatformat:2 }}
+        </td>
+        <td style="font-size:.82rem;">{{ g.get_metodo_pago_display|default:"—" }}</td>
+        <td>
+          {% if g.estado == 'pagado' %}
+            <span class="badge bg-success">{{ g.get_estado_display }}</span>
+          {% elif g.estado == 'pendiente' %}
+            <span class="badge bg-warning text-dark">{{ g.get_estado_display }}</span>
+          {% else %}
+            <span class="badge bg-secondary">{{ g.get_estado_display }}</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if g.comprobante %}
+          <a href="{{ g.comprobante.url }}" target="_blank" class="btn btn-sm btn-outline-secondary" title="{% trans 'View receipt' %}">
+            <i class="bi bi-paperclip"></i>
+          </a>
+          {% else %}
+          <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+        <td style="white-space:nowrap;">
+          <a href="{% url 'backoffice:gasto_editar' g.pk %}" class="btn btn-sm btn-outline-secondary me-1">
+            <i class="bi bi-pencil"></i>
+          </a>
+          <a href="{% url 'backoffice:gasto_eliminar' g.pk %}" class="btn btn-sm btn-outline-danger">
+            <i class="bi bi-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <div class="text-center py-5 text-muted">
+    <i class="bi bi-receipt fs-1 d-block mb-2"></i>
+    {% if q or filtro_categoria or filtro_estado %}
+      {% trans "No expenses match the selected filters." %}
+    {% else %}
+      {% trans "No expenses recorded yet." %}
+      <br>
+      <a href="{% url 'backoffice:gasto_crear' %}" class="btn btn-sm mt-3" style="background:#C41230;color:#fff;">
+        {% trans "Record first expense" %}
+      </a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- ── Chart.js ───────────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+{% if cat_data != '[]' %}
+new Chart(document.getElementById('chartCategorias'), {
+  type: 'doughnut',
+  data: {
+    labels: {{ cat_labels|safe }},
+    datasets: [{
+      data: {{ cat_data|safe }},
+      backgroundColor: {{ cat_colors|safe }},
+      borderWidth: 2,
+      borderColor: '#fff',
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '60%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: { color: '#2d4a32', font: { size: 11 }, boxWidth: 12 },
+      },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` $${ctx.parsed.toFixed(2)} USD`,
+        },
+      },
+    },
+  },
+});
+{% endif %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Player Registration — Estado 33</title>
+</head>
+<body style="margin:0;padding:0;background:#f0f0f0;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f0f0;padding:32px 0;">
+  <tr><td align="center">
+  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.15);">
+
+    <!-- HEADER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:28px 40px;text-align:center;">
+        <img src="{{ site_url }}/static/landing/img/logo-estado33.png"
+             alt="Estado 33" width="90" style="display:block;margin:0 auto 16px;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr><td style="height:3px;background:linear-gradient(to right,#0D3B1E,#C8A830 40%,#C41230 70%,#0D3B1E);"></td></tr>
+        </table>
+        <p style="margin:16px 0 0;font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C8A830;">
+          BACKOFFICE NOTIFICATION
+        </p>
+        <h1 style="margin:6px 0 0;font-size:22px;font-weight:700;color:#F2EDDA;text-transform:uppercase;">
+          New Player Registration
+        </h1>
+      </td>
+    </tr>
+
+    <!-- BODY -->
+    <tr>
+      <td style="background:#ffffff;padding:32px 40px;">
+
+        <p style="margin:0 0 24px;font-size:14px;color:#555;line-height:1.6;">
+          A new player has pre-registered for the <strong>Estado 33 National Championship 2026</strong>.
+          Registered on <strong>{{ jugador.fecha_registro|date:"F j, Y — H:i" }}</strong>.
+        </p>
+
+        <!-- Player info -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:20px;">
+          <tr><td style="background:#0D3B1E;padding:10px 18px;">
+            <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">Player</p>
+          </td></tr>
+          <tr><td style="padding:16px 18px;">
+            <table width="100%" cellpadding="4" cellspacing="0">
+              <tr>
+                <td width="40%" style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Full name</td>
+                <td style="font-size:14px;font-weight:700;color:#0D3B1E;">{{ jugador.nombre }} {{ jugador.apellidos }}</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Date of birth</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.fecha_nacimiento }}{% if jugador.edad %} ({{ jugador.edad }} yrs){% endif %}</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Location</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.ciudad }}{% if jugador.ciudad and jugador.estado %}, {% endif %}{{ jugador.estado }} · {{ jugador.get_pais_display }}</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Nationality</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.get_nacionalidad_display }}{% if jugador.doble_nacionalidad %} + {{ jugador.get_segunda_nacionalidad_display }} <span style="background:#C41230;color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:700;">DUAL</span>{% endif %}</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Email</td>
+                <td style="font-size:14px;color:#1a1a1a;"><a href="mailto:{{ jugador.email }}" style="color:#1A6B35;">{{ jugador.email }}</a></td>
+              </tr>
+              {% if jugador.telefono %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Phone</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.telefono }}</td>
+              </tr>
+              {% endif %}
+              {% if jugador.instagram %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Instagram</td>
+                <td style="font-size:14px;color:#1a1a1a;">@{{ jugador.instagram }}</td>
+              </tr>
+              {% endif %}
+            </table>
+          </td></tr>
+        </table>
+
+        <!-- Baseball info -->
+        {% if jugador.equipo_viaje or jugador.posicion_principal %}
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:20px;">
+          <tr><td style="background:#1A6B35;padding:10px 18px;">
+            <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">Baseball</p>
+          </td></tr>
+          <tr><td style="padding:16px 18px;">
+            <table width="100%" cellpadding="4" cellspacing="0">
+              {% if jugador.equipo_viaje %}
+              <tr>
+                <td width="40%" style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Travel team</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.equipo_viaje }}{% if jugador.equipo_ciudad_estado %} · {{ jugador.equipo_ciudad_estado }}{% endif %}</td>
+              </tr>
+              {% endif %}
+              {% if jugador.posicion_principal %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Position</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.get_posicion_principal_display }}{% if jugador.posicion_secundaria %} / {{ jugador.get_posicion_secundaria_display }}{% endif %}{% if jugador.es_pitcher %} · <strong>Pitcher</strong>{% endif %}</td>
+              </tr>
+              {% endif %}
+            </table>
+          </td></tr>
+        </table>
+        {% endif %}
+
+        <!-- Guardian info -->
+        {% if jugador.tutor_nombre %}
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:24px;">
+          <tr><td style="background:#555;padding:10px 18px;">
+            <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;">Guardian / Parent</p>
+          </td></tr>
+          <tr><td style="padding:16px 18px;">
+            <table width="100%" cellpadding="4" cellspacing="0">
+              <tr>
+                <td width="40%" style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Name</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.tutor_nombre }} {{ jugador.tutor_apellidos }}</td>
+              </tr>
+              {% if jugador.tutor_email %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Email</td>
+                <td style="font-size:14px;"><a href="mailto:{{ jugador.tutor_email }}" style="color:#1A6B35;">{{ jugador.tutor_email }}</a></td>
+              </tr>
+              {% endif %}
+              {% if jugador.tutor_telefono %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;">Phone</td>
+                <td style="font-size:14px;color:#1a1a1a;">{{ jugador.tutor_telefono }}</td>
+              </tr>
+              {% endif %}
+            </table>
+          </td></tr>
+        </table>
+        {% endif %}
+
+        <!-- CTA to backoffice -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center" style="padding:8px 0;">
+              <a href="{{ site_url }}/backoffice/"
+                 style="display:inline-block;background:#0D3B1E;color:#C8A830;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 30px;border-radius:4px;border:2px solid #C8A830;">
+                VIEW IN BACKOFFICE
+              </a>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:20px 40px;text-align:center;">
+        <p style="margin:0;font-size:11px;color:rgba(242,237,218,.4);letter-spacing:.1em;text-transform:uppercase;">
+          Estado 33 · Internal Notification · Do not reply
+        </p>
+      </td>
+    </tr>
+
+  </table>
+  </td></tr>
+</table>
+
+</body>
+</html>

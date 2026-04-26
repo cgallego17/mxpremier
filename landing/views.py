@@ -13,6 +13,7 @@ from backoffice.forms import JugadorForm
 from backoffice.models import Partner
 from jugadores.choices import AMERICAS_CHOICES
 from landing.forms import SponsorForm
+from landing.emails import send_registro_emails, send_sponsor_emails
 
 
 logger = logging.getLogger(__name__)
@@ -135,6 +136,8 @@ def registro(request):
         if not jugador.email and jugador.tutor_email:
             jugador.email = jugador.tutor_email
         jugador.save()
+        lang = request.LANGUAGE_CODE if hasattr(request, 'LANGUAGE_CODE') else 'en'
+        send_registro_emails(jugador, lang=lang)
         return JsonResponse({'ok': True})
     return JsonResponse({'ok': False, 'errors': form.errors}, status=400)
 
@@ -148,6 +151,8 @@ def sponsor(request):
         )
     form = SponsorForm(request.POST, request.FILES)
     if form.is_valid():
-        form.save()
+        sponsor_obj = form.save()
+        lang = request.LANGUAGE_CODE if hasattr(request, 'LANGUAGE_CODE') else 'en'
+        send_sponsor_emails(sponsor_obj, lang=lang)
         return JsonResponse({'ok': True})
     return JsonResponse({'ok': False, 'errors': form.errors}, status=400)

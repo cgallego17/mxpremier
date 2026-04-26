@@ -1,0 +1,181 @@
+{% load i18n %}<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% trans "Registration Confirmed — Estado 33" %}</title>
+</head>
+<body style="margin:0;padding:0;background:#f0f0f0;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f0f0;padding:32px 0;">
+  <tr><td align="center">
+  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.15);">
+
+    <!-- HEADER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:32px 40px 0;text-align:center;">
+        <img src="{{ site_url }}/static/landing/img/logo-estado33.png"
+             alt="Estado 33" width="110" style="display:block;margin:0 auto 20px;">
+        <!-- Gold accent line -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="height:3px;background:linear-gradient(to right,#0D3B1E,#C8A830 40%,#C41230 70%,#0D3B1E);"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- HERO BAND -->
+    <tr>
+      <td style="background:#0D3B1E;padding:28px 40px 32px;text-align:center;">
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C8A830;">
+          MX PREMIER BASEBALL · FEMEBE
+        </p>
+        <h1 style="margin:0;font-size:28px;font-weight:900;color:#F2EDDA;letter-spacing:.02em;text-transform:uppercase;line-height:1.2;">
+          {% trans "Registration" %}<br>
+          <span style="color:#C41230;">{% trans "Confirmed" %}</span>
+        </h1>
+      </td>
+    </tr>
+
+    <!-- BODY -->
+    <tr>
+      <td style="background:#ffffff;padding:36px 40px;">
+
+        <p style="margin:0 0 20px;font-size:15px;color:#1a1a1a;line-height:1.6;">
+          {% blocktrans with nombre=jugador.nombre tutor=jugador.tutor_nombre %}
+          Hello <strong>{{ tutor }}</strong>, we have received <strong>{{ nombre }}</strong>'s pre-registration for the <strong>Estado 33 National Championship 2026</strong>.
+          {% endblocktrans %}
+        </p>
+
+        <!-- Player card -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:28px;">
+          <tr>
+            <td style="background:#0D3B1E;padding:12px 20px;">
+              <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">
+                {% trans "Player Information" %}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="50%" style="padding:6px 0;vertical-align:top;">
+                    <p style="margin:0;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;">{% trans "Player" %}</p>
+                    <p style="margin:4px 0 0;font-size:15px;font-weight:700;color:#0D3B1E;">{{ jugador.nombre }} {{ jugador.apellidos }}</p>
+                  </td>
+                  <td width="50%" style="padding:6px 0;vertical-align:top;">
+                    <p style="margin:0;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;">{% trans "Date of birth" %}</p>
+                    <p style="margin:4px 0 0;font-size:15px;font-weight:700;color:#0D3B1E;">{{ jugador.fecha_nacimiento }}</p>
+                  </td>
+                </tr>
+                {% if jugador.ciudad or jugador.estado %}
+                <tr>
+                  <td colspan="2" style="padding:6px 0;border-top:1px solid #f0f0f0;">
+                    <p style="margin:0;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;">{% trans "City and State" %}</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#1a1a1a;">{{ jugador.ciudad }}{% if jugador.ciudad and jugador.estado %}, {% endif %}{{ jugador.estado }}</p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% if jugador.equipo_viaje %}
+                <tr>
+                  <td colspan="2" style="padding:6px 0;border-top:1px solid #f0f0f0;">
+                    <p style="margin:0;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;">{% trans "Travel team name" %}</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#1a1a1a;">{{ jugador.equipo_viaje }}</p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% if jugador.posicion_principal %}
+                <tr>
+                  <td colspan="2" style="padding:6px 0;border-top:1px solid #f0f0f0;">
+                    <p style="margin:0;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.1em;">{% trans "Primary position" %}</p>
+                    <p style="margin:4px 0 0;font-size:15px;color:#1a1a1a;">{{ jugador.get_posicion_principal_display }}</p>
+                  </td>
+                </tr>
+                {% endif %}
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Next steps -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#F2EDDA;border-left:4px solid #C8A830;border-radius:0 6px 6px 0;margin-bottom:28px;">
+          <tr>
+            <td style="padding:18px 20px;">
+              <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#0D3B1E;">
+                {% trans "Next Steps" %}
+              </p>
+              <p style="margin:0;font-size:14px;color:#333;line-height:1.6;">
+                {% blocktrans %}
+                Our team will review your information and contact you with the details about the <strong>SIREBE credential</strong> and medical insurance requirements. Keep an eye on your inbox.
+                {% endblocktrans %}
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Key dates -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+          <tr>
+            <td width="50%" style="padding:0 8px 0 0;vertical-align:top;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0D3B1E;border-radius:6px;">
+                <tr>
+                  <td style="padding:16px 18px;">
+                    <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">{% trans "Registration Deadline" %}</p>
+                    <p style="margin:0;font-size:16px;font-weight:700;color:#ffffff;">{% trans "May 10, 2026" %}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="50%" style="padding:0 0 0 8px;vertical-align:top;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#C41230;border-radius:6px;">
+                <tr>
+                  <td style="padding:16px 18px;">
+                    <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);">{% trans "Championship" %}</p>
+                    <p style="margin:0;font-size:16px;font-weight:700;color:#ffffff;">{% trans "May 16–23, 2026" %}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- CTA -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center" style="padding:8px 0 16px;">
+              <a href="{{ site_url }}/#about"
+                 style="display:inline-block;background:#C41230;color:#ffffff;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:14px 36px;border-radius:4px;">
+                {% trans "Learn More" %}
+              </a>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:24px 40px;text-align:center;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="height:2px;background:linear-gradient(to right,#0D3B1E,#C8A830 50%,#0D3B1E);margin-bottom:20px;"></td>
+          </tr>
+        </table>
+        <p style="margin:16px 0 6px;font-size:11px;color:rgba(242,237,218,.5);letter-spacing:.1em;text-transform:uppercase;">
+          MX Premier Baseball · FEMEBE · {% trans "La Paz, Baja California Sur" %}
+        </p>
+        <p style="margin:0;font-size:11px;color:rgba(242,237,218,.35);">
+          &copy; 2026 Estado 33. {% trans "All rights reserved." %}
+        </p>
+      </td>
+    </tr>
+
+  </table>
+  </td></tr>
+</table>
+
+</body>
+</html>

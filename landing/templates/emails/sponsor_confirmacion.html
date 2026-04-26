@@ -1,0 +1,148 @@
+{% load i18n %}<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% trans "Sponsorship Inquiry Received — Estado 33" %}</title>
+</head>
+<body style="margin:0;padding:0;background:#f0f0f0;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f0f0;padding:32px 0;">
+  <tr><td align="center">
+  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.15);">
+
+    <!-- HEADER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:32px 40px 0;text-align:center;">
+        <img src="{{ site_url }}/static/landing/img/logo-estado33.png"
+             alt="Estado 33" width="110" style="display:block;margin:0 auto 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr><td style="height:3px;background:linear-gradient(to right,#0D3B1E,#C8A830 40%,#C41230 70%,#0D3B1E);"></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- HERO BAND -->
+    <tr>
+      <td style="background:#0D3B1E;padding:28px 40px 32px;text-align:center;">
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#C8A830;">
+          MX PREMIER BASEBALL · FEMEBE
+        </p>
+        <h1 style="margin:0;font-size:26px;font-weight:900;color:#F2EDDA;letter-spacing:.02em;text-transform:uppercase;line-height:1.25;">
+          {% trans "Thank you for your" %}<br>
+          <span style="color:#C8A830;">{% trans "interest!" %}</span>
+        </h1>
+      </td>
+    </tr>
+
+    <!-- BODY -->
+    <tr>
+      <td style="background:#ffffff;padding:36px 40px;">
+
+        <p style="margin:0 0 20px;font-size:15px;color:#1a1a1a;line-height:1.65;">
+          {% blocktrans with name=sponsor.contact_name company=sponsor.company_name %}
+          Hello <strong>{{ name }}</strong>, we have received your sponsorship inquiry from <strong>{{ company }}</strong>. Our team will review your proposal and get back to you shortly.
+          {% endblocktrans %}
+        </p>
+
+        <!-- Summary card -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:28px;">
+          <tr><td style="background:#0D3B1E;padding:12px 20px;">
+            <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">
+              {% trans "Inquiry Summary" %}
+            </p>
+          </td></tr>
+          <tr><td style="padding:20px;">
+            <table width="100%" cellpadding="4" cellspacing="0">
+              <tr>
+                <td width="45%" style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;vertical-align:top;padding:6px 0;">{% trans "Company" %}</td>
+                <td style="font-size:14px;font-weight:700;color:#0D3B1E;padding:6px 0;">{{ sponsor.company_name }}</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;padding:6px 0;border-top:1px solid #f5f5f5;">{% trans "Contact" %}</td>
+                <td style="font-size:14px;color:#1a1a1a;padding:6px 0;border-top:1px solid #f5f5f5;">{{ sponsor.contact_name }}</td>
+              </tr>
+              {% if sponsor.budget %}
+              <tr>
+                <td style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em;padding:6px 0;border-top:1px solid #f5f5f5;">{% trans "Estimated Budget" %}</td>
+                <td style="font-size:14px;color:#1a1a1a;padding:6px 0;border-top:1px solid #f5f5f5;">{{ sponsor.get_budget_display }}</td>
+              </tr>
+              {% endif %}
+              {% if sponsor.quiere_propuesta %}
+              <tr>
+                <td colspan="2" style="padding:12px 0 0;border-top:1px solid #f5f5f5;">
+                  <span style="display:inline-block;background:#0D3B1E;color:#C8A830;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border-radius:3px;">
+                    ✓ {% trans "Custom proposal requested" %}
+                  </span>
+                </td>
+              </tr>
+              {% endif %}
+            </table>
+          </td></tr>
+        </table>
+
+        <!-- What's next -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#F2EDDA;border-left:4px solid #C8A830;border-radius:0 6px 6px 0;margin-bottom:28px;">
+          <tr><td style="padding:18px 20px;">
+            <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#0D3B1E;">
+              {% trans "What happens next?" %}
+            </p>
+            <p style="margin:0;font-size:14px;color:#333;line-height:1.65;">
+              {% blocktrans %}
+              A member of our team will contact you within <strong>2–3 business days</strong> to discuss partnership opportunities that align with your goals.
+              {% endblocktrans %}
+            </p>
+          </td></tr>
+        </table>
+
+        <!-- Event highlight -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#0D3B1E;border-radius:6px;margin-bottom:28px;">
+          <tr><td style="padding:20px 24px;">
+            <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8A830;">
+              {% trans "The Event" %}
+            </p>
+            <p style="margin:0 0 4px;font-size:18px;font-weight:700;color:#F2EDDA;text-transform:uppercase;">
+              12U {% trans "National Championship" %}
+            </p>
+            <p style="margin:0;font-size:13px;color:rgba(242,237,218,.65);">
+              {% trans "May 16–23, 2026" %} · La Paz, Baja California Sur
+            </p>
+          </td></tr>
+        </table>
+
+        <!-- CTA -->
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center" style="padding:8px 0 16px;">
+              <a href="{{ site_url }}/#about"
+                 style="display:inline-block;background:#C41230;color:#ffffff;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:14px 36px;border-radius:4px;">
+                {% trans "Learn More" %}
+              </a>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td style="background:#0D3B1E;padding:24px 40px;text-align:center;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr><td style="height:2px;background:linear-gradient(to right,#0D3B1E,#C8A830 50%,#0D3B1E);"></td></tr>
+        </table>
+        <p style="margin:16px 0 6px;font-size:11px;color:rgba(242,237,218,.5);letter-spacing:.1em;text-transform:uppercase;">
+          MX Premier Baseball · FEMEBE · {% trans "La Paz, Baja California Sur" %}
+        </p>
+        <p style="margin:0;font-size:11px;color:rgba(242,237,218,.35);">
+          &copy; 2026 Estado 33. {% trans "All rights reserved." %}
+        </p>
+      </td>
+    </tr>
+
+  </table>
+  </td></tr>
+</table>
+
+</body>
+</html>
