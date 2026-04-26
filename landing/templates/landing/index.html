@@ -2536,13 +2536,20 @@
         background: transparent;
         z-index: 5;
       }
-      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+      .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: .6rem;
+        width: 100%;
+        max-width: 320px;
+      }
       .btn-hero-primary, .btn-hero-secondary {
         width: 100%;
         text-align: center;
         justify-content: center;
-        font-size: .85rem;
-        padding: .75rem 1rem;
+        font-size: 1rem;
+        padding: .9rem 1rem;
+        letter-spacing: .1em;
       }
     }
     /* ─── REGISTRATION MODAL ──────────────────────────────── */
