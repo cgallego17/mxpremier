@@ -602,20 +602,27 @@ def gastos_exportar(request):
         'Date', 'Title', 'Category', 'Amount', 'Currency',
         'Payment method', 'Status', 'Notes', 'Registered',
     ]
+    import traceback
     rows = []
-    for g in qs:
-        rows.append([
-            g.fecha.strftime('%Y-%m-%d'),
-            g.titulo,
-            cat_display.get(g.categoria, g.categoria),
-            float(g.monto),
-            g.moneda,
-            g.get_metodo_pago_display(),
-            g.get_estado_display(),
-            g.notas,
-            g.fecha_registro.strftime('%Y-%m-%d %H:%M'),
-        ])
-    col_widths = [12, 30, 16, 12, 8, 14, 12, 36, 18]
-    wb, _ = build_workbook('Expenses', headers, rows, col_widths)
-    resp = workbook_response('gastos_estado33.xlsx')
-    return wb_to_response(wb, resp)
+    try:
+        for g in qs:
+            try:
+                rows.append([
+                    g.fecha.strftime('%Y-%m-%d') if g.fecha else 'N/A',
+                    g.titulo,
+                    cat_display.get(g.categoria, g.categoria),
+                    float(g.monto) if g.monto is not None else 0.0,
+                    g.moneda,
+                    g.get_metodo_pago_display(),
+                    g.get_estado_display(),
+                    g.notas,
+                    g.fecha_registro.strftime('%Y-%m-%d %H:%M') if g.fecha_registro else 'N/A',
+                ])
+            except Exception as row_exc:
+                return HttpResponse(f'<h2>Error en gasto ID {g.id}</h2><pre>{traceback.format_exc()}</pre>', status=500)
+        col_widths = [12, 30, 16, 12, 8, 14, 12, 36, 18]
+        wb, _ = build_workbook('Expenses', headers, rows, col_widths)
+        resp = workbook_response('gastos_estado33.xlsx')
+        return wb_to_response(wb, resp)
+    except Exception as exc:
+        return HttpResponse(f'<h2>Error general en gastos_exportar</h2><pre>{traceback.format_exc()}</pre>', status=500)
