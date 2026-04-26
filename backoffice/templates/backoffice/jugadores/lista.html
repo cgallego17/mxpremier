@@ -23,6 +23,9 @@
           </a>
         {% endif %}
       </form>
+      <a href="{% url 'backoffice:jugadores_exportar' %}" class="btn btn-sm btn-outline-success" title="{% trans 'Export to Excel' %}">
+        <i class="bi bi-file-earmark-excel me-1"></i>Excel
+      </a>
       <a href="{% url 'backoffice:jugador_crear' %}" class="btn btn-sm btn-primary">
         <i class="bi bi-plus-lg me-1"></i>{% trans "New player" %}
       </a>

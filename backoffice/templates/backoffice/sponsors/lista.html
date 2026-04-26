@@ -8,6 +8,7 @@
 <div class="bo-card">
   <div class="bo-card-header">
     <h5><i class="bi bi-building me-2"></i>{% trans "Sponsor Inquiries" %}</h5>
+    <div class="d-flex gap-2 flex-wrap align-items-center">
     <form method="get" class="d-flex gap-2">
       <input type="search" name="q" value="{{ q }}"
              class="form-control form-control-sm"
@@ -20,6 +21,10 @@
         </a>
       {% endif %}
     </form>
+    <a href="{% url 'backoffice:sponsors_exportar' %}" class="btn btn-sm btn-outline-success" title="{% trans 'Export to Excel' %}">
+      <i class="bi bi-file-earmark-excel me-1"></i>Excel
+    </a>
+    </div>
   </div>
 
   {% if sponsors %}

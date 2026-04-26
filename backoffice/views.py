@@ -2,6 +2,7 @@ import csv
 import json
 from datetime import timedelta
 from django.http import HttpResponse
+from .excel import build_workbook, wb_to_response, workbook_response
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -487,23 +488,121 @@ def gasto_eliminar(request, pk):
 
 
 @login_required
+def jugadores_exportar(request):
+    qs = Jugador.objects.all().order_by('apellidos', 'nombre')
+    headers = [
+        'First name', 'Last names', 'Date of birth', 'Age',
+        'Country', 'State', 'City', 'Nationality', 'Dual nationality',
+        'Email', 'Phone', 'Instagram',
+        'Travel team', 'Team city/state',
+        'Primary position', 'Secondary position', 'Pitcher',
+        'Guardian name', 'Guardian email', 'Guardian phone',
+        'Registered',
+    ]
+    rows = []
+    for j in qs:
+        rows.append([
+            j.nombre, j.apellidos,
+            j.fecha_nacimiento.strftime('%Y-%m-%d') if j.fecha_nacimiento else '',
+            j.edad or '',
+            j.get_pais_display(), j.estado, j.ciudad,
+            j.get_nacionalidad_display(),
+            'Yes' if j.doble_nacionalidad else 'No',
+            j.email, j.telefono,
+            f'@{j.instagram}' if j.instagram else '',
+            j.equipo_viaje, j.equipo_ciudad_estado,
+            j.get_posicion_principal_display() if j.posicion_principal else '',
+            j.get_posicion_secundaria_display() if j.posicion_secundaria else '',
+            'Yes' if j.es_pitcher else 'No',
+            f'{j.tutor_nombre} {j.tutor_apellidos}'.strip(),
+            j.tutor_email, j.tutor_telefono,
+            j.fecha_registro.strftime('%Y-%m-%d %H:%M'),
+        ])
+    col_widths = [
+        14, 18, 14, 5,
+        14, 14, 14, 14, 8,
+        26, 14, 14,
+        22, 22,
+        16, 16, 7,
+        22, 26, 14,
+        18,
+    ]
+    wb, _ = build_workbook('Player Registrations', headers, rows, col_widths)
+    resp = workbook_response('jugadores_estado33.xlsx')
+    return wb_to_response(wb, resp)
+
+
+@login_required
+def sponsors_exportar(request):
+    qs = SponsorInquiry.objects.all().order_by('-fecha_registro')
+    headers = [
+        'Company', 'Contact', 'Email', 'Phone', 'Website',
+        'Budget', 'Wants proposal',
+        'Teams', 'Players', 'Showcases', 'Tournaments', 'Full program',
+        'Brand awareness', 'Support youth', 'Community',
+        'Marketing', 'Intl. reach',
+        'Logo on uniforms', 'Event branding', 'Social media', 'On-site',
+        'Notes', 'Submitted',
+    ]
+    rows = []
+    for s in qs:
+        rows.append([
+            s.company_name, s.contact_name, s.email,
+            s.phone, s.website,
+            s.get_budget_display() if s.budget else '',
+            'Yes' if s.wants_proposal        else 'No',
+            'Yes' if s.interest_teams        else 'No',
+            'Yes' if s.interest_players      else 'No',
+            'Yes' if s.interest_showcases    else 'No',
+            'Yes' if s.interest_tournaments  else 'No',
+            'Yes' if s.interest_full_program else 'No',
+            'Yes' if s.goal_brand_awareness  else 'No',
+            'Yes' if s.goal_youth_athletes   else 'No',
+            'Yes' if s.goal_community        else 'No',
+            'Yes' if s.goal_marketing        else 'No',
+            'Yes' if s.goal_international    else 'No',
+            'Yes' if s.activation_logo       else 'No',
+            'Yes' if s.activation_event      else 'No',
+            'Yes' if s.activation_social     else 'No',
+            'Yes' if s.activation_onsite     else 'No',
+            s.notes,
+            s.fecha_registro.strftime('%Y-%m-%d %H:%M'),
+        ])
+    col_widths = [
+        22, 20, 26, 14, 26,
+        16, 8,
+        7, 7, 7, 7, 7,
+        7, 7, 7, 7, 7,
+        7, 7, 7, 7,
+        30, 18,
+    ]
+    wb, _ = build_workbook('Sponsor Inquiries', headers, rows, col_widths)
+    resp = workbook_response('sponsors_estado33.xlsx')
+    return wb_to_response(wb, resp)
+
+
+@login_required
 def gastos_exportar(request):
     qs = Gasto.objects.all().order_by('-fecha')
-    resp = HttpResponse(content_type='text/csv')
-    resp['Content-Disposition'] = 'attachment; filename="gastos_estado33.csv"'
     cat_display = dict(CATEGORIAS_GASTO)
-    writer = csv.writer(resp)
-    writer.writerow([
+    headers = [
         'Date', 'Title', 'Category', 'Amount', 'Currency',
-        'Payment Method', 'Status', 'Notes',
-    ])
+        'Payment method', 'Status', 'Notes', 'Registered',
+    ]
+    rows = []
     for g in qs:
-        writer.writerow([
-            g.fecha, g.titulo,
+        rows.append([
+            g.fecha.strftime('%Y-%m-%d'),
+            g.titulo,
             cat_display.get(g.categoria, g.categoria),
-            g.monto, g.moneda,
+            float(g.monto),
+            g.moneda,
             g.get_metodo_pago_display(),
             g.get_estado_display(),
             g.notas,
+            g.fecha_registro.strftime('%Y-%m-%d %H:%M'),
         ])
-    return resp
+    col_widths = [12, 30, 16, 12, 8, 14, 12, 36, 18]
+    wb, _ = build_workbook('Expenses', headers, rows, col_widths)
+    resp = workbook_response('gastos_estado33.xlsx')
+    return wb_to_response(wb, resp)

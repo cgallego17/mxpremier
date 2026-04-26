@@ -127,8 +127,8 @@
       {% if gastos %}<span class="badge bg-secondary ms-1">{{ gastos|length }}</span>{% endif %}
     </h6>
     <div class="d-flex gap-2">
-      <a href="{% url 'backoffice:gastos_exportar' %}" class="btn btn-sm btn-outline-secondary">
-        <i class="bi bi-download me-1"></i>CSV
+      <a href="{% url 'backoffice:gastos_exportar' %}" class="btn btn-sm btn-outline-success" title="{% trans 'Export to Excel' %}">
+        <i class="bi bi-file-earmark-excel me-1"></i>Excel
       </a>
       <a href="{% url 'backoffice:gasto_crear' %}" class="btn btn-sm" style="background:#C41230;color:#fff;">
         <i class="bi bi-plus-lg me-1"></i>{% trans "New expense" %}
