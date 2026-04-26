@@ -362,6 +362,7 @@
       pointer-events: none;
       z-index: 10;
       animation: baseball-fly 2.4s cubic-bezier(.4,0,.2,1) forwards;
+      animation-play-state: paused;
     }
 
     .hero-gold-line {
@@ -4657,6 +4658,8 @@
       setTimeout(function () {
         loader.classList.add('hidden');
         setTimeout(function () { loader.style.display = 'none'; }, 420);
+        var ball = document.querySelector('.baseball-fly');
+        if (ball) ball.style.animationPlayState = 'running';
       }, wait);
     }
 
