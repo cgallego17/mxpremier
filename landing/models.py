@@ -61,19 +61,27 @@ class SponsorInquiry(models.Model):
 
 
 class PageVisit(models.Model):
-    ip = models.CharField(max_length=45)
-    path = models.CharField(max_length=200)
-    user_agent = models.CharField(max_length=300, blank=True)
+    DEVICE_MOBILE  = 'mobile'
+    DEVICE_TABLET  = 'tablet'
+    DEVICE_DESKTOP = 'desktop'
+
+    ip           = models.CharField(max_length=45)
+    path         = models.CharField(max_length=200)
+    user_agent   = models.CharField(max_length=300, blank=True)
     country_code = models.CharField(max_length=2, blank=True)
-    referrer = models.CharField(max_length=300, blank=True)
-    is_mobile = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    region       = models.CharField(max_length=100, blank=True)
+    city         = models.CharField(max_length=100, blank=True)
+    referrer     = models.CharField(max_length=300, blank=True)
+    is_mobile    = models.BooleanField(default=False)
+    device_type  = models.CharField(max_length=10, default=DEVICE_DESKTOP)
+    timestamp    = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         indexes = [
             models.Index(fields=['timestamp']),
             models.Index(fields=['country_code']),
             models.Index(fields=['ip']),
+            models.Index(fields=['device_type']),
         ]
 
     def __str__(self):

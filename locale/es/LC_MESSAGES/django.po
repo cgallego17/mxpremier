@@ -2,96 +2,240 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 18:23-0500\n"
+"POT-Creation-Date: 2026-04-26 12:39-0500\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\backoffice\forms.py:51 .\backoffice\forms.py:57 .\backoffice\forms.py:63
+#: .\backoffice\forms.py:52 .\backoffice\forms.py:58 .\backoffice\forms.py:64
 #: .\landing\forms.py:49
 msgid "Must be at least 2 characters."
 msgstr "Debe tener al menos 2 caracteres."
 
-#: .\backoffice\forms.py:73
+#: .\backoffice\forms.py:74
 msgid "Date of birth cannot be in the future."
 msgstr "La fecha de nacimiento no puede ser en el futuro."
 
-#: .\backoffice\forms.py:75
+#: .\backoffice\forms.py:76
 msgid "Player must be 18 years old or younger."
 msgstr "El jugador debe tener 18 años o menos."
 
-#: .\backoffice\forms.py:84
+#: .\backoffice\forms.py:85
 msgid "A player with this email is already registered."
 msgstr "Ya existe un jugador registrado con este correo."
 
 # forms.py
-#: .\backoffice\forms.py:92 .\landing\templates\landing\index.html:3948
+#: .\backoffice\forms.py:93 .\landing\templates\landing\index.html:4167
 msgid "Select the second nationality."
 msgstr "Selecciona la segunda nacionalidad."
 
 # base.html
-#: .\backoffice\templates\backoffice\base.html:316
+#: .\backoffice\templates\backoffice\base.html:319
 msgid "General"
 msgstr "General"
 
-#: .\backoffice\templates\backoffice\base.html:322
+#: .\backoffice\templates\backoffice\base.html:325
 msgid "Management"
 msgstr "Gestión"
 
-#: .\backoffice\templates\backoffice\base.html:325
+#: .\backoffice\templates\backoffice\base.html:328
 #: .\backoffice\templates\backoffice\jugadores\lista.html:4
 #: .\backoffice\templates\backoffice\jugadores\lista.html:5
 #: .\backoffice\templates\backoffice\jugadores\lista.html:10
 msgid "Player Registrations"
 msgstr "Registro de Jugadores"
 
-#: .\backoffice\templates\backoffice\base.html:331
+#: .\backoffice\templates\backoffice\base.html:332
+#: .\backoffice\templates\backoffice\dashboard.html:103
+#: .\backoffice\templates\backoffice\sponsors\lista.html:4
+#: .\backoffice\templates\backoffice\sponsors\lista.html:5
+#: .\backoffice\templates\backoffice\sponsors\lista.html:10
+#: .\landing\models.py:56
+msgid "Sponsor Inquiries"
+msgstr "Consultas de patrocinio"
+
+#: .\backoffice\templates\backoffice\base.html:336
+#: .\backoffice\templates\backoffice\partners\lista.html:6
+msgid "Partner Logos"
+msgstr "Logos de Colaboradores"
+
+#: .\backoffice\templates\backoffice\base.html:342
 msgid "System active"
 msgstr "Sistema activo"
 
+#: .\backoffice\templates\backoffice\dashboard.html:19
+msgid "Total visits"
+msgstr "Total de visitas"
+
+#: .\backoffice\templates\backoffice\dashboard.html:31
+msgid "Unique visitors"
+msgstr "Visitantes únicos"
+
+#: .\backoffice\templates\backoffice\dashboard.html:43
+msgid "Visits today"
+msgstr "Visitas hoy"
+
+#: .\backoffice\templates\backoffice\dashboard.html:55
+msgid "Visits this week"
+msgstr "Visitas esta semana"
+
 # dashboard.html
-#: .\backoffice\templates\backoffice\dashboard.html:16
+#: .\backoffice\templates\backoffice\dashboard.html:67
 msgid "Registered players"
 msgstr "Jugadores registrados"
 
-#: .\backoffice\templates\backoffice\dashboard.html:27 .\jugadores\models.py:42
+#: .\backoffice\templates\backoffice\dashboard.html:79
+msgid "Registrations today"
+msgstr "Registros hoy"
+
+#: .\backoffice\templates\backoffice\dashboard.html:91 .\jugadores\models.py:42
 msgid "Dual nationality"
 msgstr "Doble nacionalidad"
 
-#: .\backoffice\templates\backoffice\dashboard.html:35
-msgid "Recent entries"
-msgstr "Últimos registros"
+#: .\backoffice\templates\backoffice\dashboard.html:116
+msgid "Website visits — last 30 days"
+msgstr "Visitas al sitio — últimos 30 días"
 
-#: .\backoffice\templates\backoffice\dashboard.html:38
+#: .\backoffice\templates\backoffice\dashboard.html:127
+msgid "Device type"
+msgstr "Tipo de dispositivo"
+
+#: .\backoffice\templates\backoffice\dashboard.html:148
+msgid "Player registrations — last 30 days"
+msgstr "Registros de jugadores — últimos 30 días"
+
+#: .\backoffice\templates\backoffice\dashboard.html:159
+msgid "Top visitor countries"
+msgstr "Principales países de visitantes"
+
+#: .\backoffice\templates\backoffice\dashboard.html:175
+msgid "Registered players by age"
+msgstr "Jugadores registrados por edad"
+
+#: .\backoffice\templates\backoffice\dashboard.html:191
+msgid "Visitors by country"
+msgstr "Visitantes por país"
+
+#: .\backoffice\templates\backoffice\dashboard.html:195
+#: .\backoffice\templates\backoffice\dashboard.html:292
+#: .\jugadores\models.py:30 .\landing\templates\landing\index.html:3910
+msgid "Country"
+msgstr "País"
+
+#: .\backoffice\templates\backoffice\dashboard.html:195
+#: .\backoffice\templates\backoffice\dashboard.html:218
+#: .\backoffice\templates\backoffice\dashboard.html:241
+#: .\backoffice\templates\backoffice\dashboard.html:269
+msgid "Visits"
+msgstr "Visitas"
+
+#: .\backoffice\templates\backoffice\dashboard.html:206
+#: .\backoffice\templates\backoffice\dashboard.html:229
+#: .\backoffice\templates\backoffice\dashboard.html:252
+#: .\backoffice\templates\backoffice\dashboard.html:280
+#: .\backoffice\templates\backoffice\dashboard.html:303
+msgid "No data yet."
+msgstr "Sin datos aún."
+
+#: .\backoffice\templates\backoffice\dashboard.html:214
+msgid "Top states / regions"
+msgstr "Principales estados / regiones"
+
+#: .\backoffice\templates\backoffice\dashboard.html:218
+msgid "State / Region"
+msgstr "Estado / Región"
+
+#: .\backoffice\templates\backoffice\dashboard.html:237
+msgid "Top cities"
+msgstr "Principales ciudades"
+
+#: .\backoffice\templates\backoffice\dashboard.html:241
+#: .\jugadores\models.py:36 .\landing\templates\landing\index.html:3925
+msgid "City"
+msgstr "Ciudad"
+
+#: .\backoffice\templates\backoffice\dashboard.html:265
+msgid "Top pages"
+msgstr "Páginas más visitadas"
+
+#: .\backoffice\templates\backoffice\dashboard.html:269
+msgid "Page"
+msgstr "Página"
+
+#: .\backoffice\templates\backoffice\dashboard.html:288
+msgid "Players by country"
+msgstr "Jugadores por país"
+
+#: .\backoffice\templates\backoffice\dashboard.html:292
+#: .\backoffice\templates\backoffice\dashboard.html:459
+#: .\jugadores\models.py:97 .\landing\templates\landing\index.html:3139
+#: .\landing\templates\landing\index.html:3189
+#: .\landing\templates\landing\index.html:3552
+#: .\landing\templates\landing\index.html:3796
+msgid "Players"
+msgstr "Jugadores"
+
+#: .\backoffice\templates\backoffice\dashboard.html:316
+msgid "Recent registrations"
+msgstr "Registros recientes"
+
+#: .\backoffice\templates\backoffice\dashboard.html:317
+#: .\backoffice\templates\backoffice\dashboard.html:342
 msgid "View all"
 msgstr "Ver todos"
 
-#: .\backoffice\templates\backoffice\dashboard.html:45 .\jugadores\models.py:96
-#: .\landing\templates\landing\index.html:3622
+#: .\backoffice\templates\backoffice\dashboard.html:321
+#: .\jugadores\models.py:96 .\landing\templates\landing\index.html:3847
 msgid "Player"
 msgstr "Jugador"
 
-#: .\backoffice\templates\backoffice\dashboard.html:46
-#: .\backoffice\templates\backoffice\jugadores\lista.html:39
-#: .\jugadores\models.py:83 .\landing\models.py:17
-#: .\landing\templates\landing\index.html:4227
-msgid "Email"
-msgstr "Email"
-
-#: .\backoffice\templates\backoffice\dashboard.html:47
+#: .\backoffice\templates\backoffice\dashboard.html:321
 #: .\backoffice\templates\backoffice\jugadores\lista.html:42
 #: .\jugadores\models.py:39
 msgid "Nationality"
 msgstr "Nacionalidad"
 
-#: .\backoffice\templates\backoffice\dashboard.html:48 .\jugadores\models.py:92
-msgid "Registration date"
-msgstr "Fecha de registro"
+#: .\backoffice\templates\backoffice\dashboard.html:321
+#: .\backoffice\templates\backoffice\dashboard.html:346
+msgid "Date"
+msgstr "Fecha"
 
-#: .\backoffice\templates\backoffice\dashboard.html:70
+#: .\backoffice\templates\backoffice\dashboard.html:333
 msgid "No players registered yet."
 msgstr "No hay jugadores registrados aún."
+
+#: .\backoffice\templates\backoffice\dashboard.html:341
+msgid "Recent Sponsor Inquiries"
+msgstr "Consultas de patrocinio recientes"
+
+#: .\backoffice\templates\backoffice\dashboard.html:346
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:24
+#: .\backoffice\templates\backoffice\sponsors\lista.html:31
+msgid "Company"
+msgstr "Empresa"
+
+#: .\backoffice\templates\backoffice\dashboard.html:346
+#: .\backoffice\templates\backoffice\sponsors\lista.html:35
+msgid "Budget"
+msgstr "Presupuesto"
+
+#: .\backoffice\templates\backoffice\dashboard.html:358
+#: .\backoffice\templates\backoffice\sponsors\lista.html:85
+msgid "No sponsor inquiries yet."
+msgstr "Sin consultas de patrocinio aún."
+
+#: .\backoffice\templates\backoffice\dashboard.html:418
+msgid "Mobile"
+msgstr "Móvil"
+
+#: .\backoffice\templates\backoffice\dashboard.html:418
+msgid "Tablet"
+msgstr "Tablet"
+
+#: .\backoffice\templates\backoffice\dashboard.html:418
+msgid "Desktop"
+msgstr "Escritorio"
 
 # confirmar_eliminar.html
 #: .\backoffice\templates\backoffice\jugadores\confirmar_eliminar.html:4
@@ -109,120 +253,127 @@ msgid "You are about to delete <strong>%(name)s</strong>."
 msgstr "Estás por eliminar a <strong>%(name)s</strong>."
 
 #: .\backoffice\templates\backoffice\jugadores\confirmar_eliminar.html:16
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:18
 msgid "This action cannot be undone."
 msgstr "Esta acción no se puede deshacer."
 
 #: .\backoffice\templates\backoffice\jugadores\confirmar_eliminar.html:22
+#: .\backoffice\templates\backoffice\partners\confirmar_eliminar.html:14
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:22
 msgid "Yes, delete"
 msgstr "Sí, eliminar"
 
 #: .\backoffice\templates\backoffice\jugadores\confirmar_eliminar.html:25
 #: .\backoffice\templates\backoffice\jugadores\form.html:119
+#: .\backoffice\templates\backoffice\partners\confirmar_eliminar.html:17
+#: .\backoffice\templates\backoffice\partners\form.html:60
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:25
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:13
-#: .\landing\templates\landing\index.html:3664
+#: .\landing\templates\landing\index.html:3889
 msgid "Player information"
 msgstr "Información del jugador"
 
 # models.py — field labels
 #: .\backoffice\templates\backoffice\jugadores\form.html:16
-#: .\jugadores\models.py:24 .\landing\templates\landing\index.html:3667
+#: .\jugadores\models.py:24 .\landing\templates\landing\index.html:3892
 msgid "First name"
 msgstr "Nombre"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:21
-#: .\jugadores\models.py:25 .\landing\templates\landing\index.html:3672
+#: .\jugadores\models.py:25 .\landing\templates\landing\index.html:3897
 msgid "Last names"
 msgstr "Apellidos"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:26
-#: .\jugadores\models.py:27 .\landing\templates\landing\index.html:3677
+#: .\jugadores\models.py:27 .\landing\templates\landing\index.html:3902
 msgid "Date of birth"
 msgstr "Fecha de nacimiento"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:31
-#: .\landing\templates\landing\index.html:3682
+#: .\landing\templates\landing\index.html:3907
 msgid "City and State"
 msgstr "Ciudad y Estado"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:36
-#: .\landing\templates\landing\index.html:3712
+#: .\landing\templates\landing\index.html:3937
 msgid "Citizenship"
 msgstr "Ciudadanía"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:41
-#: .\jugadores\models.py:49 .\landing\templates\landing\index.html:3722
+#: .\jugadores\models.py:49 .\landing\templates\landing\index.html:3947
 msgid "Instagram handle"
 msgstr "Usuario de Instagram"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:48
-#: .\landing\templates\landing\index.html:3728
+#: .\landing\templates\landing\index.html:3953
 msgid "Has dual nationality"
 msgstr "Tiene doble nacionalidad"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:52
-#: .\jugadores\models.py:46 .\landing\templates\landing\index.html:3732
+#: .\jugadores\models.py:46 .\landing\templates\landing\index.html:3957
 msgid "Second nationality"
 msgstr "Segunda nacionalidad"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:59
-#: .\landing\templates\landing\index.html:3746
+#: .\landing\templates\landing\index.html:3971
 msgid "Additional player info"
 msgstr "Información adicional del jugador"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:62
-#: .\jugadores\models.py:54 .\landing\templates\landing\index.html:3749
+#: .\jugadores\models.py:54 .\landing\templates\landing\index.html:3974
 msgid "Travel team name"
 msgstr "Nombre del equipo"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:67
-#: .\jugadores\models.py:57 .\landing\templates\landing\index.html:3754
+#: .\jugadores\models.py:57 .\landing\templates\landing\index.html:3979
 msgid "Team city and state"
 msgstr "Ciudad y estado del equipo"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:72
-#: .\jugadores\models.py:61 .\landing\templates\landing\index.html:3759
+#: .\jugadores\models.py:61 .\landing\templates\landing\index.html:3984
 msgid "Primary position"
 msgstr "Posición principal"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:77
-#: .\jugadores\models.py:65 .\landing\templates\landing\index.html:3778
+#: .\jugadores\models.py:65 .\landing\templates\landing\index.html:4003
 msgid "Secondary position"
 msgstr "Posición secundaria"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:84
-#: .\jugadores\models.py:67 .\landing\templates\landing\index.html:3799
+#: .\jugadores\models.py:67 .\landing\templates\landing\index.html:4024
 msgid "Pitcher?"
 msgstr "¿Es pitcher?"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:90
-#: .\landing\templates\landing\index.html:3807
+#: .\landing\templates\landing\index.html:4032
 msgid "Parents / Guardian"
 msgstr "Padres / Tutor"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:93
-#: .\jugadores\models.py:71 .\landing\templates\landing\index.html:3810
+#: .\jugadores\models.py:71 .\landing\templates\landing\index.html:4035
 msgid "Guardian first name"
 msgstr "Nombre del tutor"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:98
-#: .\jugadores\models.py:74 .\landing\templates\landing\index.html:3815
+#: .\jugadores\models.py:74 .\landing\templates\landing\index.html:4040
 msgid "Guardian last name"
 msgstr "Apellido del tutor"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:103
-#: .\jugadores\models.py:77 .\landing\templates\landing\index.html:3820
+#: .\jugadores\models.py:77 .\landing\templates\landing\index.html:4045
 msgid "Guardian phone"
 msgstr "Teléfono del tutor"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:108
-#: .\jugadores\models.py:79 .\landing\templates\landing\index.html:3825
+#: .\jugadores\models.py:79 .\landing\templates\landing\index.html:4050
 msgid "Guardian email"
 msgstr "Email del tutor"
 
 #: .\backoffice\templates\backoffice\jugadores\form.html:116
+#: .\backoffice\templates\backoffice\partners\form.html:58
 msgid "Save"
 msgstr "Guardar"
 
@@ -235,12 +386,24 @@ msgid "New player"
 msgstr "Nuevo jugador"
 
 #: .\backoffice\templates\backoffice\jugadores\lista.html:38
+#: .\backoffice\templates\backoffice\partners\form.html:27
+#: .\backoffice\templates\backoffice\partners\lista.html:19
 msgid "Name"
 msgstr "Nombre"
 
+#: .\backoffice\templates\backoffice\jugadores\lista.html:39
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:26
+#: .\backoffice\templates\backoffice\sponsors\lista.html:33
+#: .\jugadores\models.py:83 .\landing\models.py:17
+#: .\landing\templates\landing\index.html:4446
+msgid "Email"
+msgstr "Email"
+
 #: .\backoffice\templates\backoffice\jugadores\lista.html:40
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:27
+#: .\backoffice\templates\backoffice\sponsors\lista.html:34
 #: .\jugadores\models.py:86 .\landing\models.py:18
-#: .\landing\templates\landing\index.html:4232
+#: .\landing\templates\landing\index.html:4451
 msgid "Phone"
 msgstr "Teléfono"
 
@@ -254,11 +417,13 @@ msgid "Registration"
 msgstr "Registro"
 
 #: .\backoffice\templates\backoffice\jugadores\lista.html:65
-#: .\backoffice\views.py:81
+#: .\backoffice\views.py:258
 msgid "Edit"
 msgstr "Editar"
 
 #: .\backoffice\templates\backoffice\jugadores\lista.html:69
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:13
+#: .\backoffice\templates\backoffice\sponsors\lista.html:69
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -293,33 +458,292 @@ msgstr "Tu usuario"
 msgid "Password"
 msgstr "Contraseña"
 
+# confirmar_eliminar.html
+#: .\backoffice\templates\backoffice\partners\confirmar_eliminar.html:3
+msgid "Delete Partner"
+msgstr "Eliminar Colaborador"
+
+#: .\backoffice\templates\backoffice\partners\confirmar_eliminar.html:8
+msgid "Delete partner?"
+msgstr "¿Eliminar colaborador?"
+
+#: .\backoffice\templates\backoffice\partners\form.html:19
+msgid "Current logo"
+msgstr "Logo actual"
+
+#: .\backoffice\templates\backoffice\partners\form.html:33
+#: .\backoffice\templates\backoffice\partners\lista.html:18
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:48
+#: .\landing\models.py:47
+msgid "Logo"
+msgstr "Logo"
+
+#: .\backoffice\templates\backoffice\partners\form.html:40
+msgid "Website URL"
+msgstr "URL del sitio web"
+
+#: .\backoffice\templates\backoffice\partners\form.html:46
+#: .\backoffice\templates\backoffice\partners\lista.html:21
+msgid "Order"
+msgstr "Orden"
+
+#: .\backoffice\templates\backoffice\partners\form.html:48
+msgid "Lower number = appears first."
+msgstr "Número menor = aparece primero."
+
+#: .\backoffice\templates\backoffice\partners\form.html:53
+msgid "Active (visible on site)"
+msgstr "Activo (visible en el sitio)"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:8
+#: .\backoffice\views.py:330
+msgid "Add Partner"
+msgstr "Agregar Colaborador"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:20
+msgid "URL"
+msgstr "URL"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:22
+msgid "Active"
+msgstr "Activo"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:44
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:45
+#: .\backoffice\templates\backoffice\sponsors\lista.html:56
+#: .\landing\templates\landing\index.html:4528
+msgid "Yes"
+msgstr "Sí"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:46
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:46
+#: .\backoffice\templates\backoffice\sponsors\lista.html:58
+#: .\landing\templates\landing\index.html:4529
+msgid "No"
+msgstr "No"
+
+#: .\backoffice\templates\backoffice\partners\lista.html:66
+msgid "No partners yet."
+msgstr "Sin colaboradores aún."
+
+#: .\backoffice\templates\backoffice\partners\lista.html:66
+msgid "Add the first one."
+msgstr "Agrega el primero."
+
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:4
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:5
+msgid "Delete inquiry"
+msgstr "Eliminar consulta"
+
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:10
+msgid "Delete inquiry?"
+msgstr "¿Eliminar consulta?"
+
+#: .\backoffice\templates\backoffice\sponsors\confirmar_eliminar.html:14
+#, python-format
+msgid ""
+"\n"
+"        You are about to delete the inquiry from <strong>%(name)s</strong>.\n"
+"      "
+msgstr ""
+"\n"
+"        Estás por eliminar la consulta de <strong>%(name)s</strong>.\n"
+"      "
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:10
+msgid "Back"
+msgstr "Volver"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:22
+#: .\landing\templates\landing\index.html:4433
+msgid "Company Information"
+msgstr "Información de la empresa"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:25
+#: .\backoffice\templates\backoffice\sponsors\lista.html:32
+#: .\landing\templates\landing\index.html:3813
+msgid "Contact"
+msgstr "Contacto"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:29
+#, fuzzy
+#| msgid "Website / Social media"
+msgid "Website / Social"
+msgstr "Sitio web / Redes sociales"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:32
+#: .\backoffice\templates\backoffice\sponsors\lista.html:37
+#: .\landing\models.py:52
+msgid "Submitted"
+msgstr "Enviado"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:40
+msgid "Budget & Proposal"
+msgstr "Presupuesto y propuesta"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:42
+#: .\landing\templates\landing\index.html:4478
+msgid "Estimated Budget"
+msgstr "Presupuesto estimado"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:44
+msgid "Wants Proposal"
+msgstr "Desea propuesta"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:60
+#: .\landing\templates\landing\index.html:4465
+msgid "Sponsorship Interest"
+msgstr "Interés de patrocinio"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:62
+#: .\landing\models.py:22 .\landing\templates\landing\index.html:4468
+msgid "Estado 33 Teams"
+msgstr "Equipos Estado 33"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:63
+#: .\landing\models.py:23 .\landing\templates\landing\index.html:4469
+msgid "Player Sponsorships"
+msgstr "Patrocinios de jugadores"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:64
+#: .\landing\models.py:24 .\landing\templates\landing\index.html:4470
+msgid "Showcases / Tryouts"
+msgstr "Showcases / Tryouts"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:65
+#: .\landing\models.py:25 .\landing\templates\landing\index.html:4471
+msgid "Mexico Tournaments"
+msgstr "Torneos en México"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:66
+#: .\landing\models.py:26 .\landing\templates\landing\index.html:4472
+msgid "Full Program Partnership"
+msgstr "Patrocinio del programa completo"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:76
+#: .\landing\templates\landing\index.html:4489
+msgid "Goals"
+msgstr "Objetivos"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:78
+#: .\landing\models.py:34 .\landing\templates\landing\index.html:4492
+msgid "Brand Awareness"
+msgstr "Reconocimiento de marca"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:79
+#: .\landing\models.py:35 .\landing\templates\landing\index.html:4493
+msgid "Support Youth Athletes"
+msgstr "Apoyar atletas jóvenes"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:80
+#: .\landing\models.py:36 .\landing\templates\landing\index.html:4494
+msgid "Community Impact"
+msgstr "Impacto comunitario"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:81
+#: .\landing\models.py:37 .\landing\templates\landing\index.html:4495
+msgid "Marketing / Exposure"
+msgstr "Marketing / Exposición"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:82
+#: .\landing\models.py:38 .\landing\templates\landing\index.html:4496
+msgid "International (U.S.–Mexico) Reach"
+msgstr "Alcance internacional (EE.UU.–México)"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:92
+#: .\landing\templates\landing\index.html:4502
+msgid "Activation"
+msgstr "Activación"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:94
+#: .\landing\models.py:41 .\landing\templates\landing\index.html:4505
+msgid "Logo on uniforms"
+msgstr "Logo en uniformes"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:95
+#: .\landing\models.py:42 .\landing\templates\landing\index.html:4506
+msgid "Event branding"
+msgstr "Marca en eventos"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:96
+#: .\landing\models.py:43 .\landing\templates\landing\index.html:4507
+msgid "Social media promotion"
+msgstr "Promoción en redes sociales"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:97
+#: .\landing\models.py:44
+msgid "On-site presence"
+msgstr "Presencia en eventos"
+
+#: .\backoffice\templates\backoffice\sponsors\detalle.html:109
+#: .\landing\models.py:48 .\landing\templates\landing\index.html:4522
+msgid "Notes / Ideas"
+msgstr "Notas / Ideas"
+
+#: .\backoffice\templates\backoffice\sponsors\lista.html:14
+msgid "Search by company, contact or email…"
+msgstr "Buscar por empresa, contacto o email…"
+
+#: .\backoffice\templates\backoffice\sponsors\lista.html:36
+msgid "Proposal"
+msgstr "Propuesta"
+
+#: .\backoffice\templates\backoffice\sponsors\lista.html:65
+msgid "View"
+msgstr "Ver"
+
+#: .\backoffice\templates\backoffice\sponsors\lista.html:83
+#, python-format
+msgid "No inquiries found for \"%(q)s\"."
+msgstr "No se encontraron consultas para \"%(q)s\"."
+
 # views.py
-#: .\backoffice\views.py:21
+#: .\backoffice\views.py:40
 msgid "Invalid username or password."
 msgstr "Usuario o contraseña incorrectos."
 
-#: .\backoffice\views.py:63
+#: .\backoffice\views.py:240
 msgid "Player registered successfully."
 msgstr "Jugador registrado correctamente."
 
-#: .\backoffice\views.py:67
+#: .\backoffice\views.py:244
 msgid "New Player"
 msgstr "Nuevo Jugador"
 
-#: .\backoffice\views.py:77
+#: .\backoffice\views.py:254
 msgid "Player updated successfully."
 msgstr "Jugador actualizado correctamente."
 
-#: .\backoffice\views.py:91
+#: .\backoffice\views.py:268
 msgid "Player deleted."
 msgstr "Jugador eliminado."
 
+#: .\backoffice\views.py:304
+msgid "Sponsor inquiry deleted."
+msgstr "Consulta de patrocinio eliminada."
+
+#: .\backoffice\views.py:326
+msgid "Partner added."
+msgstr "Colaborador agregado."
+
+#: .\backoffice\views.py:342
+msgid "Partner updated."
+msgstr "Colaborador actualizado."
+
+#: .\backoffice\views.py:346
+msgid "Edit Partner"
+msgstr "Editar Colaborador"
+
+#: .\backoffice\views.py:357
+msgid "Partner deleted."
+msgstr "Colaborador eliminado."
+
 # settings.py
-#: .\config\settings.py:129
+#: .\config\settings.py:127
 msgid "English"
 msgstr "Inglés"
 
-#: .\config\settings.py:130
+#: .\config\settings.py:128
 msgid "Spanish"
 msgstr "Español"
 
@@ -332,277 +756,236 @@ msgid "Mexico"
 msgstr "México"
 
 #: .\jugadores\choices.py:8
-#, fuzzy
-#| msgid "Dominican"
 msgid "Dominican Republic"
-msgstr "Dominicano"
+msgstr "República Dominicana"
 
 #: .\jugadores\choices.py:9
-#, fuzzy
-#| msgid "Cuban"
 msgid "Cuba"
-msgstr "Cubano"
+msgstr "Cuba"
 
 #: .\jugadores\choices.py:10
-#, fuzzy
-#| msgid "Venezuelan"
 msgid "Venezuela"
-msgstr "Venezolano"
+msgstr "Venezuela"
 
 #: .\jugadores\choices.py:11
-#, fuzzy
-#| msgid "Puerto Rican"
 msgid "Puerto Rico"
-msgstr "Puertorriqueño"
+msgstr "Puerto Rico"
 
 #: .\jugadores\choices.py:12
-#, fuzzy
-#| msgid "Panamanian"
 msgid "Panama"
-msgstr "Panameño"
+msgstr "Panamá"
 
 #: .\jugadores\choices.py:13
-#, fuzzy
-#| msgid "Colombian"
 msgid "Colombia"
-msgstr "Colombiano"
+msgstr "Colombia"
 
 #: .\jugadores\choices.py:14
-#, fuzzy
-#| msgid "Nicaraguan"
 msgid "Nicaragua"
-msgstr "Nicaragüense"
+msgstr "Nicaragua"
 
 #: .\jugadores\choices.py:15
-#, fuzzy
-#| msgid "Honduran"
 msgid "Honduras"
-msgstr "Hondureño"
+msgstr "Honduras"
 
 #: .\jugadores\choices.py:16
-#, fuzzy
-#| msgid "Guatemalan"
 msgid "Guatemala"
-msgstr "Guatemalteco"
+msgstr "Guatemala"
 
 #: .\jugadores\choices.py:17
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: .\jugadores\choices.py:18
-#, fuzzy
-#| msgid "Costa Rican"
 msgid "Costa Rica"
-msgstr "Costarricense"
+msgstr "Costa Rica"
 
 #: .\jugadores\choices.py:19
-#, fuzzy
-#| msgid "Argentine"
 msgid "Argentina"
-msgstr "Argentino"
+msgstr "Argentina"
 
 #: .\jugadores\choices.py:20
-#, fuzzy
-#| msgid "Brazilian"
 msgid "Brazil"
-msgstr "Brasileño"
+msgstr "Brasil"
 
 #: .\jugadores\choices.py:21
 msgid "Canada"
-msgstr ""
+msgstr "Canadá"
 
 #: .\jugadores\choices.py:22
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #: .\jugadores\choices.py:23
 msgid "Peru"
-msgstr ""
+msgstr "Perú"
 
 #: .\jugadores\choices.py:24
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: .\jugadores\choices.py:25
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #: .\jugadores\choices.py:26
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: .\jugadores\choices.py:27
-#, fuzzy
-#| msgid "Nicaraguan"
 msgid "Paraguay"
-msgstr "Nicaragüense"
+msgstr "Paraguay"
 
 #: .\jugadores\choices.py:28
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: .\jugadores\choices.py:29
 msgid "Haiti"
-msgstr ""
+msgstr "Haití"
 
 #: .\jugadores\choices.py:30
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad y Tobago"
 
 #: .\jugadores\choices.py:32
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguila"
 
 #: .\jugadores\choices.py:33
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua y Barbuda"
 
 #: .\jugadores\choices.py:34
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: .\jugadores\choices.py:35
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: .\jugadores\choices.py:36
 msgid "Belize"
-msgstr ""
+msgstr "Belice"
 
 #: .\jugadores\choices.py:37
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermudas"
 
 #: .\jugadores\choices.py:38
 msgid "Bonaire, Sint Eustatius and Saba"
-msgstr ""
+msgstr "Bonaire, Sint Eustatius y Saba"
 
 #: .\jugadores\choices.py:39
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Islas Caimán"
 
 #: .\jugadores\choices.py:40
 msgid "Curaçao"
-msgstr ""
+msgstr "Curazao"
 
 #: .\jugadores\choices.py:41
-#, fuzzy
-#| msgid "Dominican"
 msgid "Dominica"
-msgstr "Dominicano"
+msgstr "Dominica"
 
 #: .\jugadores\choices.py:42
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Islas Malvinas"
 
 #: .\jugadores\choices.py:43
 msgid "French Guiana"
-msgstr ""
+msgstr "Guayana Francesa"
 
 #: .\jugadores\choices.py:44
 msgid "Greenland"
-msgstr ""
+msgstr "Groenlandia"
 
 #: .\jugadores\choices.py:45
 msgid "Grenada"
-msgstr ""
+msgstr "Granada"
 
 #: .\jugadores\choices.py:46
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadalupe"
 
 #: .\jugadores\choices.py:47
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: .\jugadores\choices.py:48
 msgid "Martinique"
-msgstr ""
+msgstr "Martinica"
 
 #: .\jugadores\choices.py:49
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: .\jugadores\choices.py:50
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "San Cristóbal y Nieves"
 
 #: .\jugadores\choices.py:51
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Santa Lucía"
 
 #: .\jugadores\choices.py:52
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "San Pedro y Miquelón"
 
 #: .\jugadores\choices.py:53
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "San Vicente y las Granadinas"
 
 #: .\jugadores\choices.py:54
 msgid "Saint-Barthelemy"
-msgstr ""
+msgstr "San Bartolomé"
 
 #: .\jugadores\choices.py:55
 msgid "Saint-Martin (French part)"
-msgstr ""
+msgstr "San Martín (parte francesa)"
 
 #: .\jugadores\choices.py:56
 msgid "Sint Maarten (Dutch part)"
-msgstr ""
+msgstr "Sint Maarten (parte holandesa)"
 
 #: .\jugadores\choices.py:57
 msgid "South Georgia"
-msgstr ""
+msgstr "Georgia del Sur"
 
 #: .\jugadores\choices.py:58
-#, fuzzy
-#| msgid "Tournament"
 msgid "Suriname"
-msgstr "Torneo"
+msgstr "Surinam"
 
 #: .\jugadores\choices.py:59
 msgid "The Bahamas"
-msgstr ""
+msgstr "Las Bahamas"
 
 #: .\jugadores\choices.py:60
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Islas Turcas y Caicos"
 
 #: .\jugadores\choices.py:61
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Islas Ultramarinas de EE.UU."
 
 #: .\jugadores\choices.py:62
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Islas Vírgenes Británicas"
 
 #: .\jugadores\choices.py:63
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Islas Vírgenes de EE.UU."
 
 #: .\jugadores\choices.py:64
 msgid "Other"
 msgstr "Otra"
 
-#: .\jugadores\models.py:30 .\landing\templates\landing\index.html:3685
-msgid "Country"
-msgstr ""
-
-#: .\jugadores\models.py:33 .\landing\templates\landing\index.html:3694
+#: .\jugadores\models.py:33 .\landing\templates\landing\index.html:3919
 msgid "State / Province"
-msgstr ""
+msgstr "Estado / Provincia"
 
-#: .\jugadores\models.py:36 .\landing\templates\landing\index.html:3700
-msgid "City"
-msgstr ""
-
-#: .\jugadores\models.py:97 .\landing\templates\landing\index.html:2925
-#: .\landing\templates\landing\index.html:2975
-#: .\landing\templates\landing\index.html:3344
-#: .\landing\templates\landing\index.html:3570
-msgid "Players"
-msgstr "Jugadores"
+#: .\jugadores\models.py:92
+msgid "Registration date"
+msgstr "Fecha de registro"
 
 #: .\landing\forms.py:41
 msgid "Logo must be under 5 MB."
@@ -616,19 +999,19 @@ msgstr "Solo se permiten archivos de imagen."
 msgid "Enter a valid phone number."
 msgstr "Ingresa un número de teléfono válido."
 
-#: .\landing\models.py:6 .\landing\templates\landing\index.html:4261
+#: .\landing\models.py:6 .\landing\templates\landing\index.html:4480
 msgid "Under $2,500"
 msgstr "Menos de $2,500"
 
-#: .\landing\models.py:7 .\landing\templates\landing\index.html:4262
+#: .\landing\models.py:7 .\landing\templates\landing\index.html:4481
 msgid "$2,500–$5,000"
 msgstr "$2,500–$5,000"
 
-#: .\landing\models.py:8 .\landing\templates\landing\index.html:4263
+#: .\landing\models.py:8 .\landing\templates\landing\index.html:4482
 msgid "$5,000–$10,000"
 msgstr "$5,000–$10,000"
 
-#: .\landing\models.py:9 .\landing\templates\landing\index.html:4264
+#: .\landing\models.py:9 .\landing\templates\landing\index.html:4483
 msgid "$10,000+"
 msgstr "$10,000+"
 
@@ -644,175 +1027,108 @@ msgstr "Nombre de contacto"
 msgid "Website / Social media"
 msgstr "Sitio web / Redes sociales"
 
-#: .\landing\models.py:22 .\landing\templates\landing\index.html:4249
-msgid "Estado 33 Teams"
-msgstr "Equipos Estado 33"
-
-#: .\landing\models.py:23 .\landing\templates\landing\index.html:4250
-msgid "Player Sponsorships"
-msgstr "Patrocinios de jugadores"
-
-#: .\landing\models.py:24 .\landing\templates\landing\index.html:4251
-msgid "Showcases / Tryouts"
-msgstr "Showcases / Tryouts"
-
-#: .\landing\models.py:25 .\landing\templates\landing\index.html:4252
-msgid "Mexico Tournaments"
-msgstr "Torneos en México"
-
-#: .\landing\models.py:26 .\landing\templates\landing\index.html:4253
-msgid "Full Program Partnership"
-msgstr "Patrocinio del programa completo"
-
 #: .\landing\models.py:30
 msgid "Estimated budget"
 msgstr "Presupuesto estimado"
-
-#: .\landing\models.py:34 .\landing\templates\landing\index.html:4273
-msgid "Brand Awareness"
-msgstr "Reconocimiento de marca"
-
-#: .\landing\models.py:35 .\landing\templates\landing\index.html:4274
-msgid "Support Youth Athletes"
-msgstr "Apoyar atletas jóvenes"
-
-#: .\landing\models.py:36 .\landing\templates\landing\index.html:4275
-msgid "Community Impact"
-msgstr "Impacto comunitario"
-
-#: .\landing\models.py:37 .\landing\templates\landing\index.html:4276
-msgid "Marketing / Exposure"
-msgstr "Marketing / Exposición"
-
-#: .\landing\models.py:38 .\landing\templates\landing\index.html:4277
-msgid "International (U.S.–Mexico) Reach"
-msgstr "Alcance internacional (EE.UU.–México)"
-
-#: .\landing\models.py:41 .\landing\templates\landing\index.html:4286
-msgid "Logo on uniforms"
-msgstr "Logo en uniformes"
-
-#: .\landing\models.py:42 .\landing\templates\landing\index.html:4287
-msgid "Event branding"
-msgstr "Marca en eventos"
-
-#: .\landing\models.py:43 .\landing\templates\landing\index.html:4288
-msgid "Social media promotion"
-msgstr "Promoción en redes sociales"
-
-#: .\landing\models.py:44
-msgid "On-site presence"
-msgstr "Presencia en eventos"
-
-#: .\landing\models.py:47
-msgid "Logo"
-msgstr "Logo"
-
-#: .\landing\models.py:48 .\landing\templates\landing\index.html:4303
-msgid "Notes / Ideas"
-msgstr "Notas / Ideas"
 
 #: .\landing\models.py:49
 msgid "Wants custom proposal"
 msgstr "Desea propuesta personalizada"
 
-#: .\landing\models.py:52
-msgid "Submitted"
-msgstr "Enviado"
-
 #: .\landing\models.py:55
 msgid "Sponsor Inquiry"
 msgstr "Consulta de patrocinio"
 
-#: .\landing\models.py:56
-msgid "Sponsor Inquiries"
-msgstr "Consultas de patrocinio"
-
 # landing
-#: .\landing\templates\landing\index.html:2903
+#: .\landing\templates\landing\index.html:3116
 msgid "REGISTRATIONS NOW OPEN"
 msgstr "REGISTROS AHORA ABIERTOS"
 
-#: .\landing\templates\landing\index.html:2905
+#: .\landing\templates\landing\index.html:3118
 msgid "MAY 16–23, 2026"
 msgstr "16–23 DE MAYO, 2026"
 
-#: .\landing\templates\landing\index.html:2908
+#: .\landing\templates\landing\index.html:3121
 msgid "DEADLINE: MAY 10, 2026"
 msgstr "LÍMITE: 10 DE MAYO, 2026"
 
-#: .\landing\templates\landing\index.html:2920
-#: .\landing\templates\landing\index.html:2970
-#: .\landing\templates\landing\index.html:3569
+#: .\landing\templates\landing\index.html:3133
+#: .\landing\templates\landing\index.html:3792
+msgid "Home"
+msgstr "Inicio"
+
+#: .\landing\templates\landing\index.html:3134
+#: .\landing\templates\landing\index.html:3184
+#: .\landing\templates\landing\index.html:3795
 msgid "About"
 msgstr "Acerca de"
 
-#: .\landing\templates\landing\index.html:2921
-#: .\landing\templates\landing\index.html:2971
+#: .\landing\templates\landing\index.html:3135
+#: .\landing\templates\landing\index.html:3185
 msgid "Requirements"
 msgstr "Requisitos"
 
-#: .\landing\templates\landing\index.html:2922
-#: .\landing\templates\landing\index.html:2972
+#: .\landing\templates\landing\index.html:3136
+#: .\landing\templates\landing\index.html:3186
 msgid "Why"
 msgstr "¿Por qué?"
 
-#: .\landing\templates\landing\index.html:2923
-#: .\landing\templates\landing\index.html:2973
-#: .\landing\templates\landing\index.html:3568
+#: .\landing\templates\landing\index.html:3137
+#: .\landing\templates\landing\index.html:3187
+#: .\landing\templates\landing\index.html:3794
 msgid "Events"
 msgstr "Eventos"
 
-#: .\landing\templates\landing\index.html:2924
-#: .\landing\templates\landing\index.html:2974
-#: .\landing\templates\landing\index.html:3293
-#: .\landing\templates\landing\index.html:3571
+#: .\landing\templates\landing\index.html:3138
+#: .\landing\templates\landing\index.html:3188
+#: .\landing\templates\landing\index.html:3509
+#: .\landing\templates\landing\index.html:3797
 msgid "Partners"
 msgstr "Colaboradores"
 
-#: .\landing\templates\landing\index.html:2926
-#: .\landing\templates\landing\index.html:2976
+#: .\landing\templates\landing\index.html:3140
+#: .\landing\templates\landing\index.html:3190
 msgid "Division"
 msgstr "División"
 
-#: .\landing\templates\landing\index.html:2927
+#: .\landing\templates\landing\index.html:3141
 msgid "Reels"
 msgstr "Reels"
 
-#: .\landing\templates\landing\index.html:2961
-#: .\landing\templates\landing\index.html:2977
-#: .\landing\templates\landing\index.html:3180
+#: .\landing\templates\landing\index.html:3175
+#: .\landing\templates\landing\index.html:3191
+#: .\landing\templates\landing\index.html:3396
 msgid "Register Now"
 msgstr "Regístrate Ahora"
 
-#: .\landing\templates\landing\index.html:2988
-#: .\landing\templates\landing\index.html:3198
-#: .\landing\templates\landing\index.html:3834
-#: .\landing\templates\landing\index.html:3965
+#: .\landing\templates\landing\index.html:3202
+#: .\landing\templates\landing\index.html:3414
+#: .\landing\templates\landing\index.html:4059
+#: .\landing\templates\landing\index.html:4184
 msgid "Player registration"
 msgstr "Registro de jugador"
 
-#: .\landing\templates\landing\index.html:2990
+#: .\landing\templates\landing\index.html:3204
 msgid "Learn More"
 msgstr "Más información"
 
-#: .\landing\templates\landing\index.html:3008
+#: .\landing\templates\landing\index.html:3222
 msgid "Official · FEMEBE"
 msgstr "Oficial · FEMEBE"
 
-#: .\landing\templates\landing\index.html:3011
+#: .\landing\templates\landing\index.html:3225
 msgid "For the first time"
 msgstr "¡Por primera vez"
 
-#: .\landing\templates\landing\index.html:3011
+#: .\landing\templates\landing\index.html:3225
 msgid "in history!"
 msgstr "en la historia!"
 
-#: .\landing\templates\landing\index.html:3012
+#: .\landing\templates\landing\index.html:3226
 msgid "Estado 33 is here."
 msgstr "Estado 33 está aquí."
 
-#: .\landing\templates\landing\index.html:3017
+#: .\landing\templates\landing\index.html:3231
 msgid ""
 "\n"
 "          Mexican-American players will have the opportunity to join the "
@@ -838,7 +1154,7 @@ msgstr ""
 "          Béisbol División 11-12</strong> en La Paz, Baja California Sur.\n"
 "          "
 
-#: .\landing\templates\landing\index.html:3026
+#: .\landing\templates\landing\index.html:3240
 msgid ""
 "\n"
 "          The top dual-national players will face off against the best "
@@ -858,39 +1174,39 @@ msgstr ""
 "          <strong>Campeonato Panamericano Sub-12U</strong>.\n"
 "          "
 
-#: .\landing\templates\landing\index.html:3037
+#: .\landing\templates\landing\index.html:3251
 msgid "Sanctioned by"
 msgstr "Avalado por"
 
-#: .\landing\templates\landing\index.html:3041
+#: .\landing\templates\landing\index.html:3255
 msgid "Location"
 msgstr "Sede"
 
-#: .\landing\templates\landing\index.html:3045
+#: .\landing\templates\landing\index.html:3259
 msgid "Category"
 msgstr "Categoría"
 
-#: .\landing\templates\landing\index.html:3049
+#: .\landing\templates\landing\index.html:3263
 msgid "Goal"
 msgstr "Meta"
 
-#: .\landing\templates\landing\index.html:3060
+#: .\landing\templates\landing\index.html:3274
 msgid "Tournament"
 msgstr "Torneo"
 
-#: .\landing\templates\landing\index.html:3061
+#: .\landing\templates\landing\index.html:3275
 msgid "National Championship"
 msgstr "Campeonato Nacional"
 
-#: .\landing\templates\landing\index.html:3064
+#: .\landing\templates\landing\index.html:3278
 msgid "11–12 Age Division — La Paz, Baja California Sur, México."
 msgstr "Categoría 11–12 años — La Paz, Baja California Sur, México."
 
-#: .\landing\templates\landing\index.html:3071
+#: .\landing\templates\landing\index.html:3285
 msgid "Organization"
 msgstr "Organización"
 
-#: .\landing\templates\landing\index.html:3075
+#: .\landing\templates\landing\index.html:3289
 msgid ""
 "Federación Mexicana de Béisbol — officially recognizing Estado 33 as a "
 "competing state."
@@ -898,15 +1214,15 @@ msgstr ""
 "Federación Mexicana de Béisbol — reconociendo oficialmente al Estado 33 como "
 "estado participante."
 
-#: .\landing\templates\landing\index.html:3082
+#: .\landing\templates\landing\index.html:3296
 msgid "Ultimate Goal"
 msgstr "Objetivo Final"
 
-#: .\landing\templates\landing\index.html:3083
+#: .\landing\templates\landing\index.html:3297
 msgid "12U Pan American Games"
 msgstr "Campeonato Panamericano Sub-12U"
 
-#: .\landing\templates\landing\index.html:3086
+#: .\landing\templates\landing\index.html:3300
 msgid ""
 "Top players earn a spot on the Mexican National Team competing on the world "
 "stage."
@@ -914,15 +1230,15 @@ msgstr ""
 "Los mejores jugadores ganan un lugar en la Selección Nacional Mexicana para "
 "competir a nivel mundial."
 
-#: .\landing\templates\landing\index.html:3096
+#: .\landing\templates\landing\index.html:3310
 msgid "How to participate"
 msgstr "Cómo participar"
 
-#: .\landing\templates\landing\index.html:3097
+#: .\landing\templates\landing\index.html:3311
 msgid "Requirements & Information"
 msgstr "Requisitos e Información"
 
-#: .\landing\templates\landing\index.html:3099
+#: .\landing\templates\landing\index.html:3313
 msgid ""
 "Everything you need to know to join the 2026 Estado 33 National "
 "Championship. Review the requirements and secure your spot before the "
@@ -931,15 +1247,15 @@ msgstr ""
 "Todo lo que necesitas saber para unirte al Campeonato Nacional Estado 33 "
 "2026. Revisa los requisitos y asegura tu lugar antes de la fecha límite."
 
-#: .\landing\templates\landing\index.html:3110
+#: .\landing\templates\landing\index.html:3324
 msgid "Who can join?"
 msgstr "¿Quién puede participar?"
 
-#: .\landing\templates\landing\index.html:3111
+#: .\landing\templates\landing\index.html:3325
 msgid "Dual-National Players"
 msgstr "Jugadores de Doble Nacionalidad"
 
-#: .\landing\templates\landing\index.html:3113
+#: .\landing\templates\landing\index.html:3327
 msgid ""
 "Dual-National / Mexican Heritage players <strong>residing in the United "
 "States</strong>. Ages 11-12 years old Born 2014–2015."
@@ -947,15 +1263,15 @@ msgstr ""
 "Jugadores de doble nacionalidad / herencia mexicana <strong>residiendo en "
 "Estados Unidos</strong>. Edades 11-12 años, nacidos 2014–2015."
 
-#: .\landing\templates\landing\index.html:3122
+#: .\landing\templates\landing\index.html:3336
 msgid "Registration Deadline"
 msgstr "Fecha Límite de Registro"
 
-#: .\landing\templates\landing\index.html:3123
+#: .\landing\templates\landing\index.html:3337
 msgid "May 10, 2026"
 msgstr "10 de mayo de 2026"
 
-#: .\landing\templates\landing\index.html:3125
+#: .\landing\templates\landing\index.html:3339
 msgid ""
 "Pre-register by <strong>May 10, 2026 at 8:00 PM</strong>. Don't miss your "
 "chance to be part of history."
@@ -963,15 +1279,15 @@ msgstr ""
 "Prerregístrate antes del <strong>15 de mayo de 2026 a las 8:00 PM</strong>. "
 "No pierdas tu oportunidad de ser parte de la historia."
 
-#: .\landing\templates\landing\index.html:3134
+#: .\landing\templates\landing\index.html:3348
 msgid "Official Requirement"
 msgstr "Requisito Oficial"
 
-#: .\landing\templates\landing\index.html:3135
+#: .\landing\templates\landing\index.html:3349
 msgid "SIREBE Credential"
 msgstr "Credencial SIREBE"
 
-#: .\landing\templates\landing\index.html:3137
+#: .\landing\templates\landing\index.html:3351
 msgid ""
 "Official <strong>2026 SIREBE Credential</strong> required to compete. Must "
 "be processed before the deadline."
@@ -979,15 +1295,15 @@ msgstr ""
 "Se requiere la <strong>Credencial SIREBE 2026</strong> oficial para "
 "competir. Debe tramitarse antes de la fecha límite."
 
-#: .\landing\templates\landing\index.html:3146
+#: .\landing\templates\landing\index.html:3360
 msgid "Insurance"
 msgstr "Seguro"
 
-#: .\landing\templates\landing\index.html:3147
+#: .\landing\templates\landing\index.html:3361
 msgid "Medical Insurance"
 msgstr "Seguro Médico"
 
-#: .\landing\templates\landing\index.html:3149
+#: .\landing\templates\landing\index.html:3363
 msgid ""
 "<strong>Valid Medical Insurance</strong> is required for all registered "
 "players during the championship."
@@ -995,15 +1311,15 @@ msgstr ""
 "Se requiere <strong>Seguro Médico Vigente</strong> para todos los jugadores "
 "registrados durante el campeonato."
 
-#: .\landing\templates\landing\index.html:3172
+#: .\landing\templates\landing\index.html:3388
 msgid "Now Open"
 msgstr "Ahora Abierto"
 
-#: .\landing\templates\landing\index.html:3174
+#: .\landing\templates\landing\index.html:3390
 msgid "Registrations"
 msgstr "Registros"
 
-#: .\landing\templates\landing\index.html:3176
+#: .\landing\templates\landing\index.html:3392
 msgid ""
 "Spots are <strong>limited</strong>. Secure your place in the most important "
 "Mexican-American Baseball National Championship."
@@ -1011,27 +1327,27 @@ msgstr ""
 "Los lugares son <strong>limitados</strong>. Asegura tu lugar en el "
 "Campeonato Nacional de Béisbol Mexicano-Americano más importante."
 
-#: .\landing\templates\landing\index.html:3191
+#: .\landing\templates\landing\index.html:3407
 msgid "Why participate"
 msgstr "Por qué participar"
 
-#: .\landing\templates\landing\index.html:3193
+#: .\landing\templates\landing\index.html:3409
 msgid "The most important"
 msgstr "El evento de béisbol"
 
-#: .\landing\templates\landing\index.html:3194
+#: .\landing\templates\landing\index.html:3410
 msgid "Mexican-American"
 msgstr "mexicano-americano"
 
-#: .\landing\templates\landing\index.html:3195
+#: .\landing\templates\landing\index.html:3411
 msgid "baseball event."
 msgstr "mexicano-americano más importante."
 
-#: .\landing\templates\landing\index.html:3209
+#: .\landing\templates\landing\index.html:3425
 msgid "Showcase your talent"
 msgstr "Muestra tu talento"
 
-#: .\landing\templates\landing\index.html:3212
+#: .\landing\templates\landing\index.html:3428
 msgid ""
 "Showcase your skills in front of professional scouts and coaches from Mexico "
 "and the United States. This is your opportunity to be seen at the highest "
@@ -1040,11 +1356,11 @@ msgstr ""
 "Muestra tus habilidades ante scouts y entrenadores profesionales de México y "
 "Estados Unidos. Esta es tu oportunidad de ser visto al más alto nivel."
 
-#: .\landing\templates\landing\index.html:3222
+#: .\landing\templates\landing\index.html:3438
 msgid "Elite Competition"
 msgstr "Competencia de Élite"
 
-#: .\landing\templates\landing\index.html:3225
+#: .\landing\templates\landing\index.html:3441
 msgid ""
 "Compete against the best Mexican baseball talent. Measure yourself against "
 "players who have been identified as the best of the best in Mexico."
@@ -1053,11 +1369,11 @@ msgstr ""
 "jugadores que han sido identificados como los mejores de los mejores en "
 "México."
 
-#: .\landing\templates\landing\index.html:3235
+#: .\landing\templates\landing\index.html:3451
 msgid "Connect with your roots"
 msgstr "Conecta con tus raíces"
 
-#: .\landing\templates\landing\index.html:3238
+#: .\landing\templates\landing\index.html:3454
 msgid ""
 "Connect with the land of your parents and grandparents; experience the "
 "feeling of reuniting with your culture through baseball."
@@ -1065,28 +1381,28 @@ msgstr ""
 "Conecta con la tierra de tus padres y abuelos; vive la emoción de "
 "reencontrarte con tu cultura a través del béisbol."
 
-#: .\landing\templates\landing\index.html:3252
-#: .\landing\templates\landing\index.html:3253
+#: .\landing\templates\landing\index.html:3468
+#: .\landing\templates\landing\index.html:3469
 msgid "UPCOMING EVENTS"
 msgstr "PRÓXIMOS EVENTOS"
 
-#: .\landing\templates\landing\index.html:3293
+#: .\landing\templates\landing\index.html:3509
 msgid "Platinum"
 msgstr "Platino"
 
-#: .\landing\templates\landing\index.html:3325
+#: .\landing\templates\landing\index.html:3533
 msgid "Become a Partner"
 msgstr "Conviértete en Patrocinador"
 
-#: .\landing\templates\landing\index.html:3326
+#: .\landing\templates\landing\index.html:3534
 msgid "View All"
 msgstr "Ver Todos"
 
-#: .\landing\templates\landing\index.html:3350
+#: .\landing\templates\landing\index.html:3558
 msgid "The Roster"
 msgstr "La Alineación"
 
-#: .\landing\templates\landing\index.html:3351
+#: .\landing\templates\landing\index.html:3559
 msgid ""
 "Meet the Mexican-American talent that will take the field. Players from both "
 "sides of the border competing at the highest level of amateur baseball."
@@ -1094,38 +1410,37 @@ msgstr ""
 "Conoce el talento mexicano-americano que tomará el campo. Jugadores de ambos "
 "lados de la frontera compitiendo al más alto nivel del béisbol amateur."
 
-#: .\landing\templates\landing\index.html:3352
+#: .\landing\templates\landing\index.html:3560
 msgid "View All Players"
 msgstr "Ver Todos los Jugadores"
 
-#: .\landing\templates\landing\index.html:3399
+#: .\landing\templates\landing\index.html:3613
 msgid "Our"
 msgstr "Nuestros"
 
-#: .\landing\templates\landing\index.html:3400
+#: .\landing\templates\landing\index.html:3614
 msgid "Follow us on Facebook and don't miss a single moment of the event"
 msgstr "Síguenos en Facebook y no te pierdas ningún momento del evento"
 
-#: .\landing\templates\landing\index.html:3407
-#: .\landing\templates\landing\index.html:3413
-#: .\landing\templates\landing\index.html:3417
-#: .\landing\templates\landing\index.html:3421
+#: .\landing\templates\landing\index.html:3637
+#: .\landing\templates\landing\index.html:3641
+#: .\landing\templates\landing\index.html:3645
 msgid "Watch Reels"
 msgstr "Ver Reels"
 
-#: .\landing\templates\landing\index.html:3428
+#: .\landing\templates\landing\index.html:3652
 msgid "Follow on Facebook"
 msgstr "Seguir en Facebook"
 
-#: .\landing\templates\landing\index.html:3431
+#: .\landing\templates\landing\index.html:3655
 msgid "Watch all Reels"
 msgstr "Ver todos los Reels"
 
-#: .\landing\templates\landing\index.html:3438
+#: .\landing\templates\landing\index.html:3662
 msgid "Official Tournament Division"
 msgstr "División Oficial del Torneo"
 
-#: .\landing\templates\landing\index.html:3445
+#: .\landing\templates\landing\index.html:3669
 msgid ""
 "The <strong>12U National Championship</strong> brings together the top "
 "Under-12 talent from Mexico and the United States. Organized under the MX "
@@ -1137,334 +1452,309 @@ msgstr ""
 "este es el escenario principal para la próxima generación del béisbol "
 "mexicano-americano."
 
-#: .\landing\templates\landing\index.html:3453
+#: .\landing\templates\landing\index.html:3677
 msgid "Front Office"
 msgstr "Directorio"
 
-#: .\landing\templates\landing\index.html:3453
+#: .\landing\templates\landing\index.html:3677
 msgid "Directory"
 msgstr "Ejecutivo"
 
-#: .\landing\templates\landing\index.html:3546
-#: .\landing\templates\landing\index.html:3558
-msgid "May 16–23, 2026"
-msgstr "16–23 de Mayo, 2026"
-
-#: .\landing\templates\landing\index.html:3554
-msgid "Event Details"
-msgstr "Detalles del Evento"
-
-#: .\landing\templates\landing\index.html:3564
-msgid "Links"
-msgstr "Enlaces"
-
-#: .\landing\templates\landing\index.html:3566
-msgid "Home"
-msgstr "Inicio"
-
-#: .\landing\templates\landing\index.html:3567
-msgid "Register"
-msgstr "Registrarse"
-
-#: .\landing\templates\landing\index.html:3576
-msgid "Sponsors & Partners"
-msgstr "Colaboradores y Socios"
-
-#: .\landing\templates\landing\index.html:3587
-msgid "Contact"
-msgstr "Contacto"
-
-#: .\landing\templates\landing\index.html:3603
-msgid "All rights reserved."
-msgstr "Todos los derechos reservados."
-
-#: .\landing\templates\landing\index.html:3605
-msgid "Terms & Conditions"
-msgstr "Términos y Condiciones"
-
-#: .\landing\templates\landing\index.html:3606
-msgid "Privacy Policy"
-msgstr "Política de Privacidad"
-
-#: .\landing\templates\landing\index.html:3622
-msgid "registration"
-msgstr "registro"
-
-#: .\landing\templates\landing\index.html:3687
-#: .\landing\templates\landing\index.html:3696
-#: .\landing\templates\landing\index.html:3714
-#: .\landing\templates\landing\index.html:3734
-#: .\landing\templates\landing\index.html:3761
-#: .\landing\templates\landing\index.html:3780
-#: .\landing\templates\landing\index.html:4151
-msgid "Select"
-msgstr "Seleccionar"
-
-#: .\landing\templates\landing\index.html:3703
-msgid "Type to search…"
-msgstr ""
-
-#: .\landing\templates\landing\index.html:3762
-#: .\landing\templates\landing\index.html:3781
-msgid "Pitcher"
-msgstr "Pitcher"
-
-#: .\landing\templates\landing\index.html:3763
-#: .\landing\templates\landing\index.html:3782
-msgid "Catcher"
-msgstr "Receptor"
-
-#: .\landing\templates\landing\index.html:3764
-#: .\landing\templates\landing\index.html:3783
-msgid "First Base"
-msgstr "Primera Base"
-
-#: .\landing\templates\landing\index.html:3765
-#: .\landing\templates\landing\index.html:3784
-msgid "Second Base"
-msgstr "Segunda Base"
-
-#: .\landing\templates\landing\index.html:3766
-#: .\landing\templates\landing\index.html:3785
-msgid "Third Base"
-msgstr "Tercera Base"
-
-#: .\landing\templates\landing\index.html:3767
-#: .\landing\templates\landing\index.html:3786
-msgid "Shortstop"
-msgstr "Parador en Corto"
-
-#: .\landing\templates\landing\index.html:3768
-#: .\landing\templates\landing\index.html:3787
-msgid "Left Field"
-msgstr "Jardín Izquierdo"
-
-#: .\landing\templates\landing\index.html:3769
-#: .\landing\templates\landing\index.html:3788
-msgid "Center Field"
-msgstr "Jardín Central"
-
-#: .\landing\templates\landing\index.html:3770
-#: .\landing\templates\landing\index.html:3789
-msgid "Right Field"
-msgstr "Jardín Derecho"
-
-#: .\landing\templates\landing\index.html:3771
-#: .\landing\templates\landing\index.html:3790
-msgid "Outfield"
-msgstr "Jardines"
-
-#: .\landing\templates\landing\index.html:3772
-#: .\landing\templates\landing\index.html:3791
-msgid "Designated Hitter"
-msgstr "Bateador Designado"
-
-#: .\landing\templates\landing\index.html:3773
-#: .\landing\templates\landing\index.html:3792
-msgid "Utility"
-msgstr "Utilitario"
-
-#: .\landing\templates\landing\index.html:3842
-msgid "Registration complete!"
-msgstr "¡Registro completado!"
-
-#: .\landing\templates\landing\index.html:3843
-msgid "We'll be in touch with next steps. Welcome to Estado 33."
-msgstr ""
-"Nos pondremos en contacto con los próximos pasos. Bienvenido a Estado 33."
-
-msgid "Thank you for registering!"
-msgstr "¡Gracias por registrarte!"
-
-msgid "Welcome to Estado 33 🙌"
-msgstr "Bienvenido a Estado 33 🙌"
-
-msgid "Your registration has been received. We will contact you soon with the next steps. See you on the field!"
-msgstr "Tu registro ha sido recibido. Pronto nos pondremos en contacto contigo con los próximos pasos. ¡Nos vemos en el campo!"
-
-#: .\landing\templates\landing\index.html:3901
-#: .\landing\templates\landing\index.html:3902
-#: .\landing\templates\landing\index.html:3903
-#: .\landing\templates\landing\index.html:3907
-#: .\landing\templates\landing\index.html:3908
-#: .\landing\templates\landing\index.html:3911
-#: .\landing\templates\landing\index.html:3912
-#: .\landing\templates\landing\index.html:3913
-#: .\landing\templates\landing\index.html:3914
-#: .\landing\templates\landing\index.html:4354
-#: .\landing\templates\landing\index.html:4355
-#: .\landing\templates\landing\index.html:4356
-#: .\landing\templates\landing\index.html:4357
-#, fuzzy
-#| msgid "Requirements"
-msgid "Required"
-msgstr "Requisitos"
-
-#: .\landing\templates\landing\index.html:3904
-msgid "Select a country"
-msgstr ""
-
-#: .\landing\templates\landing\index.html:3905
-msgid "Enter a city"
-msgstr ""
-
-#: .\landing\templates\landing\index.html:3906
-#, fuzzy
-#| msgid "Second nationality"
-msgid "Select a nationality"
-msgstr "Segunda nacionalidad"
-
-#: .\landing\templates\landing\index.html:3909
-#: .\landing\templates\landing\index.html:3910
-#, fuzzy
-#| msgid "Secondary position"
-msgid "Select a position"
-msgstr "Posición secundaria"
-
-#: .\landing\templates\landing\index.html:3942
-#: .\landing\templates\landing\index.html:4381
-msgid "Invalid email format"
-msgstr ""
-
-#: .\landing\templates\landing\index.html:3995
-#: .\landing\templates\landing\index.html:4416
-msgid "Too many attempts. Please try again later."
-msgstr ""
-
-#: .\landing\templates\landing\index.html:4004
-#: .\landing\templates\landing\index.html:4428
-msgid "Connection error. Please try again."
-msgstr ""
-
-#: .\landing\templates\landing\index.html:4200
-msgid "Estado 33"
-msgstr "Estado 33"
-
-#: .\landing\templates\landing\index.html:4200
-msgid "Sponsorship Inquiry"
-msgstr "Consulta de patrocinio"
-
-#: .\landing\templates\landing\index.html:4201
-msgid "Tell us about your company and sponsorship goals."
-msgstr "Cuéntanos sobre tu empresa y tus objetivos de patrocinio."
-
-#: .\landing\templates\landing\index.html:4214
-msgid "Company Information"
-msgstr "Información de la empresa"
-
-#: .\landing\templates\landing\index.html:4217
-msgid "Company Name"
-msgstr "Nombre de la empresa"
-
-#: .\landing\templates\landing\index.html:4222
-msgid "Contact Name"
-msgstr "Nombre de contacto"
-
-#: .\landing\templates\landing\index.html:4237
-msgid "Website / Social Media"
-msgstr "Sitio web / Redes sociales"
-
-#: .\landing\templates\landing\index.html:4246
-msgid "Sponsorship Interest"
-msgstr "Interés de patrocinio"
-
-#: .\landing\templates\landing\index.html:4247
-msgid "What are you interested in sponsoring?"
-msgstr "¿Qué te interesa patrocinar?"
-
-#: .\landing\templates\landing\index.html:4259
-msgid "Estimated Budget"
-msgstr "Presupuesto estimado"
-
-#: .\landing\templates\landing\index.html:4270
-msgid "Goals"
-msgstr "Objetivos"
-
-#: .\landing\templates\landing\index.html:4271
-msgid "What are your main goals?"
-msgstr "¿Cuáles son tus principales objetivos?"
-
-#: .\landing\templates\landing\index.html:4283
-msgid "Activation"
-msgstr "Activación"
-
-#: .\landing\templates\landing\index.html:4284
-msgid "Interested in:"
-msgstr "Interesado en:"
-
-#: .\landing\templates\landing\index.html:4289
-msgid "On-site presence (events in U.S. or Mexico)"
-msgstr "Presencia en eventos (EE.UU. o México)"
-
-#: .\landing\templates\landing\index.html:4295
-msgid "Final Step"
-msgstr "Último paso"
-
-#: .\landing\templates\landing\index.html:4298
-msgid "Upload Logo"
-msgstr "Subir logo"
-
-#: .\landing\templates\landing\index.html:4298
-msgid "optional"
-msgstr "opcional"
-
-#: .\landing\templates\landing\index.html:4304
-msgid "Share any ideas, questions or specific requirements…"
-msgstr "Comparte ideas, preguntas o requisitos específicos…"
-
-#: .\landing\templates\landing\index.html:4307
-msgid "Would you like a custom sponsorship proposal?"
-msgstr "¿Deseas una propuesta de patrocinio personalizada?"
-
-#: .\landing\templates\landing\index.html:4309
-msgid "Yes"
-msgstr "Sí"
-
-#: .\landing\templates\landing\index.html:4310
-msgid "No"
-msgstr "No"
-
-#: .\landing\templates\landing\index.html:4318
-#: .\landing\templates\landing\index.html:4419
-#: .\landing\templates\landing\index.html:4425
-#: .\landing\templates\landing\index.html:4431
-msgid "Become a Sponsor"
-msgstr "Conviértete en patrocinador"
-
-#: .\landing\templates\landing\index.html:4327
-msgid "Thank you for your interest!"
-msgstr "¡Gracias por tu interés!"
-
-#: .\landing\templates\landing\index.html:4328
-msgid "Our team will contact you soon with partnership opportunities."
-msgstr "Nuestro equipo te contactará pronto con oportunidades de patrocinio."
-
+#: .\landing\templates\landing\index.html:3685
 msgid "FEMEBE President"
 msgstr "PRESIDENTE DE FEMEBE"
 
+#: .\landing\templates\landing\index.html:3693
 msgid "FEMEBE National Teams Coordinator"
 msgstr "Coordinador de Selecciones Nacionales de FEMEBE"
 
+#: .\landing\templates\landing\index.html:3701
 msgid "Mexico National Team Roster Manager"
 msgstr "Gerente de Roster de la Selección Nacional de México"
 
+#: .\landing\templates\landing\index.html:3709
 msgid "Mexico National Team General Manager"
 msgstr "Gerente General de la Selección Nacional de México"
 
+#: .\landing\templates\landing\index.html:3717
 msgid "Mexico National Team Operations Manager"
 msgstr "Gerente de Operaciones de la Selección Nacional de México"
 
+#: .\landing\templates\landing\index.html:3725
 msgid "#Estado33 General Manager"
 msgstr "Gerente General del #Estado33"
 
+#: .\landing\templates\landing\index.html:3733
 msgid "#Estado33 President of Baseball Operations"
 msgstr "Presidente de Operaciones de Béisbol del #Estado33"
 
+#: .\landing\templates\landing\index.html:3741
 msgid "#Estado33 VP of Baseball Operations"
 msgstr "Vice Presidente de Operaciones de Béisbol del #Estado33"
 
+#: .\landing\templates\landing\index.html:3749
 msgid "#Estado33 Media Director"
 msgstr "Director de Medios del #Estado33"
+
+#: .\landing\templates\landing\index.html:3772
+#: .\landing\templates\landing\index.html:3784
+msgid "May 16–23, 2026"
+msgstr "16–23 de Mayo, 2026"
+
+#: .\landing\templates\landing\index.html:3780
+msgid "Event Details"
+msgstr "Detalles del Evento"
+
+#: .\landing\templates\landing\index.html:3790
+msgid "Links"
+msgstr "Enlaces"
+
+#: .\landing\templates\landing\index.html:3793
+msgid "Register"
+msgstr "Registrarse"
+
+#: .\landing\templates\landing\index.html:3802
+msgid "Sponsors & Partners"
+msgstr "Colaboradores y Socios"
+
+#: .\landing\templates\landing\index.html:3828
+msgid "All rights reserved."
+msgstr "Todos los derechos reservados."
+
+#: .\landing\templates\landing\index.html:3830
+msgid "Terms & Conditions"
+msgstr "Términos y Condiciones"
+
+#: .\landing\templates\landing\index.html:3831
+msgid "Privacy Policy"
+msgstr "Política de Privacidad"
+
+#: .\landing\templates\landing\index.html:3847
+msgid "registration"
+msgstr "registro"
+
+#: .\landing\templates\landing\index.html:3912
+#: .\landing\templates\landing\index.html:3921
+#: .\landing\templates\landing\index.html:3939
+#: .\landing\templates\landing\index.html:3959
+#: .\landing\templates\landing\index.html:3986
+#: .\landing\templates\landing\index.html:4005
+#: .\landing\templates\landing\index.html:4370
+msgid "Select"
+msgstr "Seleccionar"
+
+#: .\landing\templates\landing\index.html:3928
+msgid "Type to search…"
+msgstr "Escribe para buscar…"
+
+#: .\landing\templates\landing\index.html:3987
+#: .\landing\templates\landing\index.html:4006
+msgid "Pitcher"
+msgstr "Pitcher"
+
+#: .\landing\templates\landing\index.html:3988
+#: .\landing\templates\landing\index.html:4007
+msgid "Catcher"
+msgstr "Receptor"
+
+#: .\landing\templates\landing\index.html:3989
+#: .\landing\templates\landing\index.html:4008
+msgid "First Base"
+msgstr "Primera Base"
+
+#: .\landing\templates\landing\index.html:3990
+#: .\landing\templates\landing\index.html:4009
+msgid "Second Base"
+msgstr "Segunda Base"
+
+#: .\landing\templates\landing\index.html:3991
+#: .\landing\templates\landing\index.html:4010
+msgid "Third Base"
+msgstr "Tercera Base"
+
+#: .\landing\templates\landing\index.html:3992
+#: .\landing\templates\landing\index.html:4011
+msgid "Shortstop"
+msgstr "Parador en Corto"
+
+#: .\landing\templates\landing\index.html:3993
+#: .\landing\templates\landing\index.html:4012
+msgid "Left Field"
+msgstr "Jardín Izquierdo"
+
+#: .\landing\templates\landing\index.html:3994
+#: .\landing\templates\landing\index.html:4013
+msgid "Center Field"
+msgstr "Jardín Central"
+
+#: .\landing\templates\landing\index.html:3995
+#: .\landing\templates\landing\index.html:4014
+msgid "Right Field"
+msgstr "Jardín Derecho"
+
+#: .\landing\templates\landing\index.html:3996
+#: .\landing\templates\landing\index.html:4015
+msgid "Outfield"
+msgstr "Jardines"
+
+#: .\landing\templates\landing\index.html:3997
+#: .\landing\templates\landing\index.html:4016
+msgid "Designated Hitter"
+msgstr "Bateador Designado"
+
+#: .\landing\templates\landing\index.html:3998
+#: .\landing\templates\landing\index.html:4017
+msgid "Utility"
+msgstr "Utilitario"
+
+#: .\landing\templates\landing\index.html:4067
+msgid "Thank you for registering!"
+msgstr "¡Gracias por registrarte!"
+
+#: .\landing\templates\landing\index.html:4068
+msgid "Welcome to Estado 33 🙌"
+msgstr "Bienvenido a Estado 33 🙌"
+
+#: .\landing\templates\landing\index.html:4069
+msgid ""
+"Your registration has been received. We will contact you soon with the next "
+"steps. See you on the field!"
+msgstr ""
+"Tu registro ha sido recibido. Pronto nos pondremos en contacto contigo con "
+"los próximos pasos. ¡Nos vemos en el campo!"
+
+#: .\landing\templates\landing\index.html:4120
+#: .\landing\templates\landing\index.html:4121
+#: .\landing\templates\landing\index.html:4122
+#: .\landing\templates\landing\index.html:4126
+#: .\landing\templates\landing\index.html:4127
+#: .\landing\templates\landing\index.html:4130
+#: .\landing\templates\landing\index.html:4131
+#: .\landing\templates\landing\index.html:4132
+#: .\landing\templates\landing\index.html:4133
+#: .\landing\templates\landing\index.html:4573
+#: .\landing\templates\landing\index.html:4574
+#: .\landing\templates\landing\index.html:4575
+#: .\landing\templates\landing\index.html:4576
+msgid "Required"
+msgstr "Requerido"
+
+#: .\landing\templates\landing\index.html:4123
+msgid "Select a country"
+msgstr "Selecciona un país"
+
+#: .\landing\templates\landing\index.html:4124
+msgid "Enter a city"
+msgstr "Ingresa una ciudad"
+
+#: .\landing\templates\landing\index.html:4125
+msgid "Select a nationality"
+msgstr "Selecciona una nacionalidad"
+
+#: .\landing\templates\landing\index.html:4128
+#: .\landing\templates\landing\index.html:4129
+msgid "Select a position"
+msgstr "Selecciona una posición"
+
+#: .\landing\templates\landing\index.html:4161
+#: .\landing\templates\landing\index.html:4600
+msgid "Invalid email format"
+msgstr "Formato de correo inválido"
+
+#: .\landing\templates\landing\index.html:4214
+#: .\landing\templates\landing\index.html:4635
+msgid "Too many attempts. Please try again later."
+msgstr "Demasiados intentos. Intenta de nuevo más tarde."
+
+#: .\landing\templates\landing\index.html:4223
+#: .\landing\templates\landing\index.html:4647
+msgid "Connection error. Please try again."
+msgstr "Error de conexión. Intenta de nuevo."
+
+#: .\landing\templates\landing\index.html:4419
+msgid "Estado 33"
+msgstr "Estado 33"
+
+#: .\landing\templates\landing\index.html:4419
+msgid "Sponsorship Inquiry"
+msgstr "Consulta de patrocinio"
+
+#: .\landing\templates\landing\index.html:4420
+msgid "Tell us about your company and sponsorship goals."
+msgstr "Cuéntanos sobre tu empresa y tus objetivos de patrocinio."
+
+#: .\landing\templates\landing\index.html:4436
+msgid "Company Name"
+msgstr "Nombre de la empresa"
+
+#: .\landing\templates\landing\index.html:4441
+msgid "Contact Name"
+msgstr "Nombre de contacto"
+
+#: .\landing\templates\landing\index.html:4456
+msgid "Website / Social Media"
+msgstr "Sitio web / Redes sociales"
+
+#: .\landing\templates\landing\index.html:4466
+msgid "What are you interested in sponsoring?"
+msgstr "¿Qué te interesa patrocinar?"
+
+#: .\landing\templates\landing\index.html:4490
+msgid "What are your main goals?"
+msgstr "¿Cuáles son tus principales objetivos?"
+
+#: .\landing\templates\landing\index.html:4503
+msgid "Interested in:"
+msgstr "Interesado en:"
+
+#: .\landing\templates\landing\index.html:4508
+msgid "On-site presence (events in U.S. or Mexico)"
+msgstr "Presencia en eventos (EE.UU. o México)"
+
+#: .\landing\templates\landing\index.html:4514
+msgid "Final Step"
+msgstr "Último paso"
+
+#: .\landing\templates\landing\index.html:4517
+msgid "Upload Logo"
+msgstr "Subir logo"
+
+#: .\landing\templates\landing\index.html:4517
+msgid "optional"
+msgstr "opcional"
+
+#: .\landing\templates\landing\index.html:4523
+msgid "Share any ideas, questions or specific requirements…"
+msgstr "Comparte ideas, preguntas o requisitos específicos…"
+
+#: .\landing\templates\landing\index.html:4526
+msgid "Would you like a custom sponsorship proposal?"
+msgstr "¿Deseas una propuesta de patrocinio personalizada?"
+
+#: .\landing\templates\landing\index.html:4537
+#: .\landing\templates\landing\index.html:4638
+#: .\landing\templates\landing\index.html:4644
+#: .\landing\templates\landing\index.html:4650
+msgid "Become a Sponsor"
+msgstr "Conviértete en patrocinador"
+
+#: .\landing\templates\landing\index.html:4546
+msgid "Thank you for your interest!"
+msgstr "¡Gracias por tu interés!"
+
+#: .\landing\templates\landing\index.html:4547
+msgid "Our team will contact you soon with partnership opportunities."
+msgstr "Nuestro equipo te contactará pronto con oportunidades de patrocinio."
+
+#~ msgid "Recent entries"
+#~ msgstr "Últimos registros"
+
+#~ msgid "Registration complete!"
+#~ msgstr "¡Registro completado!"
+
+#~ msgid "We'll be in touch with next steps. Welcome to Estado 33."
+#~ msgstr ""
+#~ "Nos pondremos en contacto con los próximos pasos. Bienvenido a Estado 33."
 
 # models.py — nationalities
 #~ msgid "Mexican"
@@ -1472,10 +1762,6 @@ msgstr "Director de Medios del #Estado33"
 
 #~ msgid "American"
 #~ msgstr "Estadounidense"
-
-# lista.html
-#~ msgid "Players list"
-#~ msgstr "Registro de jugadores"
 
 #~ msgid "Personal data"
 #~ msgstr "Datos personales"
@@ -1488,9 +1774,6 @@ msgstr "Director de Medios del #Estado33"
 
 #~ msgid "Coming Soon · 2025"
 #~ msgstr "Próximamente · 2025"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
 
 #~ msgid "TBD"
 #~ msgstr "Por confirmar"
