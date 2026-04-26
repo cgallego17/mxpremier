@@ -474,10 +474,15 @@ def gasto_editar(request, pk):
         form.save()
         messages.success(request, _('Expense updated.'))
         return redirect('backoffice:gastos_lista')
+    # Si el formulario no es válido, mostrar errores de depuración
+    debug_errors = None
+    if request.method == 'POST' and not form.is_valid():
+        debug_errors = f"<pre>{form.errors.as_json()}</pre>"
     return render(request, 'backoffice/gastos/form.html', {
         'form': form,
         'gasto': gasto,
         'titulo': _('Edit Expense'),
+        'debug_errors': debug_errors,
     })
 
 

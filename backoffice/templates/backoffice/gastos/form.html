@@ -6,6 +6,9 @@
 
 {% block content %}
 <div class="row justify-content-center">
+  {% if debug_errors %}
+    <div class="alert alert-danger">{{ debug_errors|safe }}</div>
+  {% endif %}
   <div class="col-12 col-lg-7">
 
     <div class="bo-card">
