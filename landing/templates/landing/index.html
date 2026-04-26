@@ -1959,6 +1959,9 @@
     .fb-reel-play i { font-size: 3rem; color: #fff; opacity: .85; }
     .fb-reel-card:hover .fb-reel-play { background: rgba(0,0,0,.5); }
     .fb-reel-card:hover .fb-reel-play i { opacity: 1; }
+    .fb-reel-facade { cursor: pointer; }
+    .fb-reel-facade .fb-reel-play { background: rgba(0,0,0,.35); }
+    .fb-reel-card iframe { display:block; width:100%; height:100%; border:none; }
     .fb-btns {
       display: flex;
       justify-content: center;
@@ -3532,14 +3535,18 @@
   <div class="fb-reels-cards">
     {% if facebook_reels %}
       {% for reel in facebook_reels %}
-        <div class="fb-reel-card">
-          <iframe
-            src="https://www.facebook.com/plugins/video.php?href={{ reel.permalink_url_encoded }}&show_text=false&autoplay=1&mute=1"
-            scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
-            allow="autoplay; encrypted-media; picture-in-picture">
-          </iframe>
+        <div class="fb-reel-card fb-reel-facade"
+             data-src="https://www.facebook.com/plugins/video.php?href={{ reel.permalink_url_encoded }}&show_text=false&autoplay=1&mute=1">
+          {% if reel.picture %}
+            <img class="fb-reel-thumb" src="{{ reel.picture }}" alt="{{ reel.title }}" loading="lazy">
+          {% else %}
+            <div class="fb-reel-thumb" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center">
+              <i class="bi bi-facebook" style="font-size:3rem;color:#1877F2"></i>
+            </div>
+          {% endif %}
+          <div class="fb-reel-play">
+            <i class="bi bi-play-circle-fill"></i>
+          </div>
         </div>
       {% endfor %}
     {% else %}
@@ -4592,6 +4599,23 @@
       }, { once: true });
     }
   })();
+</script>
+<script>
+  document.querySelectorAll('.fb-reel-facade').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var src = card.dataset.src;
+      if (!src) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.frameBorder = '0';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+      card.innerHTML = '';
+      card.classList.remove('fb-reel-facade');
+      card.style.cursor = 'default';
+      card.appendChild(iframe);
+    });
+  });
 </script>
 </body>
 </html>
