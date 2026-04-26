@@ -2554,6 +2554,22 @@
     @media (max-width: 390px) {
       .hero-actions { margin-top: 5rem; }
     }
+    @media (max-width: 390px) and (max-height: 700px) {
+      #hero {
+        min-height: 50svh;
+        justify-content: flex-end;
+      }
+      .hero-content {
+        padding: 0.25rem 5% 0.75rem;
+      }
+      .hero-actions {
+        margin-top: 1.5rem;
+      }
+      .hero-badge {
+        bottom: 2.5rem;
+      }
+      .hero-badge img { width: 48px; }
+    }
     /* ─── REGISTRATION MODAL ──────────────────────────────── */
     .reg-overlay {
       position: fixed;
