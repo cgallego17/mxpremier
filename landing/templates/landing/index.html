@@ -4704,7 +4704,7 @@
       card.addEventListener('click', function () {
         if (isIOS) {
           var permalink = card.dataset.permalink;
-          if (permalink) window.open(permalink, '_blank', 'noopener,noreferrer');
+          if (permalink) window.location.href = permalink;
           return;
         }
         var src = card.dataset.src;
