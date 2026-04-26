@@ -35,10 +35,11 @@ def _is_rate_limited(ip):
     return False
 
 
-def _get_facebook_reels():
-    if not settings.FB_PAGE_ID or not settings.FB_PAGE_ACCESS_TOKEN:
-        return []
+_REELS_CACHE_KEY = 'fb_reels_v1'
+_REELS_CACHE_TTL = 900  # 15 minutos
 
+
+def _fetch_reels_from_api():
     params = urlencode(
         {
             'fields': (
@@ -61,13 +62,11 @@ def _get_facebook_reels():
             payload = json.loads(response.read().decode('utf-8'))
     except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
         logger.warning('Unable to fetch Facebook reels: %s', exc)
-        return []
+        return None
 
     if payload.get('error'):
-        logger.warning(
-            'Facebook reels API returned an error: %s', payload['error']
-        )
-        return []
+        logger.warning('Facebook reels API error: %s', payload['error'])
+        return None
 
     reels = []
     for item in payload.get('data', []):
@@ -92,6 +91,22 @@ def _get_facebook_reels():
         )
         if len(reels) >= settings.FB_REELS_LIMIT:
             break
+    return reels
+
+
+def _get_facebook_reels():
+    if not settings.FB_PAGE_ID or not settings.FB_PAGE_ACCESS_TOKEN:
+        return []
+
+    cached = cache.get(_REELS_CACHE_KEY)
+    if cached is not None:
+        return cached
+
+    reels = _fetch_reels_from_api()
+    if reels is None:
+        return []
+
+    cache.set(_REELS_CACHE_KEY, reels, timeout=_REELS_CACHE_TTL)
     return reels
 
 

@@ -2944,9 +2944,58 @@
       .sp-checks { grid-template-columns: 1fr; }
       .sp-budget { grid-template-columns: 1fr; }
     }
+    /* ─── PAGE LOADER ─────────────────────────────────────── */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity .4s ease;
+    }
+    #page-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #page-loader img {
+      width: 90px;
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+    .loader-bar {
+      width: 160px;
+      height: 3px;
+      background: rgba(255,255,255,.12);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .loader-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: var(--red, #C8102E);
+      border-radius: 99px;
+      animation: loaderFill 1.6s ease-in-out forwards;
+    }
+    @keyframes loaderPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .7; transform: scale(.93); }
+    }
+    @keyframes loaderFill {
+      0%   { width: 0%; }
+      60%  { width: 75%; }
+      100% { width: 100%; }
+    }
   </style>
 </head>
 <body>
+
+<div id="page-loader">
+  <img src="{% static 'landing/img/favicon.png' %}" alt="Cargando…">
+  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+</div>
 
 <!-- ─── TICKER ─────────────────────────────────────────────── -->
 <div class="ticker">
@@ -4499,6 +4548,21 @@
         spSubmit.innerHTML     = '{% trans "Become a Sponsor" %} <i class="bi bi-arrow-right"></i>';
       }
     });
+  })();
+</script>
+<script>
+  (function () {
+    var loader = document.getElementById('page-loader');
+    function hideLoader() {
+      loader.classList.add('hidden');
+      setTimeout(function () { loader.style.display = 'none'; }, 420);
+    }
+    if (document.readyState === 'complete') {
+      hideLoader();
+    } else {
+      window.addEventListener('load', hideLoader);
+      setTimeout(hideLoader, 4000); // fallback: ocultar a los 4s máximo
+    }
   })();
 </script>
 </body>
