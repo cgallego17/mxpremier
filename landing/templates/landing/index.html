@@ -2505,7 +2505,7 @@
       .hero-bg {
         position: absolute;
         inset: 0;
-        background-image: url("{% static 'landing/img/BannerMOVIL.jpeg' %}");
+        background-image: url("{% if LANGUAGE_CODE == 'en' %}{% static 'landing/img/BannerMovilEng.jpg' %}{% else %}{% static 'landing/img/BannerMOVIL.jpeg' %}{% endif %}");
         background-size: cover;
         background-position: center top;
         background-color: var(--dark);
@@ -2522,7 +2522,7 @@
         display: flex;
         position: absolute;
         bottom: auto;
-        top: 6rem;
+        top: 7rem;
         right: 3%;
         z-index: 5;
       }
