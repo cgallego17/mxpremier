@@ -10,7 +10,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from jugadores.models import Jugador
 from landing.models import SponsorInquiry, PageVisit
-from .forms import JugadorForm
+from .forms import JugadorForm, PartnerForm
+from .models import Partner
 
 COUNTRY_NAMES = {
     'US': 'United States', 'MX': 'Mexico', 'DO': 'Dominican Republic',
@@ -243,3 +244,43 @@ def sponsor_eliminar(request, pk):
     return render(request, 'backoffice/sponsors/confirmar_eliminar.html', {
         'sponsor': sponsor,
     })
+
+
+# ── Partners (logos en landing) ───────────────────────────────────
+
+@login_required
+def partners_lista(request):
+    partners = Partner.objects.all()
+    return render(request, 'backoffice/partners/lista.html', {'partners': partners})
+
+
+@login_required
+def partner_crear(request):
+    form = PartnerForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, _('Partner added.'))
+        return redirect('backoffice:partners_lista')
+    return render(request, 'backoffice/partners/form.html', {'form': form, 'titulo': _('Add Partner')})
+
+
+@login_required
+def partner_editar(request, pk):
+    partner = get_object_or_404(Partner, pk=pk)
+    form = PartnerForm(request.POST or None, request.FILES or None, instance=partner)
+    if form.is_valid():
+        form.save()
+        messages.success(request, _('Partner updated.'))
+        return redirect('backoffice:partners_lista')
+    return render(request, 'backoffice/partners/form.html', {'form': form, 'titulo': _('Edit Partner'), 'partner': partner})
+
+
+@login_required
+def partner_eliminar(request, pk):
+    partner = get_object_or_404(Partner, pk=pk)
+    if request.method == 'POST':
+        partner.logo.delete(save=False)
+        partner.delete()
+        messages.success(request, _('Partner deleted.'))
+        return redirect('backoffice:partners_lista')
+    return render(request, 'backoffice/partners/confirmar_eliminar.html', {'partner': partner})

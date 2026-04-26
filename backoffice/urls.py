@@ -14,4 +14,8 @@ urlpatterns = [
     path('sponsors/', views.sponsors_lista, name='sponsors_lista'),
     path('sponsors/<int:pk>/', views.sponsor_detalle, name='sponsor_detalle'),
     path('sponsors/<int:pk>/eliminar/', views.sponsor_eliminar, name='sponsor_eliminar'),
+    path('partners/', views.partners_lista, name='partners_lista'),
+    path('partners/nuevo/', views.partner_crear, name='partner_crear'),
+    path('partners/<int:pk>/editar/', views.partner_editar, name='partner_editar'),
+    path('partners/<int:pk>/eliminar/', views.partner_eliminar, name='partner_eliminar'),
 ]

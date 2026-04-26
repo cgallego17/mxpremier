@@ -1,0 +1,69 @@
+{% extends 'backoffice/base.html' %}
+{% load static i18n %}
+{% block title %}Partners{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="mb-0"><i class="bi bi-image me-2"></i>{% trans "Partner Logos" %}</h4>
+  <a href="{% url 'backoffice:partner_crear' %}" class="btn btn-success btn-sm">
+    <i class="bi bi-plus-lg me-1"></i>{% trans "Add Partner" %}
+  </a>
+</div>
+
+{% if partners %}
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>{% trans "Logo" %}</th>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "URL" %}</th>
+          <th class="text-center">{% trans "Order" %}</th>
+          <th class="text-center">{% trans "Active" %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in partners %}
+        <tr>
+          <td style="width:90px">
+            <img src="{{ p.logo.url }}" alt="{{ p.nombre }}"
+                 style="height:44px;object-fit:contain;max-width:80px">
+          </td>
+          <td><strong>{{ p.nombre }}</strong></td>
+          <td>
+            {% if p.url %}
+              <a href="{{ p.url }}" target="_blank" rel="noopener" class="text-truncate d-inline-block" style="max-width:200px">{{ p.url }}</a>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+          <td class="text-center">{{ p.orden }}</td>
+          <td class="text-center">
+            {% if p.activo %}
+              <span class="badge bg-success">{% trans "Yes" %}</span>
+            {% else %}
+              <span class="badge bg-secondary">{% trans "No" %}</span>
+            {% endif %}
+          </td>
+          <td class="text-end">
+            <a href="{% url 'backoffice:partner_editar' p.pk %}" class="btn btn-outline-primary btn-sm me-1">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <a href="{% url 'backoffice:partner_eliminar' p.pk %}" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="text-center py-5 text-muted">
+  <i class="bi bi-image" style="font-size:2.5rem"></i>
+  <p class="mt-2">{% trans "No partners yet." %} <a href="{% url 'backoffice:partner_crear' %}">{% trans "Add the first one." %}</a></p>
+</div>
+{% endif %}
+{% endblock %}

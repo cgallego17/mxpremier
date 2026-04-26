@@ -3426,31 +3426,22 @@
   </h2>
 
   <div class="partners-grid">
-
     <div class="partners-row">
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/GPS-PREMIER.png' %}" alt="GPS Premier" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/loogo-femebe.png' %}" alt="FEMEBE" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/logo-international.png' %}" alt="International" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/MXlogoMono.png' %}" alt="MX Premier" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/wbsc americas.png' %}" alt="WBSC Americas" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/Wbsc-logo.png' %}" alt="WBSC" loading="lazy">
-      </a>
-      <a href="#" class="partner-item">
-        <img src="{% static 'landing/img/ATP blanco.png' %}" alt="ATP" loading="lazy">
-      </a>
+      {% for partner in partners %}
+        <a href="{{ partner.url|default:'#' }}" class="partner-item"
+           {% if partner.url %}target="_blank" rel="noopener"{% endif %}>
+          <img src="{{ partner.logo.url }}" alt="{{ partner.nombre }}" loading="lazy">
+        </a>
+      {% empty %}
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/GPS-PREMIER.png' %}" alt="GPS Premier" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/loogo-femebe.png' %}" alt="FEMEBE" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/logo-international.png' %}" alt="International" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/MXlogoMono.png' %}" alt="MX Premier" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/wbsc americas.png' %}" alt="WBSC Americas" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/Wbsc-logo.png' %}" alt="WBSC" loading="lazy"></a>
+        <a href="#" class="partner-item"><img src="{% static 'landing/img/ATP blanco.png' %}" alt="ATP" loading="lazy"></a>
+      {% endfor %}
     </div>
-
   </div>
 
   <div class="partners-actions">

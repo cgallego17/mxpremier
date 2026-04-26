@@ -2,6 +2,7 @@ import datetime
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from jugadores.models import Jugador
+from .models import Partner
 
 
 class JugadorForm(forms.ModelForm):
@@ -93,3 +94,15 @@ class JugadorForm(forms.ModelForm):
         if not doble:
             cleaned['segunda_nacionalidad'] = None
         return cleaned
+
+
+class PartnerForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        fields = ['nombre', 'logo', 'url', 'orden', 'activo']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'url':    forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://'}),
+            'orden':  forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }

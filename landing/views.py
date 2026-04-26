@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from backoffice.forms import JugadorForm
+from backoffice.models import Partner
 from jugadores.choices import AMERICAS_CHOICES
 from landing.forms import SponsorForm
 
@@ -116,6 +117,7 @@ def index(request):
         'facebook_page_url': settings.FB_PAGE_URL,
         'facebook_reels_url': settings.FB_REELS_URL,
         'americas_choices': AMERICAS_CHOICES,
+        'partners': Partner.objects.filter(activo=True),
     }
     return render(request, 'landing/index.html', context)
 
