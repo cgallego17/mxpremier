@@ -276,6 +276,12 @@ def jugador_editar(request, pk):
 
 
 @login_required
+def jugador_detalle(request, pk):
+    jugador = get_object_or_404(Jugador, pk=pk)
+    return render(request, 'backoffice/jugadores/detalle.html', {'jugador': jugador})
+
+
+@login_required
 def jugador_eliminar(request, pk):
     jugador = get_object_or_404(Jugador, pk=pk)
     if request.method == 'POST':

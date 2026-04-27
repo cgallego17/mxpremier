@@ -1,0 +1,161 @@
+{% extends 'backoffice/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ jugador.apellidos }}, {{ jugador.nombre }}{% endblock %}
+{% block page_title %}{{ jugador.apellidos }}, {{ jugador.nombre }}{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-2 mb-3 flex-wrap">
+  <a href="{% url 'backoffice:jugadores_lista' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i>{% trans "Back" %}
+  </a>
+  <a href="{% url 'backoffice:jugador_editar' jugador.pk %}" class="btn btn-sm btn-outline-primary">
+    <i class="bi bi-pencil me-1"></i>{% trans "Edit" %}
+  </a>
+  <a href="{% url 'backoffice:jugador_eliminar' jugador.pk %}" class="btn btn-sm btn-outline-danger ms-auto">
+    <i class="bi bi-trash me-1"></i>{% trans "Delete" %}
+  </a>
+</div>
+
+<div class="row g-3">
+
+  <!-- Player info -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-person me-2"></i>{% trans "Player Information" %}</h6>
+      </div>
+      <dl class="sp-dl">
+        <dt>{% trans "Full name" %}</dt>
+        <dd>{{ jugador.nombre }} {{ jugador.apellidos }}</dd>
+
+        <dt>{% trans "Date of birth" %}</dt>
+        <dd>
+          {% if jugador.fecha_nacimiento %}
+            {{ jugador.fecha_nacimiento|date:"d/m/Y" }}
+            {% if jugador.edad %}<span class="text-muted ms-1">({{ jugador.edad }} {% trans "years" %})</span>{% endif %}
+          {% else %}—{% endif %}
+        </dd>
+
+        <dt>{% trans "Nationality" %}</dt>
+        <dd>
+          <span class="badge-nac">{{ jugador.get_nacionalidad_display }}</span>
+          {% if jugador.doble_nacionalidad and jugador.segunda_nacionalidad %}
+            <span class="badge-nac ms-1">{{ jugador.get_segunda_nacionalidad_display }}</span>
+            <small class="text-muted ms-1">({% trans "Dual nationality" %})</small>
+          {% endif %}
+        </dd>
+
+        <dt>{% trans "City" %}</dt>
+        <dd>{{ jugador.ciudad|default:"—" }}</dd>
+
+        <dt>{% trans "State / Province" %}</dt>
+        <dd>{{ jugador.estado|default:"—" }}</dd>
+
+        <dt>{% trans "Country" %}</dt>
+        <dd>{{ jugador.get_pais_display|default:"—" }}</dd>
+
+        {% if jugador.instagram %}
+        <dt>{% trans "Instagram" %}</dt>
+        <dd><a href="https://instagram.com/{{ jugador.instagram|slice:'1:' }}" target="_blank" rel="noopener">{{ jugador.instagram }}</a></dd>
+        {% endif %}
+
+        {% if jugador.email %}
+        <dt>{% trans "Email" %}</dt>
+        <dd><a href="mailto:{{ jugador.email }}">{{ jugador.email }}</a></dd>
+        {% endif %}
+
+        {% if jugador.telefono %}
+        <dt>{% trans "Phone" %}</dt>
+        <dd>{{ jugador.telefono }}</dd>
+        {% endif %}
+      </dl>
+    </div>
+  </div>
+
+  <!-- Team & Position -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card h-100">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-trophy me-2"></i>{% trans "Team & Position" %}</h6>
+      </div>
+      <dl class="sp-dl">
+        <dt>{% trans "Travel team name" %}</dt>
+        <dd>{{ jugador.equipo_viaje|default:"—" }}</dd>
+
+        <dt>{% trans "Team city" %}</dt>
+        <dd>{{ jugador.equipo_ciudad|default:"—" }}</dd>
+
+        <dt>{% trans "Team state" %}</dt>
+        <dd>{{ jugador.equipo_estado|default:"—" }}</dd>
+
+        <dt>{% trans "Team country" %}</dt>
+        <dd>{{ jugador.get_equipo_pais_display|default:"—" }}</dd>
+
+        <dt>{% trans "Primary position" %}</dt>
+        <dd>{{ jugador.get_posicion_principal_display|default:"—" }}</dd>
+
+        <dt>{% trans "Secondary position" %}</dt>
+        <dd>{{ jugador.get_posicion_secundaria_display|default:"—" }}</dd>
+
+        <dt>{% trans "Pitcher?" %}</dt>
+        <dd>
+          {% if jugador.es_pitcher %}
+            <span class="badge bg-success bg-opacity-10 text-success">{% trans "Yes" %}</span>
+          {% else %}
+            <span class="text-muted">{% trans "No" %}</span>
+          {% endif %}
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Guardian -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-people me-2"></i>{% trans "Parents / Guardian" %}</h6>
+      </div>
+      <dl class="sp-dl">
+        <dt>{% trans "Name" %}</dt>
+        <dd>
+          {% if jugador.tutor_nombre %}
+            {{ jugador.tutor_nombre }} {{ jugador.tutor_apellidos }}
+          {% else %}—{% endif %}
+        </dd>
+
+        <dt>{% trans "Phone" %}</dt>
+        <dd>
+          {% if jugador.tutor_telefono %}
+            <a href="tel:{{ jugador.tutor_telefono }}">{{ jugador.tutor_telefono }}</a>
+          {% else %}—{% endif %}
+        </dd>
+
+        <dt>{% trans "Email" %}</dt>
+        <dd>
+          {% if jugador.tutor_email %}
+            <a href="mailto:{{ jugador.tutor_email }}">{{ jugador.tutor_email }}</a>
+          {% else %}—{% endif %}
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="col-12 col-md-6">
+    <div class="bo-card">
+      <div class="bo-card-header">
+        <h6 class="mb-0"><i class="bi bi-info-circle me-2"></i>{% trans "Registration" %}</h6>
+      </div>
+      <dl class="sp-dl">
+        <dt>ID</dt>
+        <dd>#{{ jugador.pk }}</dd>
+
+        <dt>{% trans "Registration date" %}</dt>
+        <dd>{{ jugador.fecha_registro|date:"d/m/Y H:i" }}</dd>
+      </dl>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

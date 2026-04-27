@@ -17,6 +17,7 @@ urlpatterns = [
     path(f'{_j}/',                   views.jugadores_lista,    name='jugadores_lista'),
     path(f'{_j}/nuevo/',             views.jugador_crear,      name='jugador_crear'),
     path(f'{_j}/exportar/',          views.jugadores_exportar, name='jugadores_exportar'),
+    path(f'{_j}/<int:pk>/',          views.jugador_detalle,    name='jugador_detalle'),
     path(f'{_j}/<int:pk>/editar/',   views.jugador_editar,     name='jugador_editar'),
     path(f'{_j}/<int:pk>/eliminar/', views.jugador_eliminar,   name='jugador_eliminar'),
 

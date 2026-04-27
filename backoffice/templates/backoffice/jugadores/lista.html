@@ -39,18 +39,13 @@
           <tr>
             <th>#</th>
             <th>{% trans "Name" %}</th>
-            <th>{% trans "Date of birth" %}</th>
-            <th>{% trans "City" %}</th>
-            <th>{% trans "State" %}</th>
-            <th>{% trans "Team" %}</th>
-            <th>{% trans "Team City/State" %}</th>
-            <th>{% trans "Position" %}</th>
-            <th>{% trans "Pitcher" %}</th>
-            <th>{% trans "Instagram" %}</th>
-            <th>{% trans "Guardian" %}</th>
-            <th>{% trans "Guardian Email" %}</th>
-            <th>{% trans "Guardian Phone" %}</th>
+            <th>{% trans "Age" %}</th>
             <th>{% trans "Nationality" %}</th>
+            <th>{% trans "City / State" %}</th>
+            <th>{% trans "Travel Team" %}</th>
+            <th>{% trans "Team City / State" %}</th>
+            <th>{% trans "Position" %}</th>
+            <th>{% trans "Guardian" %}</th>
             <th>{% trans "Registration" %}</th>
             <th></th>
           </tr>
@@ -60,33 +55,43 @@
             <tr>
               <td class="text-muted">{{ forloop.counter }}</td>
               <td><strong>{{ j.apellidos }}, {{ j.nombre }}</strong></td>
-              <td>{{ j.fecha_nacimiento|date:"d/m/Y" }}</td>
-              <td>{{ j.ciudad }}</td>
-              <td>{{ j.estado }}</td>
-              <td>{{ j.equipo_viaje }}</td>
-              <td>{{ j.get_equipo_pais_display }}</td>
-              <td>{{ j.equipo_estado }}</td>
-              <td>{{ j.equipo_ciudad }}</td>
-              <td>
-                {{ j.get_posicion_principal_display }}
-                {% if j.posicion_secundaria %}
-                  / {{ j.get_posicion_secundaria_display }}
-                {% endif %}
+              <td class="text-nowrap">
+                {% if j.edad %}{{ j.edad }}{% else %}—{% endif %}
+                {% if j.fecha_nacimiento %}<small class="text-muted d-block">{{ j.fecha_nacimiento|date:"d/m/Y" }}</small>{% endif %}
               </td>
-              <td>{% if j.es_pitcher %}<span class="badge bg-success">Yes</span>{% endif %}</td>
-              <td>{% if j.instagram %}<a href="https://instagram.com/{{ j.instagram|slice:"1:" }}" target="_blank">@{{ j.instagram }}</a>{% endif %}</td>
-              <td>{{ j.tutor_nombre }} {{ j.tutor_apellidos }}</td>
-              <td>{{ j.tutor_email }}</td>
-              <td>{{ j.tutor_telefono }}</td>
               <td>
                 <span class="badge-nac">{{ j.get_nacionalidad_display }}</span>
                 {% if j.doble_nacionalidad and j.segunda_nacionalidad %}
                   <span class="badge-nac ms-1">{{ j.get_segunda_nacionalidad_display }}</span>
                 {% endif %}
               </td>
-              <td>{{ j.fecha_registro|date:"d/m/Y" }}</td>
+              <td class="text-nowrap">
+                {% if j.ciudad %}{{ j.ciudad }}{% endif %}
+                {% if j.estado %}<small class="text-muted d-block">{{ j.estado }}, {{ j.get_pais_display }}</small>{% endif %}
+              </td>
+              <td>{{ j.equipo_viaje|default:"—" }}</td>
+              <td class="text-nowrap">
+                {% if j.equipo_ciudad %}{{ j.equipo_ciudad }}{% endif %}
+                {% if j.equipo_estado %}<small class="text-muted d-block">{{ j.equipo_estado }}, {{ j.get_equipo_pais_display }}</small>{% endif %}
+              </td>
+              <td class="text-nowrap">
+                {{ j.get_posicion_principal_display }}
+                {% if j.posicion_secundaria %}
+                  <small class="text-muted d-block">{{ j.get_posicion_secundaria_display }}</small>
+                {% endif %}
+                {% if j.es_pitcher %}<span class="badge bg-success bg-opacity-10 text-success" style="font-size:.7rem;">P</span>{% endif %}
+              </td>
+              <td class="text-nowrap">
+                {% if j.tutor_nombre %}{{ j.tutor_nombre }} {{ j.tutor_apellidos }}{% else %}—{% endif %}
+                {% if j.tutor_telefono %}<small class="text-muted d-block">{{ j.tutor_telefono }}</small>{% endif %}
+              </td>
+              <td class="text-nowrap">{{ j.fecha_registro|date:"d/m/Y" }}</td>
               <td>
                 <div class="d-flex gap-1">
+                  <a href="{% url 'backoffice:jugador_detalle' j.pk %}"
+                     class="btn btn-sm btn-outline-secondary" title="{% trans 'View' %}">
+                    <i class="bi bi-eye"></i>
+                  </a>
                   <a href="{% url 'backoffice:jugador_editar' j.pk %}"
                      class="btn btn-sm btn-outline-primary" title="{% trans 'Edit' %}">
                     <i class="bi bi-pencil"></i>
