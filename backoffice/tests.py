@@ -256,4 +256,4 @@ class BackofficeJugadorViewTests(TestCase):
         self.assertContains(res, 'Monterrey')
         self.assertContains(res, 'NLE')
 
-
+
