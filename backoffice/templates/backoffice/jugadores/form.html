@@ -1,8 +1,3 @@
-      <div class="col-md-6">
-        <label class="form-label fw-semibold">{% trans "Phone" %}</label>
-        {{ form.telefono }}
-        {% if form.telefono.errors %}<div class="text-danger small mt-1">{{ form.telefono.errors.0 }}</div>{% endif %}
-      </div>
 {% extends 'backoffice/base.html' %}
 {% load i18n %}
 
@@ -33,24 +28,29 @@
         {% if form.fecha_nacimiento.errors %}<div class="text-danger small mt-1">{{ form.fecha_nacimiento.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-4">
-        <label class="form-label fw-semibold">{% trans "City" %}</label>
-        {{ form.ciudad }}
-        {% if form.ciudad.errors %}<div class="text-danger small mt-1">{{ form.ciudad.errors.0 }}</div>{% endif %}
+        <label class="form-label fw-semibold">{% trans "Country" %}</label>
+        {{ form.pais }}
+        {% if form.pais.errors %}<div class="text-danger small mt-1">{{ form.pais.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-4">
-        <label class="form-label fw-semibold">{% trans "State / Province" %}</label>
+        <label class="form-label fw-semibold">{% trans "State" %}</label>
         {{ form.estado }}
         {% if form.estado.errors %}<div class="text-danger small mt-1">{{ form.estado.errors.0 }}</div>{% endif %}
       </div>
-      <div class="col-md-6">
-        <label class="form-label fw-semibold">{% trans "Citizenship" %}</label>
-        {{ form.nacionalidad }}
-        {% if form.nacionalidad.errors %}<div class="text-danger small mt-1">{{ form.nacionalidad.errors.0 }}</div>{% endif %}
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">{% trans "City" %}</label>
+        {{ form.ciudad }}
+        {% if form.ciudad.errors %}<div class="text-danger small mt-1">{{ form.ciudad.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-6">
         <label class="form-label fw-semibold">{% trans "Instagram handle" %}</label>
         {{ form.instagram }}
         {% if form.instagram.errors %}<div class="text-danger small mt-1">{{ form.instagram.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Phone" %}</label>
+        {{ form.telefono }}
+        {% if form.telefono.errors %}<div class="text-danger small mt-1">{{ form.telefono.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-12">
         <div class="form-check">
@@ -74,9 +74,19 @@
         {% if form.equipo_viaje.errors %}<div class="text-danger small mt-1">{{ form.equipo_viaje.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-6">
-        <label class="form-label fw-semibold">{% trans "Team city and state" %}</label>
-        {{ form.equipo_ciudad_estado }}
-        {% if form.equipo_ciudad_estado.errors %}<div class="text-danger small mt-1">{{ form.equipo_ciudad_estado.errors.0 }}</div>{% endif %}
+        <label class="form-label fw-semibold">{% trans "Team country" %}</label>
+        {{ form.equipo_pais }}
+        {% if form.equipo_pais.errors %}<div class="text-danger small mt-1">{{ form.equipo_pais.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Team state" %}</label>
+        {{ form.equipo_estado }}
+        {% if form.equipo_estado.errors %}<div class="text-danger small mt-1">{{ form.equipo_estado.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Team city" %}</label>
+        {{ form.equipo_ciudad }}
+        {% if form.equipo_ciudad.errors %}<div class="text-danger small mt-1">{{ form.equipo_ciudad.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-5">
         <label class="form-label fw-semibold">{% trans "Primary position" %}</label>
@@ -135,6 +145,103 @@
 
 {% block extra_js %}
 <script>
+  /* ── Generic cascading helpers ──────────────────────────── */
+  function populateSel(sel, options, blankLabel, currentVal) {
+    sel.innerHTML = '';
+    const blank = document.createElement('option');
+    blank.value = '';
+    blank.textContent = blankLabel;
+    sel.appendChild(blank);
+    options.forEach(function(item) {
+      const opt = document.createElement('option');
+      opt.value = item.codigo !== undefined ? item.codigo : item;
+      opt.textContent = item.nombre !== undefined ? item.nombre : item;
+      if (String(opt.value) === String(currentVal)) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.disabled = false;
+  }
+
+  function clearSel(sel, blankLabel) {
+    sel.innerHTML = '<option value="">' + blankLabel + '</option>';
+    sel.disabled = true;
+  }
+
+  function fetchEstados(pais, estadoSel, ciudadSel, keepEstado, keepCiudad) {
+    if (!pais) {
+      clearSel(estadoSel, '— {% trans "Select country first" %} —');
+      clearSel(ciudadSel, '— {% trans "Select country first" %} —');
+      return;
+    }
+    fetch('/api/locations/estados/?pais=' + encodeURIComponent(pais))
+      .then(r => r.json())
+      .then(data => {
+        if (data.estados && data.estados.length) {
+          populateSel(estadoSel, data.estados, '— {% trans "Select state" %} —', keepEstado);
+          if (keepEstado && estadoSel.value) {
+            fetchCiudades(pais, estadoSel.value, ciudadSel, keepCiudad);
+          } else {
+            clearSel(ciudadSel, '— {% trans "Select state first" %} —');
+          }
+        } else {
+          clearSel(estadoSel, '— {% trans "No states available" %} —');
+          clearSel(ciudadSel, '— {% trans "No cities available" %} —');
+        }
+      });
+  }
+
+  function fetchCiudades(pais, estado, ciudadSel, keepCiudad) {
+    if (!estado) {
+      clearSel(ciudadSel, '— {% trans "Select state first" %} —');
+      return;
+    }
+    fetch('/api/locations/ciudades/?pais=' + encodeURIComponent(pais) + '&estado=' + encodeURIComponent(estado))
+      .then(r => r.json())
+      .then(data => {
+        if (data.ciudades && data.ciudades.length) {
+          populateSel(ciudadSel, data.ciudades, '— {% trans "Select city" %} —', keepCiudad);
+        } else {
+          clearSel(ciudadSel, '— {% trans "No cities available" %} —');
+        }
+      });
+  }
+
+  /* ── Player location (pais → estado → ciudad) ───────────── */
+  const paisSel    = document.getElementById('id_pais');
+  const estadoSel  = document.getElementById('id_estado');
+  const ciudadSel  = document.getElementById('id_ciudad');
+
+  paisSel.addEventListener('change', function() {
+    fetchEstados(this.value, estadoSel, ciudadSel, '', '');
+  });
+  estadoSel.addEventListener('change', function() {
+    fetchCiudades(paisSel.value, this.value, ciudadSel, '');
+  });
+
+  // Init on page load (pre-populate when editing)
+  const initPais   = "{{ form.pais.value|default:''|escapejs }}";
+  const initEstado = "{{ form.estado.value|default:''|escapejs }}";
+  const initCiudad = "{{ form.ciudad.value|default:''|escapejs }}";
+  if (initPais) fetchEstados(initPais, estadoSel, ciudadSel, initEstado, initCiudad);
+
+  /* ── Team location (equipo_pais → equipo_estado → equipo_ciudad) */
+  const equipoPaisSel   = document.getElementById('id_equipo_pais');
+  const equipoEstadoSel = document.getElementById('id_equipo_estado');
+  const equipoCiudadSel = document.getElementById('id_equipo_ciudad');
+
+  equipoPaisSel.addEventListener('change', function() {
+    fetchEstados(this.value, equipoEstadoSel, equipoCiudadSel, '', '');
+  });
+  equipoEstadoSel.addEventListener('change', function() {
+    fetchCiudades(equipoPaisSel.value, this.value, equipoCiudadSel, '');
+  });
+
+  const initEquipoPais   = "{{ form.equipo_pais.value|default:''|escapejs }}";
+  const initEquipoEstado = "{{ form.equipo_estado.value|default:''|escapejs }}";
+  const initEquipoCiudad = "{{ form.equipo_ciudad.value|default:''|escapejs }}";
+  if (initEquipoPais) fetchEstados(initEquipoPais, equipoEstadoSel, equipoCiudadSel, initEquipoEstado, initEquipoCiudad);
+
+  /* ── Dual nationality toggle ─────────────────────────────── */
   const checkbox = document.getElementById('id_doble_nacionalidad');
   const wrapper  = document.getElementById('segunda-nac-wrapper');
   function toggleSegunda() { wrapper.style.display = checkbox.checked ? 'block' : 'none'; }

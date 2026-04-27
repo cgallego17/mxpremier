@@ -41,10 +41,15 @@
             <th>{% trans "Name" %}</th>
             <th>{% trans "Date of birth" %}</th>
             <th>{% trans "City" %}</th>
-            <th>{% trans "State / Province" %}</th>
-            <th>{% trans "Email" %}</th>
-            <th>{% trans "Phone" %}</th>
-            <th>{% trans "Age" %}</th>
+            <th>{% trans "State" %}</th>
+            <th>{% trans "Team" %}</th>
+            <th>{% trans "Team City/State" %}</th>
+            <th>{% trans "Position" %}</th>
+            <th>{% trans "Pitcher" %}</th>
+            <th>{% trans "Instagram" %}</th>
+            <th>{% trans "Guardian" %}</th>
+            <th>{% trans "Guardian Email" %}</th>
+            <th>{% trans "Guardian Phone" %}</th>
             <th>{% trans "Nationality" %}</th>
             <th>{% trans "Registration" %}</th>
             <th></th>
@@ -58,9 +63,21 @@
               <td>{{ j.fecha_nacimiento|date:"d/m/Y" }}</td>
               <td>{{ j.ciudad }}</td>
               <td>{{ j.estado }}</td>
-              <td>{{ j.email }}</td>
-              <td>{{ j.telefono }}</td>
-              <td>{{ j.edad }}</td>
+              <td>{{ j.equipo_viaje }}</td>
+              <td>{{ j.get_equipo_pais_display }}</td>
+              <td>{{ j.equipo_estado }}</td>
+              <td>{{ j.equipo_ciudad }}</td>
+              <td>
+                {{ j.get_posicion_principal_display }}
+                {% if j.posicion_secundaria %}
+                  / {{ j.get_posicion_secundaria_display }}
+                {% endif %}
+              </td>
+              <td>{% if j.es_pitcher %}<span class="badge bg-success">Yes</span>{% endif %}</td>
+              <td>{% if j.instagram %}<a href="https://instagram.com/{{ j.instagram|slice:"1:" }}" target="_blank">@{{ j.instagram }}</a>{% endif %}</td>
+              <td>{{ j.tutor_nombre }} {{ j.tutor_apellidos }}</td>
+              <td>{{ j.tutor_email }}</td>
+              <td>{{ j.tutor_telefono }}</td>
               <td>
                 <span class="badge-nac">{{ j.get_nacionalidad_display }}</span>
                 {% if j.doble_nacionalidad and j.segunda_nacionalidad %}

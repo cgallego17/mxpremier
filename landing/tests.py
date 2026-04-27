@@ -15,7 +15,9 @@ VALID_DATA = {
     'ciudad': 'Los Angeles',
     'nacionalidad': 'USA',
     'equipo_viaje': 'LA Stars',
-    'equipo_ciudad_estado': 'Los Angeles, CA',
+    'equipo_pais': 'USA',
+    'equipo_estado': 'CA',
+    'equipo_ciudad': 'Los Angeles',
     'posicion_principal': 'SS',
     'posicion_secundaria': 'OF',
     'tutor_nombre': 'Jane',
@@ -92,11 +94,12 @@ class RegistroViewTests(TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertIn('pais', res.json()['errors'])
 
-    def test_missing_ciudad_returns_error(self):
+    def test_missing_ciudad_is_optional(self):
+        # ciudad is optional in the backend; frontend enforces it via JS
         data = {**VALID_DATA, 'ciudad': ''}
         res = self.client.post(self.url, data)
-        self.assertEqual(res.status_code, 400)
-        self.assertIn('ciudad', res.json()['errors'])
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(res.json()['ok'])
 
     def test_estado_is_optional(self):
         data = {**VALID_DATA, 'estado': ''}
@@ -223,7 +226,9 @@ class RegistroViewTests(TestCase):
         self.assertEqual(j.instagram, '@johndoe')
         self.assertTrue(j.es_pitcher)
         self.assertEqual(j.equipo_viaje, 'LA Stars')
-        self.assertEqual(j.equipo_ciudad_estado, 'Los Angeles, CA')
+        self.assertEqual(j.equipo_pais, 'USA')
+        self.assertEqual(j.equipo_estado, 'CA')
+        self.assertEqual(j.equipo_ciudad, 'Los Angeles')
         self.assertEqual(j.posicion_principal, 'P')
         self.assertEqual(j.posicion_secundaria, 'SS')
         self.assertEqual(j.tutor_nombre, 'Jane')

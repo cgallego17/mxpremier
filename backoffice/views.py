@@ -1,7 +1,7 @@
 import csv
 import json
 from datetime import timedelta
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .excel import build_workbook, wb_to_response, workbook_response
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +11,9 @@ from django.db.models import Count, Q, Sum
 from django.db.models.functions import TruncDate
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_GET
 from jugadores.models import Jugador
+from jugadores.choices import AMERICAS_CHOICES
 from landing.models import SponsorInquiry, PageVisit
 from .forms import JugadorForm, GastoForm, PartnerForm
 from .models import Partner, Gasto, CATEGORIA_COLORS, CATEGORIAS_GASTO
@@ -507,7 +509,7 @@ def jugadores_exportar(request):
         'First name', 'Last names', 'Date of birth', 'Age',
         'Country', 'State', 'City', 'Nationality', 'Dual nationality',
         'Email', 'Phone', 'Instagram',
-        'Travel team', 'Team city/state',
+        'Travel team', 'Team country', 'Team state', 'Team city',
         'Primary position', 'Secondary position', 'Pitcher',
         'Guardian name', 'Guardian email', 'Guardian phone',
         'Registered',
@@ -523,7 +525,10 @@ def jugadores_exportar(request):
             'Yes' if j.doble_nacionalidad else 'No',
             j.email, j.telefono,
             f'@{j.instagram}' if j.instagram else '',
-            j.equipo_viaje, j.equipo_ciudad_estado,
+            j.equipo_viaje,
+            j.get_equipo_pais_display(),
+            j.equipo_estado,
+            j.equipo_ciudad,
             j.get_posicion_principal_display() if j.posicion_principal else '',
             j.get_posicion_secundaria_display() if j.posicion_secundaria else '',
             'Yes' if j.es_pitcher else 'No',
@@ -535,7 +540,7 @@ def jugadores_exportar(request):
         14, 18, 14, 5,
         14, 14, 14, 14, 8,
         26, 14, 14,
-        22, 22,
+        22, 14, 14, 14,
         16, 16, 7,
         22, 26, 14,
         18,
