@@ -6,6 +6,7 @@ from jugadores.models import Jugador  # pylint: disable=no-member
 
 
 VALID_DATA = {
+    'telefono': '555-0000',
     'nombre': 'John',
     'apellidos': 'Doe',
     'fecha_nacimiento': '2010-05-15',
@@ -275,3 +276,18 @@ class RegistroViewTests(TestCase):
         res = self.client.post(self.url, {**VALID_DATA, 'fecha_nacimiento': old})
         self.assertEqual(res.status_code, 400)
         self.assertIn('fecha_nacimiento', res.json()['errors'])
+
+    def test_telefono_y_edad_se_guardan_correctamente(self):
+        data = {
+            **VALID_DATA,
+            'telefono': '1234567890',
+            'fecha_nacimiento': '2010-05-15',
+        }
+        self.client.post(self.url, data)
+        jugador = Jugador.objects.first()
+        self.assertEqual(jugador.telefono, '1234567890')
+        # Edad calculada
+        hoy = datetime.date.today()
+        nacimiento = datetime.date(2010, 5, 15)
+        edad_esperada = hoy.year - nacimiento.year - ((hoy.month, hoy.day) < (nacimiento.month, nacimiento.day))
+        self.assertEqual(jugador.edad, edad_esperada)

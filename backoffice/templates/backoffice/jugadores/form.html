@@ -1,3 +1,8 @@
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">{% trans "Phone" %}</label>
+        {{ form.telefono }}
+        {% if form.telefono.errors %}<div class="text-danger small mt-1">{{ form.telefono.errors.0 }}</div>{% endif %}
+      </div>
 {% extends 'backoffice/base.html' %}
 {% load i18n %}
 
@@ -27,10 +32,15 @@
         {{ form.fecha_nacimiento }}
         {% if form.fecha_nacimiento.errors %}<div class="text-danger small mt-1">{{ form.fecha_nacimiento.errors.0 }}</div>{% endif %}
       </div>
-      <div class="col-md-8">
-        <label class="form-label fw-semibold">{% trans "City and State" %}</label>
-        {{ form.ciudad_estado }}
-        {% if form.ciudad_estado.errors %}<div class="text-danger small mt-1">{{ form.ciudad_estado.errors.0 }}</div>{% endif %}
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">{% trans "City" %}</label>
+        {{ form.ciudad }}
+        {% if form.ciudad.errors %}<div class="text-danger small mt-1">{{ form.ciudad.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">{% trans "State / Province" %}</label>
+        {{ form.estado }}
+        {% if form.estado.errors %}<div class="text-danger small mt-1">{{ form.estado.errors.0 }}</div>{% endif %}
       </div>
       <div class="col-md-6">
         <label class="form-label fw-semibold">{% trans "Citizenship" %}</label>

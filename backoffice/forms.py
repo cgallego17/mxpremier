@@ -14,9 +14,11 @@ class JugadorForm(forms.ModelForm):
             'nacionalidad', 'doble_nacionalidad', 'segunda_nacionalidad', 'instagram',
             'equipo_viaje', 'equipo_ciudad_estado',
             'posicion_principal', 'posicion_secundaria', 'es_pitcher',
+            'telefono',
             'tutor_nombre', 'tutor_apellidos', 'tutor_telefono', 'tutor_email',
         ]
         widgets = {
+            'telefono':             forms.TextInput(attrs={'class': 'form-control'}),
             'nombre':               forms.TextInput(attrs={'class': 'form-control'}),
             'apellidos':            forms.TextInput(attrs={'class': 'form-control'}),
             'fecha_nacimiento':     forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
@@ -93,35 +95,37 @@ class JugadorForm(forms.ModelForm):
             self.add_error('segunda_nacionalidad', _('Select the second nationality.'))
         if not doble:
             cleaned['segunda_nacionalidad'] = None
-        return cleaned
 
 
 class GastoForm(forms.ModelForm):
     class Meta:
         model = Gasto
         fields = [
-            'titulo', 'categoria', 'monto', 'moneda',
-            'fecha', 'metodo_pago', 'estado', 'comprobante', 'notas',
+            'titulo', 'categoria', 'monto', 'moneda', 'fecha',
+            'metodo_pago', 'estado', 'comprobante', 'notas'
         ]
         widgets = {
-            'titulo':      forms.TextInput(attrs={'class': 'form-control'}),
-            'categoria':   forms.Select(attrs={'class': 'form-select'}),
-            'monto':       forms.NumberInput(attrs={
-                'class': 'form-control', 'step': '0.01', 'min': '0',
-            }),
-            'moneda':      forms.Select(attrs={'class': 'form-select'}),
-            'fecha':       forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'metodo_pago': forms.Select(attrs={'class': 'form-select'}),
-            'estado':      forms.Select(attrs={'class': 'form-select'}),
-            'notas':       forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'titulo':        forms.TextInput(attrs={'class': 'form-control'}),
+            'categoria':     forms.Select(attrs={'class': 'form-select'}),
+            'monto':         forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01', 'min': '0'}),
+            'moneda':        forms.Select(attrs={'class': 'form-select'}),
+            'fecha':         forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'metodo_pago':   forms.Select(attrs={'class': 'form-select'}),
+            'estado':        forms.Select(attrs={'class': 'form-select'}),
+            'comprobante':   forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'notas':         forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
         }
 
-    def clean_monto(self):
-        monto = self.cleaned_data.get('monto')
-        if monto is not None and monto <= 0:
-            raise forms.ValidationError(_('Amount must be greater than zero.'))
-        return monto
-
+class PartnerForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        fields = ['nombre', 'logo', 'url', 'orden', 'activo']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'url':    forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://'}),
+            'orden':  forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
 
 class PartnerForm(forms.ModelForm):
     class Meta:
