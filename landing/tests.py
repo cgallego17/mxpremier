@@ -271,11 +271,6 @@ class RegistroViewTests(TestCase):
         self.assertEqual(res.status_code, 400)
         self.assertIn('fecha_nacimiento', res.json()['errors'])
 
-    def test_too_old_birth_date_rejected(self):
-        old = '2000-01-01'
-        res = self.client.post(self.url, {**VALID_DATA, 'fecha_nacimiento': old})
-        self.assertEqual(res.status_code, 400)
-        self.assertIn('fecha_nacimiento', res.json()['errors'])
 
     def test_telefono_y_edad_se_guardan_correctamente(self):
         data = {

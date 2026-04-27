@@ -71,11 +71,8 @@ class JugadorForm(forms.ModelForm):
         if not dob:
             return dob
         today = datetime.date.today()
-        age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
         if dob > today:
             raise forms.ValidationError(_('Date of birth cannot be in the future.'))
-        if age > 18:
-            raise forms.ValidationError(_('Player must be 18 years old or younger.'))
         return dob
 
     def clean_tutor_email(self):
